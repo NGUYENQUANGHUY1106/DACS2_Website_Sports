@@ -30,8 +30,6 @@ function updateTotalPrice() {
     var totalPrice = quantity * price;
     return totalPrice;
 
-    
-    // Cập nhật tổng số tiền ở đây, có thể làm thông qua JavaScript hoặc gửi yêu cầu Ajax để cập nhật trên server.
 }
 
 

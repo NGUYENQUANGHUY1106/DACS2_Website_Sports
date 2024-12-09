@@ -1,16 +1,14 @@
 <?php
 session_start();
-$customer_id = $_COOKIE['customer_id'];
-$id=$_GET['productid'];
-var_dump($id);
-if($id == 0)
-{
-unset($_SESSION['cart'][$customer_id]);
+$product_id = $_GET['productid'];
+$customer_id = $_SESSION['customer_id'];
+
+// Kiểm tra nếu sản phẩm tồn tại trong giỏ hàng
+if (isset($_SESSION['cart'][$customer_id][$product_id])) {
+    unset($_SESSION['cart'][$customer_id][$product_id]); // Xóa sản phẩm khỏi giỏ hàng
 }
-else
-{
-unset($_SESSION['cart'][$customer_id][$id]);
-}
-header("location:giohang.php");
-exit();
+
+// Quay lại giỏ hàng
+header('Location: giohang.php');
+exit;
 ?>

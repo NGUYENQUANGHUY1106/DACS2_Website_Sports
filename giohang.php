@@ -248,7 +248,7 @@ $customer_id = $_COOKIE['customer_id'];
                 </nav>
                 <div class="header-with-search">
                     <div class="header__logo">
-                        <a href="#" class="header__logo-link">
+                        <a href="index.php" class="header__logo-link">
 
                             <!-- <svg viewBox="0 0 192 65" class="header__logo-img">
                     <g fill-rule="evenodd">                
@@ -375,43 +375,12 @@ $customer_id = $_COOKIE['customer_id'];
             <!-- <?php
                     if (empty($_SESSION['address-infor'])) {
                     ?>
-        form địa chỉ
 
-        <form class="form__address" action="xulyFormdiachi.php" method="POST">
-        <div class="form__address--overlay" id="overlay"></div>
-            <div class="container__form-address">
-                <div class="content__form-address">
-                    <h1 class="content__form-address--title"> Thêm địa chỉ</h1>
-                    <table align="center" class="content__form-address--table">
-                        <tr>
-                            <td>
-                                <input type="text" name="fullName" placeholder="Nhập họ và tên" class="content_form-address--name" required>
-                            </td>
-                            <td>
-                                <input type="text" name="phoneNumber" placeholder="Nhập số điện thoại " class="content_form-address--phoneNumber" required>
-                            </td>
-                        </tr>
-                        <tr >    
-                            <th colspan="2">
-                                <input type="text" name="yourAddress" placeholder="Nhập địa chỉ của bạn" class="content_form-address--address" required>
-                            </th>
-                            <th></th>
-                        </tr>
-                      
-                    </table>
-                    <div class="content__form-address--button">
-                        <a href="index.php" id="address__back--btn" class=" btn content__form-address__button--return">Trở Lại</a>
-                        <input type="submit"  class=" btn content__form-address__button--complete" value="Hoàn Thành"></input>
-                    </div>
-                </div>
-            </div>
-        </form>
         <?php
                     }
         ?> -->
 
 <?php
-session_start();  // Đảm bảo session được khởi tạo
 $conn = mysqli_connect("localhost:3366", "root", "", "MYPHAM");
 
 $ok = 1;
@@ -430,61 +399,65 @@ if ($ok == 2) {
                 <div class="cart__navbar-product__name">Sản Phẩm</div>
             </div>
             <ul class="cart__navbar-productDetails__list">
-                <li class="cart__navbar-productDetails__item">Đơn Giá</li>
+                <li class="cart__navbar-productDetails__item">Kích Thước</li>
                 <li class="cart__navbar-productDetails__item">Số Lượng</li>
                 <li class="cart__navbar-productDetails__item">Tổng Tiền</li>
-                <li class="cart__navbar-productDetails__item">Thao Tác</li>
+                <li class="cart__navbar-productDetails__item">Tùy Chọn Khác</li>
             </ul>
         </div>
     </div>
 
     <?php
-    $item = [];
-    foreach ($_SESSION['cart'] as $product_id => $quantity) {
-        $item[] = $product_id;
-    }
+    $item_ids = array_keys($_SESSION['cart']); // Lấy tất cả các product_id từ session
     
-    if (!empty($item)) {
-        $str = implode(",", $item);
-        $sql = "SELECT * FROM SANPHAM WHERE id IN ($str)";
+    if (!empty($item_ids)) {
+        $str_ids = implode(",", $item_ids);
+        // Truy vấn các sản phẩm từ cơ sở dữ liệu dựa trên product_id
+        $sql = "SELECT * FROM cart WHERE customer_id IN ($str_ids)";
         $result = mysqli_query($conn, $sql);
-        while ($row = mysqli_fetch_array($result)) {
-            $priceNew = (int)str_replace('.', '', $row['priceNew']);
-            $discount = (int)str_replace('.', '', number_format($row['discount'], 3));
-            $product_total = $_SESSION['cart'][$row['id']] * ($priceNew - $discount);
 
+        while ($row = mysqli_fetch_array($result)) {
+            $product_id = $row['customer_id'];
+            $quantity = $row ['product_quantity'];
+            $product_quantity = $_SESSION['cart'][$quantity]['product_quantity'] ?? 0; // Đảm bảo lấy số lượng từ session
+            $priceNew = (int)str_replace('.', '', $row['product_price']);
+            $total += $priceNew * $product_quantity;
             ?>
+
             <div class="cart__container-form">
                 <div class="cart__form">
                     <div class="cart__form-product">
-                        <div class="cart__form-product__img" style="background-image: url(<?php echo $row['urlImg']; ?>);"></div>
-                        <span class="cart__form-product__name"><?php echo $row['title']; ?></span>
+                        <div class="cart__form-product__img" style="background-image: url(<?php echo $row['product_img']; ?>);"></div>
+                        <span class="cart__form-product__name"><?php echo $row['product_name']; ?></span>
                     </div>
-                    <div class="cart__form-productDetails">
-                        <span class="cart__form-productDetails__unitPrice"><?php echo number_format($priceNew - $discount, 0) . 'đ'; ?></span>
+                    <div class="cart__form-productDetails" style="gap: 37px;">
+                        <span class="cart__form-productDetails__unitPrice"><?php echo $row['product_size']; ?></span>
                         <div class="cart__form-productDetails__quantity-container">
                             <div class="detail__quantity-content">
-                                <a href="giamgiohang.php?item=<?php echo $row['id']; ?>" class="detail__quantity-content__minus">
+                                <a href="giamgiohang.php?item=<?php echo $product_id; ?>" class="detail__quantity-content__minus">
                                     <i style="color: red;" class="fa-solid fa-minus detail__quantity-content__minus-icon"></i>
                                 </a>
                                 <div class="cart__form-productDetails__quantity-content__show--parent">
-                                    <input type="text" class="cart__form-productDetails__quantity-content__show" name="qty[<?php echo $row['id']; ?>]" value="<?php echo $_SESSION['cart'][$row['id']]; ?>" />
+                                    <input type="text" class="cart__form-productDetails__quantity-content__show" 
+                                           name="quantity_<?php echo $quantity; ?>" 
+                                           value="<?php echo $product_quantity; ?>" readonly />
                                 </div>
-                                <a href="muangay.php?item=<?php echo $row['id']; ?>" class="detail__quantity-content__add">
+                                <a href="muangay.php?item=<?php echo $product_id; ?>" class="detail__quantity-content__add">
                                     <i class="fa-solid fa-plus" style="color:red;"></i>
                                 </a>
                             </div>
                         </div>
-                        <span class="cart__form-productDetails__total"><?php echo number_format($product_total, 0) . 'đ'; ?></span>
-                        <a href="xoagiohang.php?productid=<?php echo $row['id']; ?>" class="cart__form-productDetails__delete">Xóa</a>
+                        <span class="cart__form-productDetails__total"><?php echo number_format($priceNew * $product_quantity, 0, ',', '.'); ?> đ</span>
+                        <a href="xoagiohang.php?productid=<?php echo $product_id; ?>" class="cart__form-productDetails__delete">Xóa</a>
                     </div>
                 </div>
             </div>
             <?php
-            $totalProduct += $product_total;
-        }
+        
     }
-    ?>
+}
+?>
+
     <div class="cart__container-totalPrice">
         <div class="cart__form-totalPrice">
             <span class="cart__form-totalPrice--msg">Tổng thanh toán :</span>
@@ -496,6 +469,7 @@ if ($ok == 2) {
     <?php
 } else {
     ?>
+
     <div class="cart__form-No-product__container">
         <div class="cart__form-No-product__content ">
             <img src="./assets/img/no_cart.png" alt="no-cart-img" class=" cart__form-No-product__img">
@@ -673,5 +647,4 @@ if ($ok == 2) {
         <!-- </div> -->
 
 </body>
-
 </html>

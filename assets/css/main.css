@@ -1708,6 +1708,7 @@ background-position: center;
 }
 .cart__form-productDetails{
 display: flex;
+gap: 37px;
 align-items: center;
 font-size: 14px;
 }

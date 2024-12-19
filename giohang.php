@@ -21,6 +21,44 @@ $customer_id = $_COOKIE['customer_id'];
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        .quantity-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            width: 120px;
+            overflow: hidden;
+        }
+
+        .quantity-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            text-decoration: none;
+            font-size: 16px;
+            color: red;
+            background-color: #f8f8f8;
+            border: none;
+        }
+
+        .quantity-btn:hover {
+            background-color: #e0e0e0;
+        }
+
+        .quantity-container input {
+            text-align: center;
+            width: 40px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
 </head>
 
 <body>
@@ -31,10 +69,10 @@ $customer_id = $_COOKIE['customer_id'];
                 <nav class="header__navbar">
                     <ul class="header__navbar-list">
                         <li class="header__navbar-item header__navbar-item--has-qr header__navbar-item-separate">
-                            Vào cửa hàng trong ứng dụng QuangHuy_Sports11
+                            Vào cửa hàng trong ứng dụng TL-shop
                             <!-- QR code -->
                             <div class="header__qr">
-                                <a href=""> <img src="/assets/img/qr.jpg" alt="QR Code" class="header__qr-img"></a>
+                                <a href=""> <img src="./assets/img/img-QR.png" alt="QR Code" class="header__qr-img"></a>
                                 <div class="header__qr-apps">
                                     <a class="header__qr-link" href=""> <img src="./assets/img/img-ggplay.png" alt="Google play" class="header__qr-download-img"></a>
                                     <a class="header__qr-link" href=""> <img src="./assets/img/ing-appstore.png" alt="App store" class="header__qr-download-img"></a>
@@ -43,12 +81,12 @@ $customer_id = $_COOKIE['customer_id'];
                         </li>
                         <li class="header__navbar-item">
                             <span class="header__navbar-item-title--no-pointer"> Kết Nối</span>
-                            <a href="https://www.facebook.com/profile.php?id=100081001793968
-           " class="header__navbar-icon-link" target="_blank">
+                            <a href="https://www.facebook.com/manh.luu.127648?mibextid=LQQJ4d
+           " class="header__navbar-icon-link">
                                 <i class=" header__navbar-icon fa-brands fa-facebook"></i>
                             </a>
 
-                            <a href="https://www.instagram.com/qua_nghuy11/" target="_blank" class="header__navbar-icon-link">
+                            <a href="" class="header__navbar-icon-link">
                                 <i class=" header__navbar-icon fa-brands fa-instagram"></i>
                             </a>
                         </li>
@@ -221,6 +259,7 @@ $customer_id = $_COOKIE['customer_id'];
                             // Lấy giá trị của cookie 'customer_id'
                             if (isset($_COOKIE['customer_id'], $_COOKIE['customer_name'])) {
                                 $customer_name = $_COOKIE['customer_name'];
+
                                 echo '<img src="https://www.shutterstock.com/image-vector/default-avatar-profile-icon-social-260nw-1913928688.jpg" alt="" class="header__navbar-user-img ">';
                                 echo '<span class="header__navbar-user-name">' . $customer_name . '</span>';
                             }
@@ -237,7 +276,7 @@ $customer_id = $_COOKIE['customer_id'];
                                     <a href="diachi.php">Địa chỉ của tôi</a>
                                 </li>
                                 <li class="header__navbar-user-item">
-                                    <a href="">Đơn mua</a>
+                                    <a href="donMua.php">Đơn mua</a>
                                 </li>
                                 <li class="header__navbar-user-item header__navbar-user-item--separate ">
                                     <a href="xulylogout.php?logout=true">Đăng xuất</a>
@@ -248,7 +287,7 @@ $customer_id = $_COOKIE['customer_id'];
                 </nav>
                 <div class="header-with-search">
                     <div class="header__logo">
-                        <a href="index.php" class="header__logo-link">
+                        <a href="#" class="header__logo-link">
 
                             <!-- <svg viewBox="0 0 192 65" class="header__logo-img">
                     <g fill-rule="evenodd">                
@@ -257,7 +296,7 @@ $customer_id = $_COOKIE['customer_id'];
                        
                     </g>
                 </svg> -->
-                            <img src="./assets/img/logo (2).png" alt="anhlogo" class="header__logo-img">
+                            <img src="/assets/img/logo (2).png" alt="anhlogo" class="header__logo-img">
 
                         </a>
                     </div>
@@ -281,6 +320,20 @@ $customer_id = $_COOKIE['customer_id'];
                                 </ul>
                             </div>
                         </div>
+                        <!-- <div class="header__search-select">
+                <span class="header__search-select-lable">Trong Shop</span>
+                <i class=" header__search-select-icon fa-solid fa-chevron-down"></i>
+            <ul class="header__search-option">
+                <li class="header__search-option-item header__search-option-item--active">
+                    <span>Trong shop</span>
+                    <i class="fa-solid fa-check"></i>
+                </li>
+                <li class="header__search-option-item ">
+                    <span>Ngoài shop</span>
+                    <i class="fa-solid fa-check"></i>
+                </li>
+            </ul>
+            </div> -->
                         <button name="btn_search" class="header__search-btn">
                             <i class=" header__search-btn-icon fa-solid fa-magnifying-glass"></i>
                         </button>
@@ -290,304 +343,261 @@ $customer_id = $_COOKIE['customer_id'];
                     <!-- Giỏ hàng -->
                     <div class="header__cart">
                         <div class="header__cart-swap">
-                            <i class=" header__cart-icon fa-sharp fas fa-cart-shopping"></i>
+                            <i class="header__cart-icon fa-sharp fas fa-cart-shopping"></i>
                             <?php
-                            $ok = 1;
-                            if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
-                                foreach ($_SESSION['cart'] as $k => $v) { // $k là id khách hàng ,$v id sản phẩm của khách hàng đó
-                                    if (!empty($v)) {
-                                        $ok = 2;
-                                    }
+                            $customer_id = 1; // Giả sử người dùng đã đăng nhập và có customer_id
+
+                            // Tính tổng số lượng sản phẩm
+                            $total_items = 0;
+                            if (isset($_SESSION['cart'][$customer_id])) {
+                                foreach ($_SESSION['cart'][$customer_id] as $item) {
+                                    $total_items += $item['quantity'];
                                 }
                             }
-                            if ($ok != 2) {
+
+                            // Kiểm tra giỏ hàng trống
+                            if ($total_items == 0) {
                             ?>
                                 <span class="header__cart-swap-notice">0</span>
-
-                                <div class="header__cart-list header__cart-list-no-cart  ">
-                                    <img src="./assets/img/no_cart.png" alt="no-cart-img" class=" header__cart-list-no-cart-img">
-                                    <span class="header__cart-list-no-cart-msg">
-                                        Chưa có sản phẩm
-                                    </span>
+                                <div class="header__cart-list header__cart-list-no-cart">
+                                    <img src="./assets/img/no_cart.png" alt="no-cart-img" class="header__cart-list-no-cart-img">
+                                    <span class="header__cart-list-no-cart-msg">Chưa có sản phẩm</span>
                                 </div>
                             <?php
                             } else {
-                                $items = $_SESSION['cart'][$customer_id] ?? [];
                             ?>
-                                <span class="header__cart-swap-notice"><?php echo count($items) ?></span>
-                                <div class="header__cart-list ">
+                                <span class="header__cart-swap-notice"><?php echo $total_items; ?></span>
+                                <div class="header__cart-list">
                                     <h4 class="header__cart-heading">Sản phẩm đã thêm</h4>
                                     <?php
-                                    $item = [];
-                                    foreach ($_SESSION['cart'][$customer_id] ?? [] as $product_id => $value) {
-                                        $item[] = $product_id; // chứa các id sản phẩm
-                                    }
-                                    if (!empty($item)) {
-                                        $str = implode(",", $item); // chuyển mảng thành chuỗi
-                                        $conn = mysqli_connect("localhost:3366", "root", "", "MYPHAM");
-                                        $sql = " SELECT * FROM  SANPHAM WHERE id IN ($str)";
-                                        $result = mysqli_query($conn, $sql);
-                                        while ($row = mysqli_fetch_array($result)) {
+                                    foreach ($_SESSION['cart'][$customer_id] as $product_id => $item) {
                                     ?>
-                                            <a href="giohang.php" class="header__cart-list-item__link">
-                                                <ul class="header__cart-list-item">
-                                                    <li class="header__cart-item">
-                                                        <img src="<?php echo $row['urlImg'] ?>" alt="" class="header__cart-img">
-                                                        <div class="header__cart-item-info">
-                                                            <div class="header__cart-item-head">
-                                                                <h5 class="header__cart-item-name"><?php echo $row['title'] ?></h5>
-                                                                <div class="header__cart-item-price-wrap">
-                                                                    <span class="header__cart-item-price"><?php echo $row['priceNew'] . 'đ' ?></span>
-                                                                    <!-- <span class="header__cart-item-multiply">x</span>
-                                                                    <span class="header__cart-item-qnt">2</span> -->
-                                                                </div>
-                                                            </div>
-                                                            <div class="header__cart-item-body">
-                                                                <span class="header__cart-item-description">
-                                                                    Phân loại hàng: chính hãng
+                                        <a href="giohang.php" class="header__cart-list-item__link">
+                                            <ul class="header__cart-list-item">
+                                                <li class="header__cart-item" style="margin-top: 10px;">
+                                                    <img src="<?php echo $item['img']; ?>" alt="<?php echo $item['name']; ?>" class="header__cart-img">
+                                                    <div class="header__cart-item-info">
+                                                        <div class="header__cart-item-head">
+                                                            <h5 class="header__cart-item-name"><?php echo $item['name']; ?></h5>
+                                                            <div class="header__cart-item-price-wrap">
+                                                                <span class="header__cart-item-price">
+                                                                    <?php
+                                                                    $price = str_replace('.', '', $item['price']);
+                                                                    $price = floatval($price);
+                                                                    echo number_format($price, 0, ',', '.') . 'đ';
+                                                                    ?>
                                                                 </span>
-                                                                <!-- <span class="header__cart-item-remove">Xóa</span> -->
-                                                                <a href="xoagiohang.php?productid=<?php echo $row['id'] ?>" class="header__cart-item-remove">Xóa</a>
-
+                                                                <span class="header__cart-item-quantity">x<?php echo $item['quantity']; ?></span>
                                                             </div>
                                                         </div>
-                                                    </li>
-                                                </ul>
-                                            </a>
-                                    <?php
-                                        }
-                                    }
-                                    ?>
-                                    <a class=" header__cart-view btn btn--primary" href="giohang.php">Xem giỏ hàng</a>
+                                                        <div class="header__cart-item-body">
+                                                            <span class="header__cart-item-description">Phân loại hàng: Chính hãng</span>
+                                                            <a href="xoagiohang.php?productid=<?php echo $product_id; ?>" class="header__cart-item-remove">Xóa</a>
+                                                        </div>
+                                                        <span style="color: red; font-size: 14px;">Size: <?php echo $item['size']; ?></span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </a>
+                                    <?php } ?>
+                                    <a class="header__cart-view btn btn--primary" href="giohang.php">Xem giỏ hàng</a>
                                 </div>
-                            <?php
-
-                            }
-                            ?>
-
+                            <?php } ?>
                         </div>
                     </div>
+
                 </div>
-            </div>
 
         </header>
         <div class="app__container">
-            <!-- <?php
-                    if (empty($_SESSION['address-infor'])) {
-                    ?>
-
-        <?php
-                    }
-        ?> -->
-
-<?php
-$conn = mysqli_connect("localhost:3366", "root", "", "MYPHAM");
-
-$ok = 1;
-$total = 0;
-$totalProduct = 0;
-
-if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
-    $ok = 2;
-}
-
-if ($ok == 2) {
-    ?>
-    <div class="cart__container-navbar">
-        <div class="cart__navbar">
-            <div class="cart__navbar-product">
-                <div class="cart__navbar-product__name">Sản Phẩm</div>
-            </div>
-            <ul class="cart__navbar-productDetails__list">
-                <li class="cart__navbar-productDetails__item">Kích Thước</li>
-                <li class="cart__navbar-productDetails__item">Số Lượng</li>
-                <li class="cart__navbar-productDetails__item">Tổng Tiền</li>
-                <li class="cart__navbar-productDetails__item">Tùy Chọn Khác</li>
-            </ul>
-        </div>
-    </div>
-
     <?php
-    $item_ids = array_keys($_SESSION['cart']); // Lấy tất cả các product_id từ session
-    
-    if (!empty($item_ids)) {
-        $str_ids = implode(",", $item_ids);
-        // Truy vấn các sản phẩm từ cơ sở dữ liệu dựa trên product_id
-        $sql = "SELECT * FROM cart WHERE customer_id IN ($str_ids)";
-        $result = mysqli_query($conn, $sql);
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
 
-        while ($row = mysqli_fetch_array($result)) {
-            $product_id = $row['customer_id'];
-            $quantity = $row ['product_quantity'];
-            $product_quantity = $_SESSION['cart'][$quantity]['product_quantity'] ?? 0; // Đảm bảo lấy số lượng từ session
-            $priceNew = (int)str_replace('.', '', $row['product_price']);
-            $total += $priceNew * $product_quantity;
+    $conn = mysqli_connect("localhost:3366", "root", "", "MYPHAM");
+    if (!$conn) {
+        die("Kết nối thất bại: " . mysqli_connect_error());
+    }
+
+    $total = 0;
+    $customer_id = 1;
+
+    $sql = "SELECT * FROM CART WHERE customer_id = ?";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $customer_id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+
+    if (mysqli_num_rows($result) > 0) {
+    ?>
+
+        <div class="cart__container-navbar">
+            <div class="cart__navbar">
+                <div class="cart__navbar-product">
+                    <div class="cart__navbar-product__name">Sản Phẩm</div>
+                </div>
+                <ul class="cart__navbar-productDetails__list">
+                    <li>Kích Thước</li>
+                    <li>Số Lượng</li>
+                    <li>Tổng Tiền</li>
+                    <li>Tùy Chọn</li>
+                </ul>
+            </div>
+        </div>
+
+        <?php while ($row = mysqli_fetch_assoc($result)): ?>
+            <?php
+            $product_id = $row['product_id'];
+            $product_price = (int)str_replace('.', '', $row['product_price']);
+            $product_quantity = $row['product_quantity'] ?? 1;
+            $subtotal = $product_price * $product_quantity;
+            $total += $subtotal;
             ?>
-
             <div class="cart__container-form">
                 <div class="cart__form">
+                    <!-- Thêm hình ảnh sản phẩm -->
                     <div class="cart__form-product">
-                        <div class="cart__form-product__img" style="background-image: url(<?php echo $row['product_img']; ?>);"></div>
-                        <span class="cart__form-product__name"><?php echo $row['product_name']; ?></span>
-                    </div>
-                    <div class="cart__form-productDetails" style="gap: 37px;">
-                        <span class="cart__form-productDetails__unitPrice"><?php echo $row['product_size']; ?></span>
-                        <div class="cart__form-productDetails__quantity-container">
-                            <div class="detail__quantity-content">
-                                <a href="giamgiohang.php?item=<?php echo $product_id; ?>" class="detail__quantity-content__minus">
-                                    <i style="color: red;" class="fa-solid fa-minus detail__quantity-content__minus-icon"></i>
-                                </a>
-                                <div class="cart__form-productDetails__quantity-content__show--parent">
-                                    <input type="text" class="cart__form-productDetails__quantity-content__show" 
-                                           name="quantity_<?php echo $quantity; ?>" 
-                                           value="<?php echo $product_quantity; ?>" readonly />
-                                </div>
-                                <a href="muangay.php?item=<?php echo $product_id; ?>" class="detail__quantity-content__add">
-                                    <i class="fa-solid fa-plus" style="color:red;"></i>
-                                </a>
-                            </div>
+                        <div class="cart__form-product__img" 
+                             style="background-image: url('<?php echo htmlspecialchars($row['product_img']); ?>');">
                         </div>
-                        <span class="cart__form-productDetails__total"><?php echo number_format($priceNew * $product_quantity, 0, ',', '.'); ?> đ</span>
-                        <a href="xoagiohang.php?productid=<?php echo $product_id; ?>" class="cart__form-productDetails__delete">Xóa</a>
+                        <span class="cart__form-product__name"><?php echo htmlspecialchars($row['product_name']); ?></span>
+                    </div>
+                    <div class="cart__form-productDetails">
+                        <span><?php echo htmlspecialchars($row['product_size']); ?></span>
+                        <div class="quantity-container">
+                            <button class="quantity-btn minus" data-product-id="<?php echo $product_id; ?>">-</button>
+                            <input type="text" id="quantity-<?php echo $product_id; ?>" value="<?php echo $product_quantity; ?>" readonly>
+                            <button class="quantity-btn plus" data-product-id="<?php echo $product_id; ?>">+</button>
+                        </div>
+                        <span id="subtotal-<?php echo $product_id; ?>">
+                            <?php echo number_format($subtotal, 0, ',', '.'); ?> đ
+                        </span>
+                        <a href="xoagiohang.php?productid=<?php echo $product_id; ?>">Xóa</a>
                     </div>
                 </div>
             </div>
-            <?php
-        
+        <?php endwhile; ?>
+
+        <div class="cart__container-totalPrice">
+            <span>Tổng thanh toán :</span>
+            <span id="cart-total"><?php echo number_format($total, 0, ',', '.'); ?> đ</span>
+        </div>
+
+    <?php } else {
+        echo "<p>Giỏ hàng của bạn đang trống.</p>";
     }
-}
-?>
 
-    <div class="cart__container-totalPrice">
-        <div class="cart__form-totalPrice">
-            <span class="cart__form-totalPrice--msg">Tổng thanh toán :</span>
-            <span class="cart__form-totalPrice--price"><?php echo number_format($totalProduct, 0) . 'đ'; ?></span>
-            <a href="" class="cart__form-totalPrice--buy">Mua Ngay</a>
-        </div>
-    </div>
-
-    <?php
-} else {
+    mysqli_close($conn);
     ?>
+</div>
 
-    <div class="cart__form-No-product__container">
-        <div class="cart__form-No-product__content ">
-            <img src="./assets/img/no_cart.png" alt="no-cart-img" class=" cart__form-No-product__img">
-            <span class="cart__form-No-product__msg">
-                Giỏ hàng của bạn còn trống
-            </span>
-            <a href="index.php" class="cart__form-No-product__link">Mua Ngay</a>
-        </div>
+
+
     </div>
-<?php
-}
-?>
-
-            <script src="./assets/javascript/giohang.js"></script>
-        </div>
-        <footer class="footer">
-            <div class="grid">
-                <div class="row">
-                    <div class="col l-3 m-6 c-12">
-                        <div class="footer-content">
-                            <div class="">
-                                <h3 class="footer-heading">CHĂM SÓC KHÁCH HÀNG</h3>
-                                <ul class="footer-list">
-                                    <li class="footer-item">
-                                        <a href="" class="footer-item__link">
-                                            Trung tâm trợ giúp
-                                        </a>
-                                    </li>
-                                    <li class="footer-item">
-                                        <a href="" class="footer-item__link">
-                                            TL-SHOP Mall
-                                        </a>
-                                    </li>
-                                    <li class="footer-item">
-                                        <a href="" class="footer-item__link">
-                                            Hướng dẫn mua hàng
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+    <footer class="footer">
+        <div class="grid">
+            <div class="row">
+                <div class="col l-3 m-6 c-12">
+                    <div class="footer-content">
+                        <div class="">
+                            <h3 class="footer-heading">CHĂM SÓC KHÁCH HÀNG</h3>
+                            <ul class="footer-list">
+                                <li class="footer-item">
+                                    <a href="" class="footer-item__link">
+                                        Trung tâm trợ giúp
+                                    </a>
+                                </li>
+                                <li class="footer-item">
+                                    <a href="" class="footer-item__link">
+                                        TL-SHOP Mall
+                                    </a>
+                                </li>
+                                <li class="footer-item">
+                                    <a href="" class="footer-item__link">
+                                        Hướng dẫn mua hàng
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="col l-3 m-6 c-12">
-                        <div class="footer-content">
-                            <div class="">
-                                <h3 class="footer-heading">VỀ TL-SHOP</h3>
-                                <ul class="footer-list">
-                                    <li class="footer-item">
-                                        <a href="" class="footer-item__link">
-                                            Giới thiệu về TL-shop
-                                        </a>
-                                    </li>
-                                    <li class="footer-item">
-                                        <a href="" class="footer-item__link">
-                                            Tuyển dụng
-                                        </a>
-                                    </li>
-                                    <li class="footer-item">
-                                        <a href="" class="footer-item__link">
-                                            điều khoản TL-shop
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+                </div>
+                <div class="col l-3 m-6 c-12">
+                    <div class="footer-content">
+                        <div class="">
+                            <h3 class="footer-heading">VỀ TL-SHOP</h3>
+                            <ul class="footer-list">
+                                <li class="footer-item">
+                                    <a href="" class="footer-item__link">
+                                        Giới thiệu về TL-shop
+                                    </a>
+                                </li>
+                                <li class="footer-item">
+                                    <a href="" class="footer-item__link">
+                                        Tuyển dụng
+                                    </a>
+                                </li>
+                                <li class="footer-item">
+                                    <a href="" class="footer-item__link">
+                                        điều khoản TL-shop
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="col l-3 m-6 c-12">
-                        <div class="footer-content">
-                            <div class="">
-                                <h3 class="footer-heading">DANH MỤC</h3>
-                                <ul class="footer-list">
-                                    <li class="footer-item">
-                                        <a href="" class="footer-item__link">
-                                            kem dưỡng da mặt
-                                        </a>
-                                    </li>
-                                    <li class="footer-item">
-                                        <a href="" class="footer-item__link">
-                                            kem dưỡng ẩm
-                                        </a>
-                                    </li>
-                                    <li class="footer-item">
-                                        <a href="" class="footer-item__link">
-                                            Son môi
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+                </div>
+                <div class="col l-3 m-6 c-12">
+                    <div class="footer-content">
+                        <div class="">
+                            <h3 class="footer-heading">DANH MỤC</h3>
+                            <ul class="footer-list">
+                                <li class="footer-item">
+                                    <a href="" class="footer-item__link">
+                                        kem dưỡng da mặt
+                                    </a>
+                                </li>
+                                <li class="footer-item">
+                                    <a href="" class="footer-item__link">
+                                        kem dưỡng ẩm
+                                    </a>
+                                </li>
+                                <li class="footer-item">
+                                    <a href="" class="footer-item__link">
+                                        Son môi
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="col l-3 m-6 c-12">
-                        <div class="footer-content">
-                            <div class="">
-                                <h3 class="footer-heading">THEO DÕI TL-SHOP</h3>
-                                <ul class="footer-list">
-                                    <li class="footer-item">
-                                        <a href="" class="footer-item__link">
-                                            <i class="footer-item__link-icon fa-brands fa-facebook"></i>
-                                            Facebook
-                                        </a>
-                                    </li>
-                                    <li class="footer-item">
-                                        <a href="" class="footer-item__link">
-                                            <i class="footer-item__link-icon fa-brands fa-instagram"></i>
-                                            fa-instagram
-                                        </a>
-                                    </li>
-                                    <li class="footer-item">
-                                        <a href="" class="footer-item__link">
-                                            <i class=" footer-item__link-icon fa-brands fa-linkedin"></i>
-                                            Linkedln
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+                </div>
+                <div class="col l-3 m-6 c-12">
+                    <div class="footer-content">
+                        <div class="">
+                            <h3 class="footer-heading">THEO DÕI TL-SHOP</h3>
+                            <ul class="footer-list">
+                                <li class="footer-item">
+                                    <a href="" class="footer-item__link">
+                                        <i class="footer-item__link-icon fa-brands fa-facebook"></i>
+                                        Facebook
+                                    </a>
+                                </li>
+                                <li class="footer-item">
+                                    <a href="" class="footer-item__link">
+                                        <i class="footer-item__link-icon fa-brands fa-instagram"></i>
+                                        fa-instagram
+                                    </a>
+                                </li>
+                                <li class="footer-item">
+                                    <a href="" class="footer-item__link">
+                                        <i class=" footer-item__link-icon fa-brands fa-linkedin"></i>
+                                        Linkedln
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                    <!-- <div class="col l-3 m-6 c-12">
+                </div>
+                <!-- <div class="col l-3 m-6 c-12">
             <h3 class="footer-heading">VÀO TL-SHOP TRÊN ỨNG DỤNG</h3>
             <div class="footer-dowload">
                 <img src="/assets/img/img-QR.png" alt="img qr" class="footer-dowload-qr">
@@ -597,54 +607,93 @@ if ($ok == 2) {
                 </div>
             </div>
         </div> -->
-                </div>
             </div>
-            <div class="footer__bottom">
-                <div class="grid">
-                    <div class="foooter-info">
-                        <ul class="footer-infor-list">
-                            <li class="footer-infor-item">
-                                <a href="" class="footer-infor-item__link">
-                                    CHÍNH SÁCH BẢO MẬT
-                                </a>
-                            </li>
-                            <li class="footer-infor-item">
-                                <a href="" class="footer-infor-item__link">
-                                    QUY CHẾ HOẠT ĐỘNG
-                                </a>
-                            </li>
-                            <li class="footer-infor-item">
-                                <a href="" class="footer-infor-item__link">
-                                    CHÍNH SÁCH VẬN CHUYỂN
-                                </a>
-                            </li>
-                            <li class="footer-infor-item">
-                                <a href="" class="footer-infor-item__link">
-                                    CHÍNH SÁCH TRẢ HÀNG VÀ HOÀNG TIỀN
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="footer-infor__logo">
-                        <img src="data:image/png;base64,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" alt="" class="foooter-info-img">
-                        <span class="footer-infor__logo-text">Công ty TNHH TL-shop</span>
-                    </div>
-                    <div class="footer-infor__Address">
-                        <span class="footer-infor__Address-item">
-                            Địa chỉ: Tứ chánh , phong sơn , phong điền , thừa thiên Huế
-                        </span>
-                        <span class="footer-infor__Address-item">
-                            Số điện thoại: 0355506752
-                        </span>
-                        <span class="footer-infor__Address-item">
-                            &reg;2023-Bản quyền thuộc về công ty TL-shop
-                        </span>
-                    </div>
-
+        </div>
+        <div class="footer__bottom">
+            <div class="grid">
+                <div class="foooter-info">
+                    <ul class="footer-infor-list">
+                        <li class="footer-infor-item">
+                            <a href="" class="footer-infor-item__link">
+                                CHÍNH SÁCH BẢO MẬT
+                            </a>
+                        </li>
+                        <li class="footer-infor-item">
+                            <a href="" class="footer-infor-item__link">
+                                QUY CHẾ HOẠT ĐỘNG
+                            </a>
+                        </li>
+                        <li class="footer-infor-item">
+                            <a href="" class="footer-infor-item__link">
+                                CHÍNH SÁCH VẬN CHUYỂN
+                            </a>
+                        </li>
+                        <li class="footer-infor-item">
+                            <a href="" class="footer-infor-item__link">
+                                CHÍNH SÁCH TRẢ HÀNG VÀ HOÀNG TIỀN
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-            </div>
-        </footer>
-        <!-- </div> -->
+                <div class="footer-infor__logo">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZYAAAB8CAMAAAB9jmb0AAAAk1BMVEXaKC3////77+/YAAfaJivZGB/aKS7XAADZICbZHSPaIyncP0PYAA7YDBXZFx7YAArpk5XhYGPYCBP99fXcODzbLjP++fnur7D22Nnsp6jiaWvfU1beTlHmhIbgXF/xv8D66OjjcXPkd3rmgoT0zM3wubrdREf21dbtrK3mg4Xrmpzxvr/44uLle33ql5joj5HroKLTrOfIAAAeOElEQVR4nO1diXuyOBMXDXJIQgveRz3RHlr7//91XyYHEJgg2u7ut+92nn32rWIC5Jc5M5l0nEconR6y2ed1xen6OcsO5/Shbn7JRp17G5yz1csojihlbiDIZZRGvf7LKjv/FQ/436S7YNlMtv2Euj7p1Ij4Lo3688nmr3rQ/xa1h+X8NfBogCBSxob1hu+/TPN9aglLOlnELGyCRFPI4uXrr6r5JrWCZbMKqN8GE4UMdS+/LPMtagHLeR67jbILkWZB7/n01z/8n0s3YTlv4+A+TCT5vedfjnmYbsAyXiUPgQIURJdfHfMgNcOSBexO8VUm4tLZ3/Qafxo1wdJ9ib4BigAmWf5KskeoAZaMPSy/CvKTX4Z5gOyw7OJvsookkjyP/8b3+UPIBsvmyNoMesio8Gh8LCCjKOhbBdm4+0uKTOvIAsvabXIfQ+p5EfwgGEwO2YJ1/O28TzrEgk0Y2QRZSrzeLwHFbDifFNDgsHx5TQLMHx7GzuY56Pgv4td7l02caULCZwsuJF5ZcDnTH5GUfwAR4tPk0m2C5S1q7GA0ds5cLg1DunFeGR9xwq7OOQ52jvMSwg3qbejWgsss+avesw2RMAxJ/lermN9fScTVcgWDZUvxVoG0zNirc/C89cciWDpOEHpd58JHvdvzNs4h5n0fO4haYs8WXBZ3BNuwNwmSOKKCSwm913Ikw+PxOBRt+/yv49/KucwT5JpPFG1tsMxxVILedi/eOzk5T4x6iznbOqnXiabOO106Y48zy4BPOPbuvGO4LHBYNt8SYyFdHc7n9TxigeudtvF9E57LXv4AHv/LFVK2edniZ0k7Dk8mLh32gsOC80oQbc9OKnz+5ODMvCm8j4Tl7FwZ7ybiEg2a0sw5JJ2AVkdI3q9OXxbebEP+QAnjdHa5crl6ON6Fi3uFti8eTXpTMUMef5J7KVDSY18T4myLwbJHn43s+Euvj0LgcCF28mZ8oiVHxxkx6jjPvpc6b8440KgxulrXRohtcVwGD8t0wrqVvs53qapwKBodsrXoZ9LKJ/gRIiS18kCc1WF5R7Q9N3z9sTMdeYmQw/6cD6Xn8WnWOzmn7QHkEGeZrrMSr5VsnF3COWPDSEVt0DcUFlBIjxGrGd53aio6KbUdj/4+GeYd5ONiE4G4aRWWrFf/WejPXW5qpeyaTil4jly5jPn8Sgf+CBzFLmciegCh5nLJBZ2OOBud3dB/qcyFGPdf5o8GecIlLOpk75mOI7zdKYYIPRSoLH4g1tSS6BPcMT266FX2VIFliuhfMtw4Rz9JnbGTXn3izuduyF8mzUY+17jz1ZbxGep+clFGr1y2k44zjrpONwiTL+fLnA0kOjgInZNHp2nY23UXEaPu5ZCON9nybilEossJxMn4/EX+PlR8oVg2Q8sdiW/CMh7VxDwXYAEXUAm3r5wrTaI+N6j6ISVcpwjD0g+kC+kGA59LsnfXXzinqdMlISi1tNcJzd6qykDQHp81ksIy1XyigDHIiqJewv/DlFRzc66eYkb6/SAur4qT/PfG51Jj/t4ucwNbWENStT+i+yVDID/EegZKDgYs89rw+P48YVwxrnt07Hx623PKDjMGKqv6QITLr+HKJeBUOhvih30uWU5JcDTkCrg6ddo0rOqQQYmGI5qYViwZ7baKdqjfcat5cTUsvjyqr6S2IX35qa+bBlH/Zf/0/nRZhAmmzFRr/fNwKD4eh0N1wSeCip6H5pO7T2VYXmtmTLjcOJuVx3X8ynt3Um5FZqPELikIf2eXi8105JPo5KRO5j07M+PB6SeGy8rKLmRk/rJ7WLnlHwfb4tqs/mRkWG2+N5Yr6Lq4luPivuuvzsIA8pXL9SzfJOSCT/9gfJjXAu3hQF0c6gCC+rz4Un/k+HKjVr6/Kc785xIs9TlLwqO49zs3WI6Mz/5scFMNcHaZDv0OVyzOnvskqTM1BotEUwSWrnW9rQoLPM6+ZLqxr+LCoW4dV2HhlO5KxmavFNze6bFxn/LvhgCVCYs/Mt/gUPXQcliUZRdl8mPW0++So5DI248rwpAMS7DUjMtg5LpbLolEpmTX+8xIzUfEBjLgMh6M6Kedw63ncSVrJn9og3Y2fYvAwtm6GNikZESkdTMSgYU7sHlzrlwLypmtBIvwwQ1YwlF1+egcWN5QwuJruR2QWHHZQT2AnPVcRVTnU7+AZVL1WPjQ7mjEGWW4hfnxFN0RJkm6zsH7cvg8eakOOM1FRPnVbL4LCkvJRojKNsSwrtExWIpJ4JcjQjmzlWA5RR0TFvDQqvRhjmoFFm19PrFOoAPpSjMzNRTb+qTUfVdndUf4IltKz86mFy8OT3e5BOHwMEqAed9rzUiC5Sm/WPxAHJaxlrfmsM9rneCwdPUEC8oLDl09L0uwOCBeyrAEF6S/pSFETFiCufwAsb+cOdW8iKU4HCOaQXddN1IJuKLbCOywxKdNNixC3IbmXqdzQNxT/aAG1fhYP4SG5XrZ7/czvVD0puaXbwSm6yHSHJaVaK7lj2YXmpWba2YrwwLGSBmWRGv72SAaXVV/ZtTGhMVTk1D4zFrkrsVkJUR+ypAZr7rAXDrh/e0gMlyfhi2IbpwUNew9zKm0RD5yWI7gn1AdBFurN3GlYZea35aaa1hGonknNQdC2R9qdPVblmEBNVCChYTqt58ed0OomhQbQwQbsLiKH+X8FN6Do7ldRkpxSaG6qIg3Gc4igO7Wm1SDz+0oHJ6fMU3ujj4QWK74PXJYpKBgyr7WukgZuKrDTS2gl8MiTKoOVXbbVP6QBBImZSV/qklfhgWC/SVYiiEX/XlqlnjGe5dgISwt358E47yrXOt0Mb2qXtMUNsSfSyceJvYleggV/nyor0V3CCjaRahRBRYtALtKuSgL800NT79m4puwaM2gQvh6ANUT5SxYhuUSlGFRy+RaDGhr39DLZVh0/uJMdU3VBAJ21f4M4m5pWCrRQu7mzISbFHBcLj8aLEr2KCpcSqHGdwUWX8GSSqOUMHVRSfyajV+FZWegqlBKlYzfKP1mwMLtszIsz8b9tabpW2BRKwf658Xzd71ijiyxF5cPVOEjMMJOftAJnk+j5x9dhUgwS0bQF3qfZlhC5RN4KkBfk4TNsKiFgZOnJI2a9AYs44A8DkukxGNuT5FY3YpPoERexMWEuFQJfpBOj8vwdJFw12nxoATDycorfGogRtstWJRC7XpKsdZsmmZY1KhOvGk+VqJXCctYiv5t8DAsOgJ4LnSPXuGZMeJKPYOtsEtYxqafGo64dfvCG+2nzuVnecWWmASESrFmWJSBe+ipgavNvGZYFJesPGUnK2bT3CIf9oPaYaGHVKTejXBYKnCLF1B9bWL9KvjiLFwxJxlvOQmYK5a4Jg+vHGLUwCtOPdlAUDMsSuXOqPbTvGrzJli0zl0yZamqcdCwSJUzTuywdBgVZM5qDUtnK/9dlydLpPyYYyLnwhQVEp0Kmh1ldH65NJ5wQ/In11GbUZGBjio1w9KTny5BT79sZeo1wuKrYUu0faWYTcPCpIh6du2wYJTDEqiHMnhJL3R/Kla1OAZOTaoTuuL25viJeqvHsx8QapRgnMbV1aCOWCrQsHB/MKzAokN9x1Av/u5NqzF0NapDF5qbsKjo8yYirvqVHIicWyQTZZEFFj/QhHOL8rFM5aGtlKn6lWUlzanaQD5NPA+A6V7R5b5HKbqBSr6eUSJy3G7VxbftdrsITViUiclVo47vv5pDcNxqJ+kimpuwKCy5u6LdQslsGpaRxDT1cFj8bU4dVLdIlV5NhNOxTrnUcrAksDoVzvfn68NhOoW2p5/Mm7rFK7XpARSYjbj2NWBRq0hc9ujVMFMQGpYuhK5MWFS4it9Wx6qki5bDokKJiyUKi1f0jKt8da9KWIsZC4E2p1C6NjkRF541HafdzQb1cx6k27yCLWMFpjbKKrAo+/SD5jpkbJgoOuik6NWEhfTlh22QC3zJbDksagRfj7dgwQ1kRW+m9giNoDYiuAVV7DAygomzHnpeHP0kKuYA4dStLeg0w0ISKXsglqWUv2luNsOih5g30Q63ZLYcFl/isfkeLJsKu8Sl1U1b4LxTXRkk0QKaZcOfdCNboaLNpRJVhFgFFv3+EPnV0Skj5NosxBRo0JXuKRUjmMNC1Jry9luwVMPA7sp6qaBaSD10vTk8zQ+GwlqiUn9I/3mtV0TWWfaxCgxYtEIBNPXKiaGf/PmHDlZ/8Ob7wIBFhQ0hmqw9bslsBSzKksi+B8vZ9KZKK9Vj64JvJRoexseF73mXTT0a+zDFLVFBdL6fBOraMaI0MA1kNWhiimt5ZeonP9ELF/0EmhuwKJNIyHBtHomJUcCiLPAUhSVcLI7TNrBUF1SK/ANsAUySeck/gsY/PXvsm/tOStSWV7BlrEZ3Ur2eXG9XHmHXFNYN7qRe0RL+nA64i4lRwJKvLWKwdELfa4yJORtlSVSyrIuFZ9tSOYel7GbCo47haZ/a5Li0o8gU8E2EBFObYKFyzF4913WZlgymSG6ARft1L8z3fVpmthIsRvL5vaFKZ65ZfWkMPyTay16qsaKCDCfO/YTQ5vPatvrxAMXtUXHG9cdsgEXL6OwqqJA05eZ2WLQ5sZ1zelawiPWxEixGasy9sKxjFfcyo2JFMoxdhnWM6UXX3Cokvjdzrj+k8FvrFUH1SEQDLD66j+nTsCAbYGETrDn4ESVYtA0u6F5YhqGODlXCxDqXc2KHxch54zybcdUYr6rBpUcpQnNbJU3rGVd1Hm2AxUX50NRPDbAkWHqnYLYSLMYOmPuXwSx80QKWaZm/AN0023OBUHMhHqK4AZWzt659hyR62WGhWKZGRT81wNJDi2vA6kIZlnLG0wOw5M0NOdACloNxyVWvjS+Z3UtNeuXsJnUpUveVGlIsYrw4huFT21Ms8MQ+COQYsBBa1DB4IMUiT3KelYe5BSwVtROw62F62P7IbvkmCXZmIatnvdYXH+wJSSTCezYse3tCUmBJwIlNWMoZfkZCklzevJWQVGSGBaYKF9QAS9WFI24SPV7arUwxlmys356F1cgK0Gc9LdJM33OL9L1QGUlXtWuEqHlp5CVU0vf6RfqeNn0XL5I0ShExYfGLHNBy+t6TF5KQ6uUze/pejlz51VrA8vmjKRQl6t1AxdiaoqieMlVKdr1c3vJkV26RaFSXgdxRpRJJKpHXItn1clm9lpJdlS/a9XxJmvc4sxmwlJiykuxKWyW76s7KcdgWsGCWsM+ShH3Ty2/ilamo3evXc5HrW7DtqeHaRtLSQcs3w4axp4arNds8WKOXnVeBCUtpZ5I1Ndw0IE1Y8kTKEhe3gGVVhyVZTE6nyeLhjaZAtyRYp5rWLajuX9k3Uih1q3PuCpTL+QfWjRT6Qs6fpaEyYSmUkG0jRda4kUInVpaW5h+BhXj57qXHcfG+ag+fk0LlG7DAtiNtIuWWpM5/N+Yuvu0oKUDMbT9WWAMmLPlCv3XbUWUXXQWWUL9BER9/ABYS5/HNw8O4xA2oTHW47VFY0gtoWO1AFyaLN66MdKdhk542A3MMtabj8tGEpQj44pv01lWpUt2kpyMwRXz/fliMrfOHB/ORWqGCwXJbt3QPe7mllcuWMafSHIQqDvBN2W6ob2m9yC2tOlUmd/PyXy5DvaVV7XfJl0jzLa270pbW59oYVbe05p+3Wl3T2zExU+UTc+/JY/zSJMEKVDCVj+0VHgxL1M93cJN+H/7pl3a/E/mNuVB0LGjAm+vDG8hAflU0D9WvRoSM5F9E95tfUT8NIvKyf/q8XpY+uinhaLTvBOrzsJgClS/qZBjIJQn2MC7EUkJEoVL0hxjIWHAhr10gCg4UzYne3F79piLpLdUSSKWkQf5LUrtGiiv5V37gum5gSZColkuotcerJJSpnFlFkto+rfvlWFtUMHfSkmL4H6SPknyr8orA5c66u14TKoZ2RIIvP7uV5t9MpVAlQ2NYd+HSKMFOps1C66HKh/Zo/pFUxHNIhNeRvkeONaJSSfOoS0x8Y9R/ksa58+lbqknegYv32ppXimyTEmFFYcmfT8hIFqUf9L4CZETb4UJ67SVYsc23RMhaPhjCfzp1kNEtchJCtKgUPqYoxffwClb8BSsxQutrmH8aIWHJckJSz34KTht+8dCcBWt7pJjFAfF6/6uwFBayi5f4FHSTX0gTKph2YvVYALbZmPjun07oBvBSsmuUIUPaDhcS34kKZoih5av+aX381xM2nuU8RBI/jEujBMM8H8wcv2dPIP423/3p/w0ZczRfa7kTl7slGGpgpHcULPPdoGVEgDD/Owec/UNkhpcbccHK8cpWd0swNPRyap9vExxt9c1rzxat/43HkVQ36TWNsAWXZl6xxG7ielIjWpMGJX+UOhunVdkT7ktN7w7s/fPkVDIEGsd4ismxRg6zRQiwxeDWETFCus4cCp/cbsA+nRN/o4+/55iYmhZjdx9eosip2qXNuNQ3WDTaCda4jVuP6o9bq2b2el5F7mJ6QFoQYxkjXJwPgd/LzrsbCJLG1Y+WRPwgVL3JztjXuiEoThpu6dTLJTTKseo54M28YhUeUf3IY7SKBQdQHZ6VlO5MPW844P+r9e4ndDAI4iKF0fe8/mDkeYF+t16ukUjUU/ORuHEwGLCoPIK+eXYX97lpr2A51oOHDXu9vAl0xjLn3eW99cLBMIYJHG/4F7RXHCsj2wGFtDeCX1mmCwxIRRiQXnv98iAqIZKRguc9u1+i2k33fJoN1IiS5EX4PNPqGYwkmgu0zystbH33C7Ia00lfxDLIIE31XhNCNqnUZmF0FVHT6b7oz98ap/ylfHQP6VTjwrL0HHFjcjzWzJCc04zFJ+fqhvRJ7KHPBgxKcDz3DmlXJ9rzdspNdEfigLbxeokbLvA8taX+Jjl2Lte2aJZgdkWL2GGWqH55P5YsE0uiPPZ2MnKySZI/zFnKh2CZx5O2gICIw11cBctYpnSEw3wn3jQXK9U0vRmLzkXZNboWxwcsi8BJ3HXWHkfhxS16Wy15Ewr5bIeihqPcAcaK7r9QtQdXqlWr+V3ayTHioZsZJK3tqJBoU/t5tdRcCZbdfLvdQaKrcLESjspmfzxuT5VYW8If5jQfjZYcnWmsUZi8HEUVdaibKb5QbwvpxAALoZyfssVoBCyY2+hkAEVD5lcOyBz+WoZ8eMuwdOuwLAA4nz/mx/Nx+SQmxHjhizRDNRU0LHAsxPg6GA3h6Dy0kr3EtVa1rilGf9Z6v1GCNaCC1tx9xc1dgAXq6AR0BJagzGM6xW4YBrA+/VS0gvTHzAsI8SH1BqQL7GJ4jvzQp8Oxk0Z6//26V4aFcpSvng/NJqUcOwIlduDgrBWFv8LOTVgAhSNs2rn0/DBkcPgGnD4isz9dnTgLsMBMGA9oSEKXddEyyHhRxE7zmrzChcRNvNKUMxPXFb5tZRJgkUEZ7hfCbh/u8Iwlj5DeVB1XJp/4zF0weSFJITsSMp4+5fRnOzH3AJaxqsypYIF/TtJzI7S2gfylSPu4CUt6ePfdJRTzE99A6T0494y3G+upoGABCfkm55O7q5V1KmDBqik0rf+KfFXSe0yC4eug9WK5VVhoBvIHKrXoPTzwermzA0OuTX1YDSCE/19vKyFRFyw9+M2sKzcNKViAx/Jq1ZPN9HFY1h4jxdMKhxk8dd7urNlQwUKLoweIf958IVJMjTNyasANXAiyya5ApTG/DDv0yLb/LH9R4m1gFxdAobezQ9pxcWDBtTApw8X+MoLtqHldKNg9RImAbivPE1CwQJWlPFjLYlP/3geLZI2NDpqAWQPbJ+GrsWRrBUvSLbwBEsVW3YIXH2mUY6wJlY/mw3expAHbZk2AZRQlScSdAlAY4rPu3UuLpTPjQhhwHTOqgHYMBbdA4uiLr2HJjSP0SSuweLIGIvUssMDRfvmeWkhP5LwcAdNsoVqchoX0x03px4L0MGN6pzETr0HbfzTnYmKaBTl7RRKM9gGIC+hrItKYijJ98bloyCaV+n3gG+V7sCCReCFhoVwMdntEwZKcYIQ7cLCTIOPmFVjS7ENStrHAEqSFtwG2yU6o/G5PTQUFy1AZOETe0loHmdMKWxlswuVhVNCjD6zxsJLfchoyMeFKsGyaYDnisDA4hnmWVGDx589A5nNUYCkTDgtxcFiAc7sRMWEhQ3HP+QLBRd+mUnRXUVOWt42yRgmGHxRicVo6EpZPqFLBVTWIWlD834RFsOsiMGHR9Y4MgVblls8vSZ9nCyz+GIelA1PhNTFh0VsBsBSGfGRqx+rI292Ny63dSuixOm/W5GOhMpjrujSZgiUGo09ssJiZ4sOSIQEJzzksIN7OkYLlIFc2YojxjJth2XhMklW3VIXYVsPS6cFUiCUsIwXLDgI8N2CxhMnvxeUGr+CHUDWsSxYmJ7jGlwCOBsnNA68kMyBlI7/gRpFQHsbVEVGwiOM4PxOp8jO5/ZK4fLRfb8By0xLjkiC3sQSD+hoWMRU8CQtL5WwK4Z5dBJbSIVS2Ywbvk2O3UMGPbLvaF7QKWKD0zozBHNT+F4xLnk8Fho92QNzPzXlI4pK1Ggmm0LCA6+kMU4AFVhiEQiHc0ZncD4u6yk1ggAU0nzaeoLeEaFg6UAP7KRNmH5wyKH7F78kQWIwj2yxirHF3ag2VW/th0AMOuw3FngtYYL5xf9HLvXKxWzRPywAfXUeHufvfTQSHKBEATijnnBwWOEdtKmCBXtdquNl9sAgLXA4pHI0BkRzwqnQoNEpFiE3DIjbDHgQssAtQeSQoLMYBh9hxoPKBWuNyi1csx4E2MEvJnYSiGHxewxdz8SLB0KgjDDVgjuJlg4HYlwjDNhVPJIJ3x7CARdWzgJGEUyPU8nNynxCDwuxdGc1I1ECDfOqK0BSBugTwlYalIwuSipiYDzukVQALgcU8DpTzNW6mNlU+uAsV/PDcagHnGiz9mLuTdC831Ivc5V2P0njZNRa8Yd6ny5ixCGLrcBwR+NkHP6IJsBVs0y5gIfFGwSJ2As97lNEYSg/eAwtojzVNGOvNHZXHAbGc8yimFGoOCjWTwyKngvBdwS47jyLG77lHVH7l8NzaXmZN7eTY5CYq+FHT1kMnNSwnTlMIlItDrUSQYJNloKT2ZT6DQzKdw2wGN5EnafQgEnHI1iksR5AyLLIXsd4i/Kjp5GsCHZr70W7AIjgt/Zi9TiF4LKe0cPVO2RrKrouTqgpYxHKGDCmIhRP+qB8baFld8PWrB7OvLXGIpqo6rVGxRA2mjadesCLf/LSUIxQMlNmwmZvzjC025gWS6OeeiAkHroyOx0CBJrmz2V1qM6TaIdgXOSzn4hQviDUKfZHoN5rmx3knbyovcR36qp2u2QZTQe1KiPZ6gW5dE1G1g9n5Q1vG6HZtw8nN3a8Uz3FeNmY/hC+rPdDbnOS7esNo+ZVls3lUZTM/ep4ZFwgL9pNsch1JOUlGq9WLXizyV6t8S/fyPcsmn8u4WqRguFrpBQd/uyqOEZ2v5GoxYT7vP/s8lmp5u3T3mmVP+pxh3q6oyVD87UZb/qiv+1HtIAPipjVYRNwJo6aKbe1QYVu04euNoF2oTn0wVlBD5nlodoLPKDXK1ZCAf5OvLZMgKJZWeZ9Ff7wZkqNd/r1fyuMs/pb9m8fPm1/h7eSvGGKDwjp8DRbnYhmm5gqttyUYQ0tLOt3a6bBtiAzPmx+rcvr/RWL21mFxdjZcGqqBtuAVyxZA9GjKmxRc70nC/DeRnL0ILM7FJses/NKCV+qVRGRLy6LkDQoH3dRe2/nfSyTaOjZYnKtF79vk2OtNVOgWb7l5SIR1IPvtuwXP/g+JuJGy7FBYnC/LOONy7PWWBCOx7fSWZiussc9/W7L3DSLEp9FFe9s4LM6HpZg7hsvMXpJcUhjZVtMuXu+XBMVsOJ8Ue1ctsDhny/ktdVxuoiKPSkRp0/0lReZ2YhssjjPHk+2rp0nN8HMTcyLRHC+O8UsNZIfFyRhqu5q43ELFRyq7/NJNaoDF6T6jOXjlM/FuoEKiBbJw/0s3qQkWx1kTLKRc4PLViApxf1nlQWqGBc7XQTyLZKvOaG6M/QbJ3l4W45ca6RYsTnffq4fTgmA3m711mqIfgTz47ZceopuwwF6SXk2UkYBhwc9CfHlz9HiUX2pHLWDhHPNE0AqmFvJpsPrV9N+iVrA4zvjjpVfdzIpTyHrLya9O+Sa1hIXT5uvo0QbBJUQb9QZfv4zyfWoPC6fuZDtKqIsd8U58l0aj7eQXkx+hu2ABOmerl1EcwRqrXMx1GaVxb/hyzX4trx+ju2ERNJ4estnndcXp+v76cTj/hr1+lv4HaZWN+2iGM8wAAAAASUVORK5CYII=" alt="" class="foooter-info-img">
+                    <span class="footer-infor__logo-text">Công ty TNHH TL-shop</span>
+                </div>
+                <div class="footer-infor__Address">
+                    <span class="footer-infor__Address-item">
+                        Địa chỉ: Tứ chánh , phong sơn , phong điền , thừa thiên Huế
+                    </span>
+                    <span class="footer-infor__Address-item">
+                        Số điện thoại: 0355506752
+                    </span>
+                    <span class="footer-infor__Address-item">
+                        &reg;2023-Bản quyền thuộc về công ty TL-shop
+                    </span>
+                </div>
 
+            </div>
+        </div>
+    </footer>
+    <script src="/assets/javascript/update_cart.js"></script>
+    <script src="/assets/javascript/giohang.js"></script>
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const updateCart = async (productId, action) => {
+        try {
+            const response = await fetch("update_cart.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ product_id: productId, action }),
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                // Cập nhật số lượng và tổng tiền
+                document.getElementById(`quantity-${productId}`).value = result.quantity;
+                document.getElementById(`subtotal-${productId}`).textContent = result.subtotal.toLocaleString("vi-VN") + " đ";
+                document.getElementById("cart-total").textContent = result.total.toLocaleString("vi-VN") + " đ";
+            } else {
+                alert("Cập nhật giỏ hàng thất bại!");
+            }
+        } catch (error) {
+            console.error("Lỗi:", error);
+            alert("Đã xảy ra lỗi!");
+        }
+    };
+
+    // Lắng nghe sự kiện nhấn nút tăng/giảm
+    document.querySelectorAll(".quantity-btn").forEach((button) => {
+        button.addEventListener("click", (e) => {
+            const productId = e.target.dataset.productId;
+            const action = e.target.classList.contains("plus") ? "increase" : "decrease";
+            updateCart(productId, action);
+        });
+    });
+});
+
+    </script>
 </body>
+
 </html>

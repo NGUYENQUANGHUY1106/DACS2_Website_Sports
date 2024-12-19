@@ -1660,6 +1660,9 @@ display: flex;
 align-items: center;
 list-style: none;
 color: #888;
+font-size: 14px;
+gap: 50px;
+margin-right: 20px;
 }
 .cart__navbar-productDetails__item{
     font-size: 14px;
@@ -1696,8 +1699,8 @@ background-position: center;
 }
 .cart__form-product__name{
     font-size: 14px;
-    width: 250px;
     margin-left: 60px;
+    width: 245px;
     color: rgba(0,0,0,0.8);
     line-height: 17px;
     overflow: hidden;
@@ -1708,9 +1711,10 @@ background-position: center;
 }
 .cart__form-productDetails{
 display: flex;
-gap: 37px;
+gap: 45px;
 align-items: center;
 font-size: 14px;
+ margin-right: 35px;
 }
 .cart__form-productDetails__quantity-container{
     border: 1px solid #cecaca;

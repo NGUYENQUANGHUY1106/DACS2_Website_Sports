@@ -14,7 +14,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_to_cart'])) {
     $product_price = $_POST['product_price'];
     $product_size = isset($_POST['product_size']) ? $_POST['product_size'] : 'Không có size'; // Kiểm tra size
     $product_img = $_POST['product_img'];
-    $customer_id = 1; 
+
+    // Lấy customer_id từ session
+    if (isset($_SESSION['customer_id'])) {
+        $customer_id = $_SESSION['customer_id'];
+    } else {
+        // Nếu không có session, yêu cầu người dùng đăng nhập
+        header("Location: login.php");
+        exit();
+    }
 
     // Kiểm tra nếu giỏ hàng chưa tồn tại trong session
     if (!isset($_SESSION['cart'][$customer_id])) {
@@ -56,4 +64,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_to_cart'])) {
     header("Location: index.php");
     exit();
 }
+
 ?>

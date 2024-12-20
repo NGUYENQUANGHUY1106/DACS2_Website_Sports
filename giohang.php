@@ -281,81 +281,84 @@ session_start();
 
                     <!-- Giỏ hàng -->
                     <div class="header__cart">
-                        <div class="header__cart-swap">
-                            <i class="header__cart-icon fa-sharp fas fa-cart-shopping"></i>
-                            <?php
-                            // Lấy customer_id từ session (sau khi người dùng đăng nhập)
-                            if (isset($_SESSION['customer_id'])) {
-                                $customer_id = $_SESSION['customer_id'];
+    <div class="header__cart-swap">
+        <i class="header__cart-icon fa-sharp fas fa-cart-shopping"></i>
+        <?php
+        // Lấy customer_id từ session
+        if (isset($_SESSION['customer_id'])) {
+            $customer_id = $_SESSION['customer_id'];
 
-                                // Tính tổng số lượng sản phẩm
-                                $total_items = 0;
-                                if (isset($_SESSION['cart'][$customer_id])) {
-                                    foreach ($_SESSION['cart'][$customer_id] as $item) {
-                                        $total_items += $item['quantity'];
-                                    }
-                                }
+            // Tính tổng số lượng sản phẩm
+            $total_items = 0;
+            if (isset($_SESSION['cart'][$customer_id])) {
+                foreach ($_SESSION['cart'][$customer_id] as $item) {
+                    $total_items += $item['quantity'];
+                }
+            }
 
-                                // Kiểm tra giỏ hàng trống
-                                if ($total_items == 0) {
-                            ?>
-                                    <span class="header__cart-swap-notice">0</span>
-                                    <div class="header__cart-list header__cart-list-no-cart">
-                                        <img src="./assets/img/no_cart.png" alt="no-cart-img" class="header__cart-list-no-cart-img">
-                                        <span class="header__cart-list-no-cart-msg">Chưa có sản phẩm</span>
+            // Kiểm tra giỏ hàng trống
+            if ($total_items == 0) {
+                ?>
+                <span class="header__cart-swap-notice">0</span>
+                <div class="header__cart-list header__cart-list-no-cart">
+                    <img src="./assets/img/no_cart.png" alt="no-cart-img" class="header__cart-list-no-cart-img">
+                    <span class="header__cart-list-no-cart-msg">Chưa có sản phẩm</span>
+                </div>
+                <?php
+            } else {
+                ?>
+                <span class="header__cart-swap-notice"><?php echo $total_items; ?></span>
+                <div class="header__cart-list">
+                    <h4 class="header__cart-heading">Sản phẩm đã thêm</h4>
+                    <?php
+                    foreach ($_SESSION['cart'][$customer_id] as $product_id => $item) {
+                        ?>
+                        <a href="giohang.php" class="header__cart-list-item__link">
+                            <ul class="header__cart-list-item">
+                                <li class="header__cart-item" style="margin-top: 10px;">
+                                    <img src="<?php echo $item['img']; ?>" alt="<?php echo $item['name']; ?>" class="header__cart-img">
+                                    <div class="header__cart-item-info">
+                                        <div class="header__cart-item-head">
+                                            <h5 class="header__cart-item-name"><?php echo $item['name']; ?></h5>
+                                            <div class="header__cart-item-price-wrap">
+                                                <span class="header__cart-item-price">
+                                                    <?php
+                                                    $price = floatval(str_replace('.', '', $item['price']));
+                                                    echo number_format($price, 0, ',', '.') . 'đ';
+                                                    ?>
+                                                </span>
+                                                <span class="header__cart-item-quantity">x<?php echo $item['quantity']; ?></span>
+                                            </div>
+                                        </div>
+                                        <div class="header__cart-item-body">
+                                            <span class="header__cart-item-description">Phân loại hàng: Chính hãng</span>
+                                            <a href="xoagiohang.php?productid=<?php echo $product_id; ?>" class="header__cart-item-remove">Xóa</a>
+                                        </div>
+                                        <span style="color: red; font-size: 14px;">Size: <?php echo $item['size']; ?></span>
                                     </div>
-                                <?php
-                                } else {
-                                ?>
-                                    <span class="header__cart-swap-notice"><?php echo $total_items; ?></span>
-                                    <div class="header__cart-list">
-                                        <h4 class="header__cart-heading">Sản phẩm đã thêm</h4>
-                                        <?php
-                                        foreach ($_SESSION['cart'][$customer_id] as $product_id => $item) {
-                                        ?>
-                                            <a href="giohang.php" class="header__cart-list-item__link">
-                                                <ul class="header__cart-list-item">
-                                                    <li class="header__cart-item" style="margin-top: 10px;">
-                                                        <img src="<?php echo $item['img']; ?>" alt="<?php echo $item['name']; ?>" class="header__cart-img">
-                                                        <div class="header__cart-item-info">
-                                                            <div class="header__cart-item-head">
-                                                                <h5 class="header__cart-item-name"><?php echo $item['name']; ?></h5>
-                                                                <div class="header__cart-item-price-wrap">
-                                                                    <span class="header__cart-item-price">
-                                                                        <?php
-                                                                        $price = str_replace('.', '', $item['price']);
-                                                                        $price = floatval($price);
-                                                                        echo number_format($price, 0, ',', '.') . 'đ';
-                                                                        ?>
-                                                                    </span>
-                                                                    <span class="header__cart-item-quantity">x<?php echo $item['quantity']; ?></span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="header__cart-item-body">
-                                                                <span class="header__cart-item-description">Phân loại hàng: Chính hãng</span>
-                                                                <a href="xoagiohang.php?productid=<?php echo $product_id; ?>" class="header__cart-item-remove">Xóa</a>
-                                                            </div>
-                                                            <span style="color: red; font-size: 14px;">Size: <?php echo $item['size']; ?></span>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </a>
-                                        <?php } ?>
-                                        <a class="header__cart-view btn btn--primary" href="giohang.php">Xem giỏ hàng</a>
-                                    </div>
-                                <?php
-                                }
-                            } else {
-                                // Nếu chưa đăng nhập, hiển thị giỏ hàng trống và yêu cầu đăng nhập
-                                ?>
-                                <span class="header__cart-swap-notice">0</span>
-                                <div class="header__cart-list header__cart-list-no-cart">
-                                    <img src="./assets/img/no_cart.png" alt="no-cart-img" class="header__cart-list-no-cart-img">
-                                    <span class="header__cart-list-no-cart-msg">Vui lòng đăng nhập để xem giỏ hàng</span>
-                                </div>
-                            <?php } ?>
-                        </div>
-                    </div>
+                                </li>
+                            </ul>
+                        </a>
+                        <?php
+                    }
+                    ?>
+                    <a class="header__cart-view btn btn--primary" href="giohang.php">Xem giỏ hàng</a>
+                </div>
+                <?php
+            }
+        } else {
+            ?>
+            <span class="header__cart-swap-notice">0</span>
+            <div class="header__cart-list header__cart-list-no-cart">
+                <img src="./assets/img/no_cart.png" alt="no-cart-img" class="header__cart-list-no-cart-img">
+                <span class="header__cart-list-no-cart-msg">Vui lòng đăng nhập để xem giỏ hàng</span>
+            </div>
+            <?php
+        }
+        ?>
+    </div>
+</div>
+
 
 
                 </div>

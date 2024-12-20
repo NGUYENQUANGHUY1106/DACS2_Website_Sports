@@ -19,12 +19,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_to_cart'])) {
     if (isset($_SESSION['customer_id'])) {
         $customer_id = $_SESSION['customer_id'];
     } else {
-        // Nếu không có session, yêu cầu người dùng đăng nhập
         header("Location: login.php");
         exit();
     }
 
-    // Kiểm tra nếu giỏ hàng chưa tồn tại trong session
     if (!isset($_SESSION['cart'][$customer_id])) {
         $_SESSION['cart'][$customer_id] = [];
     }

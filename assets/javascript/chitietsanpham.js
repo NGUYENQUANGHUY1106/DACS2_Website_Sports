@@ -74,6 +74,32 @@
             // Lưu lại size vào input ẩn
             document.querySelector('input[name="product_size"]').value = size;
         }
+        // ktra người dùng đăng nhập chưa 
+        document.getElementById('addToCartBtn').addEventListener('click', function(event) {
+            // Kiểm tra nếu người dùng chưa đăng nhập (kiểm tra cookie hoặc session)
+            var customerId = getCookie('customer_id');
+            if (!customerId) {
+                event.preventDefault(); // Ngừng hành động mặc định của nút
+                alert('Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng!');
+            }
+        });
+        
+        document.getElementById('buyNowBtn').addEventListener('click', function(event) {
+            // Kiểm tra nếu người dùng chưa đăng nhập (kiểm tra cookie hoặc session)
+            var customerId = getCookie('customer_id');
+            if (!customerId) {
+                event.preventDefault(); // Ngừng hành động mặc định của nút
+                alert('Vui lòng đăng nhập để mua ngay!');
+                // Bạn có thể mở modal đăng nhập tại đây, ví dụ:
+            }
+        });
+        
+        // Hàm để lấy giá trị của cookie
+        function getCookie(name) {
+            var value = "; " + document.cookie;
+            var parts = value.split("; " + name + "=");
+            if (parts.length == 2) return parts.pop().split(";").shift();
+        }
         
 
 

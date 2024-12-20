@@ -269,12 +269,12 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
                     <ul class="header__search-history-list">
                         <li class="header__search-history-item">
                             <a href="">
-                                Kem dưỡng da chính hãng
+                                Nike
                             </a>
                         </li>
                         <li class="header__search-history-item">
                             <a href="">
-                                Son môi chính hãng
+                                Puma
                             </a>
                         </li>
                     </ul>

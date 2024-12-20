@@ -982,6 +982,19 @@ gap: 15px;
    
     
 }
+@media (max-width: 768px) {
+    .header__logo-img {
+        padding-right: 0;
+        width: 150px; 
+    }
+}
+
+@media (max-width: 480px) {
+    .header__logo-img {
+        padding-right: 0;
+        width: 100px;
+    }
+}
 .header__search{
     flex: 1;
     height: 40px;
@@ -1356,7 +1369,9 @@ margin-right: 4px;
 position: relative;
 top: -0.5px;
 }
-
+.category-heading {
+    cursor: pointer;
+}
 .category-item--active .category-item__link{
 color: red;
 }
@@ -1383,68 +1398,148 @@ transition: right linear 0.1s;
  color: rgb(208, 95, 95);
  right: -4px;
 }
+@media (max-width: 468px) {
+    .category-heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* Ẩn các mục danh mục khi chưa nhấn vào hamburger */
+    .category-list {
+        padding-left: 0;
+        list-style: none;
+    }
+
+    .category-item {
+        display: none; /* Ẩn các mục */
+    }
+
+    /* Khi mở menu, hiển thị các mục danh mục */
+    .collapse.show .category-item {
+        display: block;
+        padding: 10px 16px;
+    }
+
+    .category-item__link {
+        font-size: 1.6rem;
+        color: var(--text-color);
+        text-decoration: none;
+    }
+
+    .category-item__link:hover {
+        color: rgb(208, 95, 95);
+    }
+}
 /* home filter */
-.home-filter{
+.home-filter {
     display: flex;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.04);
     padding: 12px 22px;
     border-radius: 2px;
+    flex-wrap: nowrap;  /* Cho phép các phần tử tự động xuống dòng khi không đủ không gian */
+    justify-content: space-between; /* Giữ các phần tử phân bổ hợp lý */
 }
-.home-filter__lable{
+
+.home-filter__lable {
     font-size: 1.4rem;
-    color:#555;
+    color: #555;
     margin-right: 16px;
 }
-.home-filter-btn{
+
+.home-filter-btn {
     min-width: 90px;
     margin-right: 12px;
-    box-shadow: 0 1px 1px  #dadada;
+    box-shadow: 0 1px 1px #dadada;
+    flex: 1 1 100px; /* Tự động điều chỉnh kích thước cho nút khi màn hình nhỏ lại */
+    padding: 8px;
+    text-align: center;
 }
-.active:hover
-{
+
+.active:hover {
     color: red;
 }
-.home-filter__para{
+
+.home-filter__para {
     display: flex;
     align-items: center;
     margin-left: auto;
+    flex-wrap: nowrap;  /* Đảm bảo các phần tử không xuống dòng */
 }
-.home-filter__para-num{
+
+.home-filter__para-num {
     font-size: 1.5rem;
     color: var(--text-color);
     margin-right: 22px;
 }
-.home-filter__para-current{
+
+.home-filter__para-current {
     color: var(--primary-color);
 }
-.home-filter__para-control{
-width: 72px;
-height: 36px;
-border-radius: 2px;
-display: flex;
+
+.home-filter__para-control {
+    width: 72px;
+    height: 36px;
+    border-radius: 2px;
+    display: flex;
 }
-.home-filter__para-btn{
-flex: 1;
-background-color: var(--white-color);
-display: flex;
-text-decoration: none;
-box-shadow: 0 1px 1px  #dadada;
+
+.home-filter__para-btn {
+    flex: 1;
+    background-color: var(--white-color);
+    display: flex;
+    text-decoration: none;
+    box-shadow: 0 1px 1px #dadada;
 }
-.home-filter__para-btn--disabled{
+
+.home-filter__para-btn--disabled {
     background-color: #f9f9f9;
     cursor: default;
 }
-.home-filter__para-btn--disabled .home-filter__para-icon{
+
+.home-filter__para-btn--disabled .home-filter__para-icon {
     color: #ccc;
 }
-.home-filter__para-btn:first-child{
+
+.home-filter__para-btn:first-child {
     border-right: 1px solid #EEE;
 }
-.home-filter__para-icon{
+
+.home-filter__para-icon {
     font-size: 1.4rem;
     margin: auto;
     color: #555;
+}
+
+/* Responsive for mobile */
+@media (max-width: 768px) {
+    .home-filter {
+        justify-content: space-between; /* Giữ các phần tử trong hàng ngang và cân đối */
+    }
+
+    .home-filter__lable {
+        font-size: 1.2rem;
+        margin-right: 10px;
+    }
+
+    .home-filter-btn {
+        min-width: 80px; /* Giảm kích thước của nút để phù hợp với màn hình nhỏ */
+        margin-right: 8px;
+        flex: 1 1 auto;  /* Cho phép các nút tự động thu nhỏ với chiều rộng còn lại */
+        box-shadow: 0 1px 1px #dadada;
+        padding: 6px;
+    }
+
+    .home-filter__para {
+        margin-left: auto;
+    }
+
+    .home-filter__para-btn {
+        width: 48%;  /* Chia đôi các nút phân trang khi trên mobile */
+        justify-content: center;
+        text-align: center;
+    }
 }
 /* product item */
 .home-product{
@@ -1894,6 +1989,8 @@ margin: 100px 0 ;
 .footer{
     padding-top: 26px;
     border-top: 4px solid red;
+    max-width: 100%;
+    width: 100%;
 }
 .footer-content{
     display: flex;
@@ -1943,60 +2040,115 @@ align-items: center;
     margin: 3px 0 ;
 }
 /* footer bootom */
-.footer__bottom{
+/* Phần CSS hiện tại */
+.footer__bottom {
     background-color: rgba(0, 0, 0, 0.04);
     line-height: 1.8rem;
     padding-top: 26px;
 }
-.footer-infor-list{
+.footer-infor-list {
     display: flex;
     justify-content: center;
     padding-left: 0;
     list-style: none;
 }
-.footer-infor-item{
+.footer-infor-item {
     border-right: 1px solid var(--border-color);
 }
-.footer-infor-item:last-child{
+.footer-infor-item:last-child {
     border: none;
 }
-.footer-infor-item__link{
+.footer-infor-item__link {
     text-decoration: none;
     color: #737373;
     font-size: 1.4rem;
     padding: 0 22px;
 }
-.footer-infor-item__link:hover{
-color: var(--primary-color);
+.footer-infor-item__link:hover {
+    color: var(--primary-color);
 }
-.footer-infor__logo{
-display: grid;
-place-content: center;
-margin-top: 26px;
+.footer-infor__logo {
+    display: grid;
+    place-content: center;
+    margin-top: 26px;
 }
-.foooter-info-img{
+.foooter-info-img {
     width: 110px;
     height: 30px;
 }
-.footer-infor__logo-text{
-font-size: 1.4rem;
-color: #737373;
-margin: 12px 0  16px 0;
+.footer-infor__logo-text {
+    font-size: 1.4rem;
+    color: #737373;
+    margin: 12px 0 16px 0;
 }
-.footer-infor__Address{
-display: flex;
-flex-direction: column;
+.footer-infor__Address {
+    display: flex;
+    flex-direction: column;
 }
-.footer-infor__Address-item{
-text-align: center;
-font-size: 1.4rem;
-color: #737373;
-padding: 3px 0 ;
+.footer-infor__Address-item {
+    text-align: center;
+    font-size: 1.4rem;
+    color: #737373;
+    padding: 3px 0;
 }
-.footer-infor__Address-item:last-child{
-margin-bottom: 30px;
+.footer-infor__Address-item:last-child {
+    margin-bottom: 30px;
 }
-.Pagination-item__link:hover
-{
+.Pagination-item__link:hover {
     color: red;
+}
+@media screen and (max-width: 768px) {
+    .footer-infor-list {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    .footer-infor-item {
+        border: none;
+    }
+    .footer-infor-item__link {
+        padding: 0;
+        font-size: 1.2rem;
+    }
+    .footer__bottom {
+        padding-top: 16px;
+    }
+    .footer-infor__logo {
+        margin-top: 16px;
+    }
+    .foooter-info-img {
+        width: 90px;
+        height: 24px;
+    }
+    .footer-infor__logo-text {
+        font-size: 1.2rem;
+    }
+    .footer-infor__Address-item {
+        font-size: 1.2rem;
+        padding: 2px 0;
+    }
+    .footer-infor__Address-item:last-child {
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .footer-infor__logo-text {
+        font-size: 1.1rem;
+        margin: 8px 0 12px 0;
+    }
+    .footer-infor__Address-item {
+        font-size: 1.1rem;
+    }
+    .footer-infor-item__link {
+        font-size: 1.1rem;
+    }
+    .foooter-info-img {
+        width: 80px;
+        height: 20px;
+    }
+    .footer__bottom {
+        line-height: 1.6rem;
+        padding-top: 12px;
+    }
 }

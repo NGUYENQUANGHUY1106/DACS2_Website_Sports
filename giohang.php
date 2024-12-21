@@ -25,7 +25,7 @@ session_start();
 <body>
 
     <div class="app">
-        <header class="header">
+    <header class="header">
             <div class="grid">
                 <nav class="header__navbar">
                     <ul class="header__navbar-list">
@@ -67,28 +67,46 @@ session_start();
                                 <ul class="header__notify-list">
                                     <li class="header__notify-item">
                                         <a href="" class="header__notify-link">
-                                            <div class="header__notify-info">
-                                                <span class="header__notify-name">Ohui giảm giá cực sốc toàn bộ mỹ phẩm chỉ còn 599.000 vnd</span>
-                                                <span class="header__notify-descriotion">Chương trình khuyến mãi chỉ diễn ra từ ngày 20-4 cho đến 30-4</span>
+                                            <div style="display: flex; gap:  15px;" class="header__notify-info">
+                                                <img style="width: 40px; object-fit: contain;" src="/assets/img/thongbao_anh1.jpg" alt="">
+                                                <div>
+                                                    <span class="header__notify-name">Nike Air Zoom Mercurial Superfly 9 Academy TF chỉ còn 1.200.000 vnd</span>
+                                                    <span class="header__notify-descriotion">Chương trình khuyến mãi chỉ diễn ra từ ngày 20/12 cho đến 30-4</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="header__notify-item">
+                                        <a href="" class="header__notify-link">
+                                            <div style="display: flex; gap:  15px;" class="header__notify-info">
+                                                <img style="width: 40px; object-fit: contain;" src="/assets/img/thongbaoanh_2.avif" alt="">
+                                                <div>
+                                                    <span class="header__notify-name">SALE SỐC! 19% bộ áo quần thi đấu brunofernandes </span>
+                                                    <span class="header__notify-descriotion"> giá chỉ còn 4.080.000vnd(giá gốc 5.100.000nvd)</span>
+                                                </div>
 
                                             </div>
                                         </a>
                                     </li>
                                     <li class="header__notify-item">
                                         <a href="" class="header__notify-link">
-                                            <div class="header__notify-info">
-                                                <span class="header__notify-name">SALE SỐC! 70% bộ dưỡng Ohui The First tái tạo trẻ hóa da </span>
-                                                <span class="header__notify-descriotion"> giá chỉ còn 375.000vnd(giá gốc 1.250.000nvd)</span>
-
+                                            <div style="display: flex; gap:  15px;" class="header__notify-info">
+                                                <img style="width: 40px; object-fit: contain;" src="/assets/img/thonganh_3.jpg" alt="">
+                                                <div>
+                                                <span class="header__notify-name"> FC Baca chính thức ra mắt bóng thi đấu</span>
+                                                <span class="header__notify-descriotion">khuyến mãi chỉ còn 22%</span>
+                                                </div>
                                             </div>
                                         </a>
                                     </li>
                                     <li class="header__notify-item">
                                         <a href="" class="header__notify-link">
-                                            <div class="header__notify-info">
-                                                <span class="header__notify-name"> Ohui chính thức ra mặt mộ dưỡng da</span>
-                                                <span class="header__notify-descriotion">khuyến mãi chỉ còn 50%</span>
-
+                                            <div style="display: flex; gap:  15px;" class="header__notify-info">
+                                                <img style="width: 40px; object-fit: contain;" src="/assets/img/thongbao_anh4.webp" alt="">
+                                                <div>
+                                                <span class="header__notify-name">Phụ kiện bảo vệ ống đồng thi đấu</span>
+                                                <span class="header__notify-descriotion">giá mở bán chỉ 1.260.000 </span>
+                                                </div>
                                             </div>
                                         </a>
                                     </li>
@@ -245,7 +263,7 @@ session_start();
                 </nav>
                 <div class="header-with-search">
                     <div class="header__logo">
-                        <a href="index.php" class="header__logo-link">
+                        <a href="#" class="header__logo-link">
 
 
                             <img src="/assets/img/logo (2).png" alt="anhlogo" class="header__logo-img">
@@ -261,12 +279,17 @@ session_start();
                                 <ul class="header__search-history-list">
                                     <li class="header__search-history-item">
                                         <a href="">
-                                            Kem dưỡng da chính hãng
+                                            Nike Air Zoom Mercurial Superfly 9 Academy TF
                                         </a>
                                     </li>
                                     <li class="header__search-history-item">
                                         <a href="">
-                                            Son môi chính hãng
+                                            Puma
+                                        </a>
+                                    </li>
+                                    <li class="header__search-history-item">
+                                        <a href="">
+                                            Áo 
                                         </a>
                                     </li>
                                 </ul>
@@ -284,78 +307,87 @@ session_start();
     <div class="header__cart-swap">
         <i class="header__cart-icon fa-sharp fas fa-cart-shopping"></i>
         <?php
-        // Lấy customer_id từ session
+        // Lấy customer_id từ session (sau khi người dùng đăng nhập)
         if (isset($_SESSION['customer_id'])) {
             $customer_id = $_SESSION['customer_id'];
 
             // Tính tổng số lượng sản phẩm
             $total_items = 0;
-            if (isset($_SESSION['cart'][$customer_id])) {
+            if (isset($_SESSION['cart'][$customer_id]) && is_array($_SESSION['cart'][$customer_id])) {
                 foreach ($_SESSION['cart'][$customer_id] as $item) {
-                    $total_items += $item['quantity'];
+                    if (is_array($item) && isset($item['quantity'])) {
+                        $total_items += intval($item['quantity']);
+                    }
                 }
             }
 
             // Kiểm tra giỏ hàng trống
             if ($total_items == 0) {
-                ?>
+        ?>
                 <span class="header__cart-swap-notice">0</span>
                 <div class="header__cart-list header__cart-list-no-cart">
                     <img src="./assets/img/no_cart.png" alt="no-cart-img" class="header__cart-list-no-cart-img">
                     <span class="header__cart-list-no-cart-msg">Chưa có sản phẩm</span>
                 </div>
-                <?php
+            <?php
             } else {
-                ?>
+            ?>
                 <span class="header__cart-swap-notice"><?php echo $total_items; ?></span>
                 <div class="header__cart-list">
                     <h4 class="header__cart-heading">Sản phẩm đã thêm</h4>
                     <?php
                     foreach ($_SESSION['cart'][$customer_id] as $product_id => $item) {
-                        ?>
-                        <a href="giohang.php" class="header__cart-list-item__link">
-                            <ul class="header__cart-list-item">
-                                <li class="header__cart-item" style="margin-top: 10px;">
-                                    <img src="<?php echo $item['img']; ?>" alt="<?php echo $item['name']; ?>" class="header__cart-img">
-                                    <div class="header__cart-item-info">
-                                        <div class="header__cart-item-head">
-                                            <h5 class="header__cart-item-name"><?php echo $item['name']; ?></h5>
-                                            <div class="header__cart-item-price-wrap">
-                                                <span class="header__cart-item-price">
-                                                    <?php
-                                                    $price = floatval(str_replace('.', '', $item['price']));
-                                                    echo number_format($price, 0, ',', '.') . 'đ';
-                                                    ?>
-                                                </span>
-                                                <span class="header__cart-item-quantity">x<?php echo $item['quantity']; ?></span>
+                        if (is_array($item)) {
+                            // Check for required keys
+                            $product_name = isset($item['name']) ? $item['name'] : 'Sản phẩm không xác định';
+                            $product_img = isset($item['img']) ? $item['img'] : './assets/img/default.png';
+                            $product_price = isset($item['price']) ? str_replace('.', '', $item['price']) : 0;
+                            $product_quantity = isset($item['quantity']) ? intval($item['quantity']) : 0;
+                            $product_size = isset($item['size']) ? $item['size'] : 'Không rõ';
+                    ?>
+                            <a href="giohang.php" class="header__cart-list-item__link">
+                                <ul class="header__cart-list-item">
+                                    <li class="header__cart-item" style="margin-top: 10px;">
+                                        <img src="<?php echo $product_img; ?>" alt="<?php echo $product_name; ?>" class="header__cart-img">
+                                        <div class="header__cart-item-info">
+                                            <div class="header__cart-item-head">
+                                                <h5 class="header__cart-item-name"><?php echo $product_name; ?></h5>
+                                                <div class="header__cart-item-price-wrap">
+                                                    <span class="header__cart-item-price">
+                                                        <?php
+                                                        $price = floatval($product_price);
+                                                        echo number_format($price, 0, ',', '.') . 'đ';
+                                                        ?>
+                                                    </span>
+                                                    <span class="header__cart-item-quantity">x<?php echo $product_quantity; ?></span>
+                                                </div>
                                             </div>
+                                            <div class="header__cart-item-body">
+                                                <span class="header__cart-item-description">Phân loại hàng: Chính hãng</span>
+                                                <a href="xoagiohang.php?productid=<?php echo $product_id; ?>" class="header__cart-item-remove">Xóa</a>
+                                            </div>
+                                            <span style="color: red; font-size: 14px;">Size: <?php echo $product_size; ?></span>
                                         </div>
-                                        <div class="header__cart-item-body">
-                                            <span class="header__cart-item-description">Phân loại hàng: Chính hãng</span>
-                                            <a href="xoagiohang.php?productid=<?php echo $product_id; ?>" class="header__cart-item-remove">Xóa</a>
-                                        </div>
-                                        <span style="color: red; font-size: 14px;">Size: <?php echo $item['size']; ?></span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </a>
-                        <?php
+                                    </li>
+                                </ul>
+                            </a>
+                    <?php
+                        }
                     }
                     ?>
                     <a class="header__cart-view btn btn--primary" href="giohang.php">Xem giỏ hàng</a>
                 </div>
-                <?php
+        <?php
             }
         } else {
-            ?>
+            // Nếu chưa đăng nhập, hiển thị giỏ hàng trống và yêu cầu đăng nhập
+        ?>
             <span class="header__cart-swap-notice">0</span>
             <div class="header__cart-list header__cart-list-no-cart">
                 <img src="./assets/img/no_cart.png" alt="no-cart-img" class="header__cart-list-no-cart-img">
                 <span class="header__cart-list-no-cart-msg">Vui lòng đăng nhập để xem giỏ hàng</span>
             </div>
-            <?php
-        }
-        ?>
+        <?php } ?>
     </div>
 </div>
 

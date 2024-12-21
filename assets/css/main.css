@@ -860,8 +860,11 @@ gap: 15px;
     align-items: center;
    margin-bottom: 30px;
    }
+   .feedback_product
+   {
+    text-align: center;
+   }
    .evaluatecontainer__title{
-    margin-left: 10px;
     font-size: 30px;
    }
    .evaluateForm{
@@ -2031,12 +2034,11 @@ margin: 100px 0 ;
 /* footer */
 .footer{
     padding-top: 26px;
-<<<<<<< HEAD
+
     border-top: 4px solid red;
     max-width: 100%;
     width: 100%;
-=======
->>>>>>> 21963494b5da35601d9b38a6715dd7535feef7e5
+
 }
 .footer-content{
     display: flex;
@@ -2143,7 +2145,6 @@ align-items: center;
 .Pagination-item__link:hover {
     color: red;
 }
-<<<<<<< HEAD
 @media screen and (max-width: 768px) {
     .footer-infor-list {
         flex-direction: column;
@@ -2198,7 +2199,6 @@ align-items: center;
         line-height: 1.6rem;
         padding-top: 12px;
     }
-=======
 .delete_cart
 {
     text-decoration: none;
@@ -2208,5 +2208,5 @@ align-items: center;
 .delete_cart:hover
 {
     color: red;
->>>>>>> 21963494b5da35601d9b38a6715dd7535feef7e5
+}
 }

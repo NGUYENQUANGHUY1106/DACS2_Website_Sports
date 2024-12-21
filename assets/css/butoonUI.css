@@ -1,0 +1,39 @@
+/* From Uiverse.io by CristianMontoya98 */ 
+.btn_add_to_cart {
+    width: 22.5rem;
+    height: 50px;
+    margin: 0.5em;
+    background: black;
+    color: white;
+    border: none;
+    border-radius: 2.625em;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+   }
+   
+   .btn_add_to_cart:hover {
+    color: black;
+   }
+   
+   .btn_add_to_cart:after {
+    content: "";
+    background: white;
+    position: absolute;
+    z-index: -1;
+    left: -20%;
+    right: -20%;
+    top: 0;
+    bottom: 0;
+    transform: skewX(-45deg) scale(0, 1);
+    transition: all 0.5s;
+   }
+   
+   .btn_add_to_cart:hover:after {
+    transform: skewX(-45deg) scale(1, 1);
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+   }

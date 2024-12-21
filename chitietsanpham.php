@@ -15,6 +15,7 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/grid.css">
     <link rel="stylesheet" href="/assets/css/responsive.css">
+    <link rel="stylesheet" href="/assets/css/butoonUI.css">
     <link rel="stylesheet" href="./assets/fonts/fontawesome-free-6.4.0-web/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -290,9 +291,11 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
 
             // Tính tổng số lượng sản phẩm
             $total_items = 0;
-            if (isset($_SESSION['cart'][$customer_id])) {
+            if (isset($_SESSION['cart'][$customer_id]) && is_array($_SESSION['cart'][$customer_id])) {
                 foreach ($_SESSION['cart'][$customer_id] as $item) {
-                    $total_items += $item['quantity'];
+                    if (is_array($item) && isset($item['quantity'])) {
+                        $total_items += intval($item['quantity']);
+                    }
                 }
             }
 
@@ -312,35 +315,44 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
                     <h4 class="header__cart-heading">Sản phẩm đã thêm</h4>
                     <?php
                     foreach ($_SESSION['cart'][$customer_id] as $product_id => $item) {
+                        if (is_array($item)) {
+                            // Check for required keys
+                            $product_name = isset($item['name']) ? $item['name'] : 'Sản phẩm không xác định';
+                            $product_img = isset($item['img']) ? $item['img'] : './assets/img/default.png';
+                            $product_price = isset($item['price']) ? str_replace('.', '', $item['price']) : 0;
+                            $product_quantity = isset($item['quantity']) ? intval($item['quantity']) : 0;
+                            $product_size = isset($item['size']) ? $item['size'] : 'Không rõ';
                     ?>
-                        <a href="giohang.php" class="header__cart-list-item__link">
-                            <ul class="header__cart-list-item">
-                                <li class="header__cart-item" style="margin-top: 10px;">
-                                    <img src="<?php echo $item['img']; ?>" alt="<?php echo $item['name']; ?>" class="header__cart-img">
-                                    <div class="header__cart-item-info">
-                                        <div class="header__cart-item-head">
-                                            <h5 class="header__cart-item-name"><?php echo $item['name']; ?></h5>
-                                            <div class="header__cart-item-price-wrap">
-                                                <span class="header__cart-item-price">
-                                                    <?php
-                                                    $price = str_replace('.', '', $item['price']);
-                                                    $price = floatval($price);
-                                                    echo number_format($price, 0, ',', '.') . 'đ';
-                                                    ?>
-                                                </span>
-                                                <span class="header__cart-item-quantity">x<?php echo $item['quantity']; ?></span>
+                            <a href="giohang.php" class="header__cart-list-item__link">
+                                <ul class="header__cart-list-item">
+                                    <li class="header__cart-item" style="margin-top: 10px;">
+                                        <img src="<?php echo $product_img; ?>" alt="<?php echo $product_name; ?>" class="header__cart-img">
+                                        <div class="header__cart-item-info">
+                                            <div class="header__cart-item-head">
+                                                <h5 class="header__cart-item-name"><?php echo $product_name; ?></h5>
+                                                <div class="header__cart-item-price-wrap">
+                                                    <span class="header__cart-item-price">
+                                                        <?php
+                                                        $price = floatval($product_price);
+                                                        echo number_format($price, 0, ',', '.') . 'đ';
+                                                        ?>
+                                                    </span>
+                                                    <span class="header__cart-item-quantity">x<?php echo $product_quantity; ?></span>
+                                                </div>
                                             </div>
+                                            <div class="header__cart-item-body">
+                                                <span class="header__cart-item-description">Phân loại hàng: Chính hãng</span>
+                                                <a href="xoagiohang.php?productid=<?php echo $product_id; ?>" class="header__cart-item-remove">Xóa</a>
+                                            </div>
+                                            <span style="color: red; font-size: 14px;">Size: <?php echo $product_size; ?></span>
                                         </div>
-                                        <div class="header__cart-item-body">
-                                            <span class="header__cart-item-description">Phân loại hàng: Chính hãng</span>
-                                            <a href="xoagiohang.php?productid=<?php echo $product_id; ?>" class="header__cart-item-remove">Xóa</a>
-                                        </div>
-                                        <span style="color: red; font-size: 14px;">Size: <?php echo $item['size']; ?></span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </a>
-                    <?php } ?>
+                                    </li>
+                                </ul>
+                            </a>
+                    <?php
+                        }
+                    }
+                    ?>
                     <a class="header__cart-view btn btn--primary" href="giohang.php">Xem giỏ hàng</a>
                 </div>
         <?php
@@ -356,6 +368,7 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
         <?php } ?>
     </div>
 </div>
+
 
 
                 </div>
@@ -505,11 +518,12 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
                             <input type="hidden" name="product_size" value="<?php echo isset($size) ? $size : 'Không có size'; ?>">
                             <input type="hidden" name="product_img" value="<?php echo $images[0]; ?>">
                             <div class="form_add_to_cart">
-                                <button type="submit" name="add_to_cart" class="detail__select-addCart" id="addToCartBtn">
+                                <button type="submit" name="add_to_cart" class="btn_add_to_cart" id="addToCartBtn">
                                     <i class="fa-solid fa-cart-shopping"></i> Thêm Vào Giỏ Hàng
                                 </button>
-                                <a href="muangay.php?item=<?php echo $row['id']; ?>" name="buyNow" class="detail__select-buy" id="buyNowBtn">Mua Ngay</a>
-
+                                <button type="submit" name="buy_now" class="button_buy_now" id="buyNowBtn">
+                                <span class="button-content">Download </span>
+                                </button>
                             </div>
                         </form>
 

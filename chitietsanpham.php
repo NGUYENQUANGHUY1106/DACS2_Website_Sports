@@ -26,7 +26,7 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
 <body>
 
     <div class="app">
-    <header class="header">
+        <header class="header">
             <div class="grid">
                 <nav class="header__navbar">
                     <ul class="header__navbar-list">
@@ -94,8 +94,8 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
                                             <div style="display: flex; gap:  15px;" class="header__notify-info">
                                                 <img style="width: 40px; object-fit: contain;" src="/assets/img/thonganh_3.jpg" alt="">
                                                 <div>
-                                                <span class="header__notify-name"> FC Baca chính thức ra mắt bóng thi đấu</span>
-                                                <span class="header__notify-descriotion">khuyến mãi chỉ còn 22%</span>
+                                                    <span class="header__notify-name"> FC Baca chính thức ra mắt bóng thi đấu</span>
+                                                    <span class="header__notify-descriotion">khuyến mãi chỉ còn 22%</span>
                                                 </div>
                                             </div>
                                         </a>
@@ -105,8 +105,8 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
                                             <div style="display: flex; gap:  15px;" class="header__notify-info">
                                                 <img style="width: 40px; object-fit: contain;" src="/assets/img/thongbao_anh4.webp" alt="">
                                                 <div>
-                                                <span class="header__notify-name">Phụ kiện bảo vệ ống đồng thi đấu</span>
-                                                <span class="header__notify-descriotion">giá mở bán chỉ 1.260.000 </span>
+                                                    <span class="header__notify-name">Phụ kiện bảo vệ ống đồng thi đấu</span>
+                                                    <span class="header__notify-descriotion">giá mở bán chỉ 1.260.000 </span>
                                                 </div>
                                             </div>
                                         </a>
@@ -300,92 +300,92 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
 
                     <!-- Giỏ hàng -->
                     <div class="header__cart">
-    <div class="header__cart-swap">
-        <i class="header__cart-icon fa-sharp fas fa-cart-shopping"></i>
-        <?php
-        // Lấy customer_id từ session (sau khi người dùng đăng nhập)
-        if (isset($_SESSION['customer_id'])) {
-            $customer_id = $_SESSION['customer_id'];
+                        <div class="header__cart-swap">
+                            <i class="header__cart-icon fa-sharp fas fa-cart-shopping"></i>
+                            <?php
+                            // Lấy customer_id từ session (sau khi người dùng đăng nhập)
+                            if (isset($_SESSION['customer_id'])) {
+                                $customer_id = $_SESSION['customer_id'];
 
-            // Tính tổng số lượng sản phẩm
-            $total_items = 0;
-            if (isset($_SESSION['cart'][$customer_id]) && is_array($_SESSION['cart'][$customer_id])) {
-                foreach ($_SESSION['cart'][$customer_id] as $item) {
-                    if (is_array($item) && isset($item['quantity'])) {
-                        $total_items += intval($item['quantity']);
-                    }
-                }
-            }
+                                // Tính tổng số lượng sản phẩm
+                                $total_items = 0;
+                                if (isset($_SESSION['cart'][$customer_id]) && is_array($_SESSION['cart'][$customer_id])) {
+                                    foreach ($_SESSION['cart'][$customer_id] as $item) {
+                                        if (is_array($item) && isset($item['quantity'])) {
+                                            $total_items += intval($item['quantity']);
+                                        }
+                                    }
+                                }
 
-            // Kiểm tra giỏ hàng trống
-            if ($total_items == 0) {
-        ?>
-                <span class="header__cart-swap-notice">0</span>
-                <div class="header__cart-list header__cart-list-no-cart">
-                    <img src="./assets/img/no_cart.png" alt="no-cart-img" class="header__cart-list-no-cart-img">
-                    <span class="header__cart-list-no-cart-msg">Chưa có sản phẩm</span>
-                </div>
-            <?php
-            } else {
-            ?>
-                <span class="header__cart-swap-notice"><?php echo $total_items; ?></span>
-                <div class="header__cart-list">
-                    <h4 class="header__cart-heading">Sản phẩm đã thêm</h4>
-                    <?php
-                    foreach ($_SESSION['cart'][$customer_id] as $product_id => $item) {
-                        if (is_array($item)) {
-                            // Check for required keys
-                            $product_name = isset($item['name']) ? $item['name'] : 'Sản phẩm không xác định';
-                            $product_img = isset($item['img']) ? $item['img'] : './assets/img/default.png';
-                            $product_price = isset($item['price']) ? str_replace('.', '', $item['price']) : 0;
-                            $product_quantity = isset($item['quantity']) ? intval($item['quantity']) : 0;
-                            $product_size = isset($item['size']) ? $item['size'] : 'Không rõ';
-                    ?>
-                            <a href="giohang.php" class="header__cart-list-item__link">
-                                <ul class="header__cart-list-item">
-                                    <li class="header__cart-item" style="margin-top: 10px;">
-                                        <img src="<?php echo $product_img; ?>" alt="<?php echo $product_name; ?>" class="header__cart-img">
-                                        <div class="header__cart-item-info">
-                                            <div class="header__cart-item-head">
-                                                <h5 class="header__cart-item-name"><?php echo $product_name; ?></h5>
-                                                <div class="header__cart-item-price-wrap">
-                                                    <span class="header__cart-item-price">
-                                                        <?php
-                                                        $price = floatval($product_price);
-                                                        echo number_format($price, 0, ',', '.') . 'đ';
-                                                        ?>
-                                                    </span>
-                                                    <span class="header__cart-item-quantity">x<?php echo $product_quantity; ?></span>
-                                                </div>
-                                            </div>
-                                            <div class="header__cart-item-body">
-                                                <span class="header__cart-item-description">Phân loại hàng: Chính hãng</span>
-                                                <a href="xoagiohang.php?productid=<?php echo $product_id; ?>" class="header__cart-item-remove">Xóa</a>
-                                            </div>
-                                            <span style="color: red; font-size: 14px;">Size: <?php echo $product_size; ?></span>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </a>
-                    <?php
-                        }
-                    }
-                    ?>
-                    <a class="header__cart-view btn btn--primary" href="giohang.php">Xem giỏ hàng</a>
-                </div>
-        <?php
-            }
-        } else {
-            // Nếu chưa đăng nhập, hiển thị giỏ hàng trống và yêu cầu đăng nhập
-        ?>
-            <span class="header__cart-swap-notice">0</span>
-            <div class="header__cart-list header__cart-list-no-cart">
-                <img src="./assets/img/no_cart.png" alt="no-cart-img" class="header__cart-list-no-cart-img">
-                <span class="header__cart-list-no-cart-msg">Vui lòng đăng nhập để xem giỏ hàng</span>
-            </div>
-        <?php } ?>
-    </div>
-</div>
+                                // Kiểm tra giỏ hàng trống
+                                if ($total_items == 0) {
+                            ?>
+                                    <span class="header__cart-swap-notice">0</span>
+                                    <div class="header__cart-list header__cart-list-no-cart">
+                                        <img src="./assets/img/no_cart.png" alt="no-cart-img" class="header__cart-list-no-cart-img">
+                                        <span class="header__cart-list-no-cart-msg">Chưa có sản phẩm</span>
+                                    </div>
+                                <?php
+                                } else {
+                                ?>
+                                    <span class="header__cart-swap-notice"><?php echo $total_items; ?></span>
+                                    <div class="header__cart-list">
+                                        <h4 class="header__cart-heading">Sản phẩm đã thêm</h4>
+                                        <?php
+                                        foreach ($_SESSION['cart'][$customer_id] as $product_id => $item) {
+                                            if (is_array($item)) {
+                                                // Check for required keys
+                                                $product_name = isset($item['name']) ? $item['name'] : 'Sản phẩm không xác định';
+                                                $product_img = isset($item['img']) ? $item['img'] : './assets/img/default.png';
+                                                $product_price = isset($item['price']) ? str_replace('.', '', $item['price']) : 0;
+                                                $product_quantity = isset($item['quantity']) ? intval($item['quantity']) : 0;
+                                                $product_size = isset($item['size']) ? $item['size'] : 'Không rõ';
+                                        ?>
+                                                <a href="giohang.php" class="header__cart-list-item__link">
+                                                    <ul class="header__cart-list-item">
+                                                        <li class="header__cart-item" style="margin-top: 10px;">
+                                                            <img src="<?php echo $product_img; ?>" alt="<?php echo $product_name; ?>" class="header__cart-img">
+                                                            <div class="header__cart-item-info">
+                                                                <div class="header__cart-item-head">
+                                                                    <h5 class="header__cart-item-name"><?php echo $product_name; ?></h5>
+                                                                    <div class="header__cart-item-price-wrap">
+                                                                        <span class="header__cart-item-price">
+                                                                            <?php
+                                                                            $price = floatval($product_price);
+                                                                            echo number_format($price, 0, ',', '.') . 'đ';
+                                                                            ?>
+                                                                        </span>
+                                                                        <span class="header__cart-item-quantity">x<?php echo $product_quantity; ?></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="header__cart-item-body">
+                                                                    <span class="header__cart-item-description">Phân loại hàng: Chính hãng</span>
+                                                                    <a href="xoagiohang.php?productid=<?php echo $product_id; ?>" class="header__cart-item-remove">Xóa</a>
+                                                                </div>
+                                                                <span style="color: red; font-size: 14px;">Size: <?php echo $product_size; ?></span>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </a>
+                                        <?php
+                                            }
+                                        }
+                                        ?>
+                                        <a class="header__cart-view btn btn--primary" href="giohang.php">Xem giỏ hàng</a>
+                                    </div>
+                                <?php
+                                }
+                            } else {
+                                // Nếu chưa đăng nhập, hiển thị giỏ hàng trống và yêu cầu đăng nhập
+                                ?>
+                                <span class="header__cart-swap-notice">0</span>
+                                <div class="header__cart-list header__cart-list-no-cart">
+                                    <img src="./assets/img/no_cart.png" alt="no-cart-img" class="header__cart-list-no-cart-img">
+                                    <span class="header__cart-list-no-cart-msg">Vui lòng đăng nhập để xem giỏ hàng</span>
+                                </div>
+                            <?php } ?>
+                        </div>
+                    </div>
 
 
 
@@ -535,12 +535,12 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
                             <input type="hidden" name="product_price" value="<?php echo $row['priceNew']; ?>">
                             <input type="hidden" name="product_size" value="<?php echo isset($size) ? $size : 'Không có size'; ?>">
                             <input type="hidden" name="product_img" value="<?php echo $images[0]; ?>">
-                            <div class="form_add_to_cart">
+                            <div style="text-align: center;" class="form_add_to_cart">
                                 <button type="submit" name="add_to_cart" class="btn_add_to_cart" id="addToCartBtn">
-                                    <i class="fa-solid fa-cart-shopping"></i> Thêm Vào Giỏ Hàng
+                                    Thêm Vào Giỏ Hàng
                                 </button>
                                 <button type="submit" name="buy_now" class="button_buy_now" id="buyNowBtn">
-                                <span class="button-content">Download </span>
+                                   Mua Ngay 
                                 </button>
                             </div>
                         </form>
@@ -555,15 +555,15 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
             ?>
         </div>
 
-        <div class="evaluateContainer">
+        <div class="evaluate-container">
             <?php
             date_default_timezone_set('Asia/Ho_Chi_Minh');
             if (isset($_COOKIE['customer_id'])) {
                 $customer_name = $_COOKIE['customer_name'];
             }
             ?>
-            <div class="evaluateForm">
-                <h1 class="evaluatecontainer__title">Đánh giá Sản phẩm</h1>
+            <div class="evaluate-form">
+                <h1 class="evaluate-container__title">Đánh giá Sản phẩm</h1>
                 <?php
                 $conn = mysqli_connect("localhost:3366", "root", "", "MYPHAM");
                 $sql = "SELECT * FROM binhluan WHERE idsp = " . $_GET['idsp'] . " ORDER BY ngayBL DESC";
@@ -571,30 +571,79 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
                 echo '<div id="dsbinhluan">';
                 while ($row = mysqli_fetch_array($kq)) {
                 ?>
-                    <div class="showComment">
-                        <div class="showComment__box">
-                            <span class="showComment__name"><?php echo $row["tenKH"] ?></span>
-                            <span class="showComment__date"><?php echo $row["ngayBL"] ?></span>
+                    <div class="comment-card">
+                        <div class="comment-header">
+                            <span class="comment-author"><?php echo $row["tenKH"]; ?></span>
+                            <span class="comment-date"><?php echo $row["ngayBL"]; ?></span>
                         </div>
-                        <div class="showComment__content"><?php echo $row["noidung"] ?></div>
+                        <div class="comment-content"><?php echo $row["noidung"]; ?></div>
+                        <?php if (!empty($row["hinhanh"])) { ?>
+                            <div class="comment-image">
+                                <img style="width: 250px; object-fit: contain;" src="<?php echo $row["hinhanh"]; ?>" alt="Hình ảnh đánh giá">
+                            </div>
+                        <?php } ?>
                     </div>
                 <?php
                 }
                 echo '</div>';
                 ?>
-                <?php
-                if (isset($_COOKIE['customer_id'])) {
-                ?>
-                    <div class="evaluateContent">
+                <?php if (isset($_COOKIE['customer_id'])) { ?>
+                    <div class="evaluate-input">
                         <input type="hidden" id="idsp" name="idsp" value="<?php echo $_GET['idsp']; ?>">
-                        <input type="hidden" id="ten" name="tenKH" value="<?php echo  $customer_name ?>">
+                        <input type="hidden" id="ten" name="tenKH" value="<?php echo $customer_name; ?>">
                         <input type="hidden" id="date" name="ngayBL" value="<?php echo date("d-m-y H:i:s"); ?>">
-                        <input type="text" class="evaluateBox" id="noidung" placeholder="Đánh giá sản phẩm"></input>
-                        <button class="evaluateEnter" id="gui"><i class="fa-regular fa-paper-plane"></i></button>
+
+                        <!-- Trường nhập đánh giá -->
+                        <div class="brutalist-container">
+                            <input
+                                id="noidung"
+                                name="noidung"
+                                placeholder="Vui Lòng Nhập Đánh Giá Của Bạn"
+                                class="brutalist-input smooth-type"
+                                type="text">
+                            <label class="brutalist-label">QuangHuy_Sports11</label>
+
+                        </div>
+
+                        <!-- Trường tải ảnh -->
+                        <label style="margin-top: 35px;" for="image" class="upload-label">
+                            Vui Lòng Chọn Hình Ảnh Nếu Có:
+                            <div class="container">
+                                <div class="folder">
+                                    <div class="front-side">
+                                        <div class="tip"></div>
+                                        <div class="cover"></div>
+                                    </div>
+                                    <div class="back-side cover"></div>
+                                </div>
+                                <label class="custom-file-upload">
+                                <input type="file" id="image" name="image" accept="image/*">
+                                    Choose a file
+                                </label>
+                            </div>
+
+                        </label>
+
+
+                        <button id="gui">
+                            <div class="svg-wrapper-1">
+                                <div class="svg-wrapper">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        width="20"
+                                        height="20">
+                                        <path fill="none" d="M0 0h24v24H0z"></path>
+                                        <path
+                                            fill="currentColor"
+                                            d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <span>Gửi</span>
+                        </button>
                     </div>
-                <?php
-                }
-                ?>
+                <?php } ?>
             </div>
         </div>
 
@@ -624,6 +673,29 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
                         $('#noidung').val('');
                     })
                     .fail(function(data) {});
+            });
+            $("#gui").click(function() {
+                let formData = new FormData();
+                formData.append("idsp", $('#idsp').val());
+                formData.append("ten", $('#ten').val());
+                formData.append("noidung", $('#noidung').val());
+                formData.append("date", $('#date').val());
+                formData.append("image", $('#image')[0].files[0]);
+
+                $.ajax({
+                        method: "POST",
+                        url: 'thembinhluan.php',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                    })
+                    .done(function(data) {
+                        alert("Đánh giá đã được gửi!");
+                        location.reload(); // Tải lại trang để hiển thị đánh giá mới
+                    })
+                    .fail(function() {
+                        alert("Đã xảy ra lỗi. Vui lòng thử lại!");
+                    });
             });
         </script>
 

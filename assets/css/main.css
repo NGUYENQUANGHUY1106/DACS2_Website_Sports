@@ -865,7 +865,9 @@ gap: 15px;
     text-align: center;
    }
    .evaluatecontainer__title{
+    text-align: center;
     font-size: 30px;
+    padding-top: 10px;
    }
    .evaluateForm{
     width: 1000px;
@@ -2138,6 +2140,92 @@ align-items: center;
     font-size: 1.4rem;
     color: #737373;
     padding: 3px 0;
+}
+.evaluate-container {
+    max-width: 800px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.evaluate-container__title {
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.comment-card {
+    background: #f5f5f5;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.comment-author {
+    font-weight: bold;
+    color: #333;
+}
+
+.comment-date {
+    font-size: 12px;
+    color: #999;
+}
+
+.comment-content {
+    font-size: 14px;
+    color: #555;
+}
+
+.comment-image img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.evaluate-input {
+    margin-top: 20px;
+}
+
+.evaluate-textbox {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    resize: none;
+}
+
+.upload-label {
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 16px;
+}
+
+.evaluate-submit {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.evaluate-submit:hover {
+    background-color: #0056b3;
 }
 .footer-infor__Address-item:last-child {
     margin-bottom: 30px;

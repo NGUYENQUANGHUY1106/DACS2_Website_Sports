@@ -26,7 +26,7 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
 <body>
 
     <div class="app">
-        <header class="header">
+    <header class="header">
             <div class="grid">
                 <nav class="header__navbar">
                     <ul class="header__navbar-list">
@@ -68,28 +68,46 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
                                 <ul class="header__notify-list">
                                     <li class="header__notify-item">
                                         <a href="" class="header__notify-link">
-                                            <div class="header__notify-info">
-                                                <span class="header__notify-name">Ohui giảm giá cực sốc toàn bộ mỹ phẩm chỉ còn 599.000 vnd</span>
-                                                <span class="header__notify-descriotion">Chương trình khuyến mãi chỉ diễn ra từ ngày 20-4 cho đến 30-4</span>
+                                            <div style="display: flex; gap:  15px;" class="header__notify-info">
+                                                <img style="width: 40px; object-fit: contain;" src="/assets/img/thongbao_anh1.jpg" alt="">
+                                                <div>
+                                                    <span class="header__notify-name">Nike Air Zoom Mercurial Superfly 9 Academy TF chỉ còn 1.200.000 vnd</span>
+                                                    <span class="header__notify-descriotion">Chương trình khuyến mãi chỉ diễn ra từ ngày 20/12 cho đến 30-4</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="header__notify-item">
+                                        <a href="" class="header__notify-link">
+                                            <div style="display: flex; gap:  15px;" class="header__notify-info">
+                                                <img style="width: 40px; object-fit: contain;" src="/assets/img/thongbaoanh_2.avif" alt="">
+                                                <div>
+                                                    <span class="header__notify-name">SALE SỐC! 19% bộ áo quần thi đấu brunofernandes </span>
+                                                    <span class="header__notify-descriotion"> giá chỉ còn 4.080.000vnd(giá gốc 5.100.000nvd)</span>
+                                                </div>
 
                                             </div>
                                         </a>
                                     </li>
                                     <li class="header__notify-item">
                                         <a href="" class="header__notify-link">
-                                            <div class="header__notify-info">
-                                                <span class="header__notify-name">SALE SỐC! 70% bộ dưỡng Ohui The First tái tạo trẻ hóa da </span>
-                                                <span class="header__notify-descriotion"> giá chỉ còn 375.000vnd(giá gốc 1.250.000nvd)</span>
-
+                                            <div style="display: flex; gap:  15px;" class="header__notify-info">
+                                                <img style="width: 40px; object-fit: contain;" src="/assets/img/thonganh_3.jpg" alt="">
+                                                <div>
+                                                <span class="header__notify-name"> FC Baca chính thức ra mắt bóng thi đấu</span>
+                                                <span class="header__notify-descriotion">khuyến mãi chỉ còn 22%</span>
+                                                </div>
                                             </div>
                                         </a>
                                     </li>
                                     <li class="header__notify-item">
                                         <a href="" class="header__notify-link">
-                                            <div class="header__notify-info">
-                                                <span class="header__notify-name"> Ohui chính thức ra mặt mộ dưỡng da</span>
-                                                <span class="header__notify-descriotion">khuyến mãi chỉ còn 50%</span>
-
+                                            <div style="display: flex; gap:  15px;" class="header__notify-info">
+                                                <img style="width: 40px; object-fit: contain;" src="/assets/img/thongbao_anh4.webp" alt="">
+                                                <div>
+                                                <span class="header__notify-name">Phụ kiện bảo vệ ống đồng thi đấu</span>
+                                                <span class="header__notify-descriotion">giá mở bán chỉ 1.260.000 </span>
+                                                </div>
                                             </div>
                                         </a>
                                     </li>

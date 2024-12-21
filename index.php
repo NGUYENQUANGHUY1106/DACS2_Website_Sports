@@ -269,6 +269,52 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
 
                             <img src="/assets/img/logo (2).png" alt="anhlogo" class="header__logo-img">
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+            </a>
+            </div>
+        <form class="header__search" action="index.php" method="POST">
+            <div class="header__search-input-swap">
+                <input type="text" name="search_Keywords" class="header__search-input" autocomplete="off" placeholder="Tìm kiếm sản phẩm trong shop">
+                <!-- search history -->
+                <div class="header__search-history">
+                    <h3 class="header__search-history-heading" >Lịch sử tìm kiếm</h3>
+                    <ul class="header__search-history-list">
+                        <li class="header__search-history-item">
+                            <a href="">
+                                Nike
+                            </a>
+                        </li>
+                        <li class="header__search-history-item">
+                            <a href="">
+                                Puma
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- <div class="header__search-select">
+                <span class="header__search-select-lable">Trong Shop</span>
+                <i class=" header__search-select-icon fa-solid fa-chevron-down"></i>
+            <ul class="header__search-option">
+                <li class="header__search-option-item header__search-option-item--active">
+                    <span>Trong shop</span>
+                    <i class="fa-solid fa-check"></i>
+                </li>
+                <li class="header__search-option-item ">
+                    <span>Ngoài shop</span>
+                    <i class="fa-solid fa-check"></i>
+                </li>
+            </ul>
+            </div> -->
+            <button name="btn_search" class="header__search-btn">
+                <i class=" header__search-btn-icon fa-solid fa-magnifying-glass"></i>
+            </button>
+        </form>
+   
+
+>>>>>>> 99f2d9e951c82bbd4e24d29314fc248431fbf4c2
                         </a>
                     </div>
                     <form class="header__search" action="index.php" method="POST">
@@ -296,6 +342,10 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
                                 </ul>
                             </div>
                         </div>
+<<<<<<< HEAD
+=======
+>>>>>>> 
+>>>>>>> 99f2d9e951c82bbd4e24d29314fc248431fbf4c2
 
                         <button name="btn_search" class="header__search-btn">
                             <i class=" header__search-btn-icon fa-solid fa-magnifying-glass"></i>

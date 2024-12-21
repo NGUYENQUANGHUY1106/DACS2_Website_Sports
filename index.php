@@ -302,7 +302,7 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
             </button>
         </form>
    
-=======
+
                         </a>
                     </div>
                     <form class="header__search" action="index.php" method="POST">
@@ -325,7 +325,7 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
                                 </ul>
                             </div>
                         </div>
->>>>>>> 21963494b5da35601d9b38a6715dd7535feef7e5
+>>>>>>> 
 
                         <button name="btn_search" class="header__search-btn">
                             <i class=" header__search-btn-icon fa-solid fa-magnifying-glass"></i>

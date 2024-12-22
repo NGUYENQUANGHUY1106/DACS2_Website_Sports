@@ -508,11 +508,12 @@ session_start();
                         </div>
                     </div>
                 <?php endwhile; ?>
-
-                <div class="cart__container-totalPrice">
-                    <span>Tổng thanh toán :</span>
-                    <span id="cart-total"><?php echo number_format($total, 0, ',', '.'); ?> đ</span>
-                </div>
+                <a style="text-decoration: none;" href="thanhtoan.php">
+                    <div class="cart__container-totalPrice">
+                        <span>Tổng thanh toán :</span>
+                        <span id="cart-total"><?php echo number_format($total, 0, ',', '.'); ?> đ</span>
+                    </div>
+                </a>
 
             <?php } else {
                 echo "<p>Giỏ hàng của bạn đang trống.</p>";
@@ -538,7 +539,7 @@ session_start();
                                 </li>
                                 <li class="footer-item">
                                     <a href="" class="footer-item__link">
-                                        TL-SHOP Mall
+                                       QuangHuySports 11
                                     </a>
                                 </li>
                                 <li class="footer-item">

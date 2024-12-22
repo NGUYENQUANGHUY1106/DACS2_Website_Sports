@@ -508,7 +508,7 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
                             <span class="detail__classify-title">Kích Cỡ</span>
                             <ul class="detail__classify-list size-list" id="detail_classify_list_size">
                                 <?php foreach ($sizes as $size) { ?>
-                                    <li class="detail__classify-item" onclick="selectSize(this, '<?php echo $size; ?>')">
+                                    <li class="detail__classify-item size" onclick="selectSize(this, '<?php echo $size; ?>')">
                                         <span class="detail__classify-size"><?php echo $size; ?></span>
                                     </li>
                                 <?php } ?>
@@ -518,15 +518,12 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
 
                         <!-- Số lượng -->
                         <div class="detail__quantity">
-                            <span class="detail__quantity-title">Số Lượng</span>
+                            <span class="detail__quantity-title">Số Lượng Hàng Còn Trong Kho</span>
                             <div class="detail__quantity-container">
                                 <div class="detail__quantity-content">
-                                    <button class="detail__quantity-content__minus" onclick="decreaseQuantity()"><i class="fa-solid fa-minus detail__quantity-content__minus-icon"></i></button>
-                                    <span class="detail__quantity-content__show" id="quantity-id">1</span>
-                                    <button class="detail__quantity-content__add" onclick="increaseQuantity()"><i class="fa-solid fa-plus"></i></button>
+                                       <span style="text-wrap: nowrap;" class="detail__quantity-product"> <?php echo $row['available'] . ' sản phẩm có sẵn'; ?></span>
                                 </div>
                             </div>
-                            <span class="detail__quantity-product"> <?php echo $row['available'] . ' sản phẩm có sẵn'; ?></span>
                         </div>
 
                         <form method="POST" action="add_to_cart.php">
@@ -536,12 +533,13 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
                             <input type="hidden" name="product_size" value="<?php echo isset($size) ? $size : 'Không có size'; ?>">
                             <input type="hidden" name="product_img" value="<?php echo $images[0]; ?>">
                             <div style="text-align: center;" class="form_add_to_cart">
-                                <button type="submit" name="add_to_cart" class="btn_add_to_cart" id="addToCartBtn">
-                                    Thêm Vào Giỏ Hàng
-                                </button>
-                                <button type="submit" name="buy_now" class="button_buy_now" id="buyNowBtn">
-                                   Mua Ngay 
-                                </button>
+                            <button type="submit" name="add_to_cart" class="btn_add_to_cart" id="addToCartBtn">
+    Thêm Vào Giỏ Hàng
+</button>
+<button type="submit" name="buy_now" class="button_buy_now" id="buyNowBtn">
+    Mua Ngay 
+</button>
+
                             </div>
                         </form>
 

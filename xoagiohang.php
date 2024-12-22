@@ -36,6 +36,6 @@ if (isset($_GET['productid'])) {
 }
 
 // Quay lại trang giỏ hàng hoặc trang chính
-header("Location: index.php");
+header("Location: giohang.php");
 exit();
 ?>

@@ -33,11 +33,8 @@ session_start();
                             Vào cửa hàng trong ứng dụng TL-shop
                             <!-- QR code -->
                             <div class="header__qr">
-                                <a href=""> <img src="./assets/img/img-QR.png" alt="QR Code" class="header__qr-img"></a>
-                                <div class="header__qr-apps">
-                                    <a class="header__qr-link" href=""> <img src="./assets/img/img-ggplay.png" alt="Google play" class="header__qr-download-img"></a>
-                                    <a class="header__qr-link" href=""> <img src="./assets/img/ing-appstore.png" alt="App store" class="header__qr-download-img"></a>
-                                </div>
+                                <a href=""> <img src="/assets/img/qr_shop.jpg" alt="QR Code" class="header__qr-img"></a>
+                               
                             </div>
                         </li>
                         <li class="header__navbar-item">
@@ -263,7 +260,7 @@ session_start();
                 </nav>
                 <div class="header-with-search">
                     <div class="header__logo">
-                        <a href="#" class="header__logo-link">
+                        <a href="index.php" class="header__logo-link">
 
 
                             <img src="/assets/img/logo (2).png" alt="anhlogo" class="header__logo-img">

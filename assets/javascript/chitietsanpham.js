@@ -101,5 +101,6 @@
             if (parts.length == 2) return parts.pop().split(";").shift();
         }
         
+// kiểm tra xem đã chọn size hay là chọn hình ảnh chưa
 
 

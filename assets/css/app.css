@@ -2,208 +2,486 @@
 .sidebar-toggle--icon{
     color: #fff;
 }
-.admin__container--login{
-    /* background-image: linear-gradient(0,#fd95ab,#e46699); */
-    background-color: rgb(253,149,171,0.5);
-}
-.admin__container--login__title.h2{
+.admin__container--login {
+    background: linear-gradient(135deg, #2B65EC, #EE3880);
     color: white;
-    font-size: 26px;
+    font-family: 'Arial', sans-serif;
+    animation: fadeIn 1.5s ease-in-out;
+    height: 100vh;
+    overflow: hidden;
 }
-.admin__container--login__msg{
-    /* color: white; */
+
+.admin__container--login__title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    animation: bounceIn 1.5s ease;
 }
-.admin__container--login__btn{
+
+.card {
+    background: white;
+    border-radius: 15px;
+    animation: slideUp 1.5s ease;
+}
+.form-check-label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #2B65EC; 
+    transition: color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+}
+.form-check-label:hover {
+    color: #FF4500;
+    transform: scale(1.05);
+}
+
+.form-check {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 8px;
 }
-.admin__container--login__btn--back{
-    min-width: 100px;
-    height: 35px;
-    border: none;
-    background-color:white;
-    text-decoration: none;
-    border-radius: 2px;
-    font-size: 16px;
-    padding: 0 8px;
-    outline: none;
-    cursor: pointer;
-    color: black; 
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-.admin__container--login__btn--back:hover{
-    text-decoration: none;
-    background-color:rgba(0,0,0,.05);
-   color: black;
-}
-.admin__container--login__btn--login{ 
-    border: none;
-    background-color:#EE3880;
-    text-decoration: none;
-    border-radius: 2px;
-    font-size: 16px;
-    padding: 6px 6px;
-    outline: none;
-    cursor: pointer;
-    color: white;
 
+.form-check-input {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #2B65EC;
+    transition: all 0.3s ease;
 }
-.admin__container--login__btn--login--register{  
-    border: none;
-    background-color:#EE3880;
-    text-decoration: none;
-    border-radius: 2px;
-    font-size: 16px;
-    padding: 8px 16px;
-    outline: none;
+.form-check-input:checked {
+    background-color: #FF4500; 
+    border-color: #FF4500;
+}
+.form-check-input:hover {
+    border-color: #FF4500;
+}
+
+.form-label {
+    font-weight: bold;
+    color: #2B65EC; 
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+.form-label:hover {
+    color: #FF4500; 
+}
+
+.admin__btn--controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.admin__container--login__btn--login, 
+.admin__container--login__btn--login--register {
+    display: inline-block;
+    width: calc(50% - 10px); 
+    padding: 12px 0; 
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 10px;
     cursor: pointer;
-    color: white;
-   margin-left: 6px;
 }
-.admin__container--login__btn--login--register:hover{
-    text-decoration: none;
+
+.admin__container--login__btn--login {
+    background: linear-gradient(90deg, #FF7F50, #FF4500);
+    box-shadow: 0 4px 10px rgba(255, 69, 0, 0.5);
     color: white;
+    transition: all 0.3s ease, box-shadow 0.3s;
+}
+.admin__container--login__btn--login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(255, 69, 0, 0.7);
+}
+
+.admin__container--login__btn--login--register {
+    background: linear-gradient(90deg, #32CD32, #2E8B57);
+    box-shadow: 0 4px 10px rgba(34, 139, 34, 0.5);
+    color: white;
+    transition: all 0.3s ease, box-shadow 0.3s;
+}
+.admin__container--login__btn--login--register:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(34, 139, 34, 0.7);
+}
+
+.admin__container--login__btn--back {
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 10px;
+    background-color: #ddd;
+    color: black;
+    transition: all 0.3s ease;
+}
+.admin__container--login__btn--back:hover {
+    background-color: #ccc;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    60% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.form-control {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+.form-control:focus {
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.7);
+    border-color: #007bff;
 }
 /* đăng ký */
-.admin__container-register{
-    /* background-image: linear-gradient(0,#fd95ab,#e46699); */
-    background-color: rgb(253,149,171,0.5);
-}
-.admin__container--register__title.h2{
+.admin__container-register {
+    background: linear-gradient(135deg, #4CAF50, #FF8C00);
     color: white;
-    font-size: 26px;
+    font-family: 'Arial', sans-serif;
+    animation: fadeIn 1.5s ease-in-out;
+    height: 100vh;
+    overflow: hidden;
 }
-.admin__container--register__msg{
+
+.admin__container--register__title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    animation: bounceIn 1.5s ease;
+}
+
+.admin__container--register__msg {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #ffffff;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.card {
+    background: white;
+    border-radius: 15px;
+    animation: slideUp 1.5s ease;
+}
+
+.form-label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #2B65EC;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.form-label:hover {
+    color: #FF4500;
+    transform: scale(1.05);
+}
+
+.form-control {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+.form-control:focus {
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.7);
+    border-color: #007bff;
+}
+
+.admin__container--register__btn--back {
+    transition: all 0.3s ease;
+    background: linear-gradient(90deg, #2B65EC, #32CD32);
     color: white;
-}
-.admin__container--register__btn{
-    display: flex;
-    align-items: center;
-    justify-content: end;
-}
-.admin__container--register__btn--back{
-    min-width: 100px;
-    height: 35px;
+    padding: 10px 20px;
     border: none;
-    background-color:white;
+    border-radius: 5px;
     text-decoration: none;
-    border-radius: 2px;
-    font-size: 16px;
-    padding: 0 8px;
-    outline: none;
-    cursor: pointer;
-    color: black; 
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    display: inline-block;
+    font-size: 1rem;
 }
-.admin__container--register__btn--back:hover{
-    text-decoration: none;
-    background-color:rgba(0,0,0,.05);
-   color: black;
+.admin__container--register__btn--back:hover {
+    background-color: black;
+    transform: scale(1.05);
 }
-.admin__container--register__btn--register{
-    border: none;
-    background-color:#EE3880;
-    text-decoration: none;
-    border-radius: 2px;
-    font-size: 16px;
-    padding: 6px 16px;
-    outline: none;
-    cursor: pointer;
+
+.admin__container--register__btn--register {
+    transition: all 0.3s ease, box-shadow 0.3s;
+    font-size: 1rem;
+    padding: 10px 20px;
+    background: linear-gradient(90deg, #FF4500, #FF7F50);
     color: white;
-   margin-left: 10px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(255, 69, 0, 0.5);
+}
+.admin__container--register__btn--register:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(255, 69, 0, 0.7);
+}
+
+/* Hiệu ứng động */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    60% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 /* admin KHách hàng */
-.customer__title{
-    text-align: center;
-    color: #EE3880;
-    margin: 30px;
-}
-.customer__table{
-    border: 1px solid rgba(0,0,0,.2);
-}
-.customer__table--navbar{
-
-    background-color: #EE3880;
+/* Chỉnh giao diện container */
+.customer__container {
+    background: linear-gradient(135deg, #2196F3, #03A9F4); /* Màu xanh dương gradient */
     color: white;
-    border: 1px solid rgba(0,0,0,.2);
+    font-family: 'Arial', sans-serif;
+    animation: fadeIn 1.5s ease-in-out;
+    padding: 20px;
+    height: auto;
 }
-.customer__table--item{
-    border: 1px solid rgba(0,0,0,.2);
-    text-align: center;
-    font-size: 16px;
-    padding: 2px 6px;
-}
-.customer__table--body{
-    border: 1px solid rgba(0,0,0,.2);
 
+/* Tiêu đề */
+.customer__title {
+    text-align: center;
+    color: #ffffff;
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 30px;
+    animation: bounceIn 1.5s ease;
+    text-shadow: 2px 2px 8px rgba(0, 0, 255, 0.6); 
 }
-.customer__table--body-item{
+
+/* Bảng */
+.customer__table {
+    border: 1px solid rgba(0,0,0,.2);
+    width: 100%;
+    margin-bottom: 30px;
+    animation: slideUp 1.5s ease;
+    background: #FFFFFF; 
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 255, 0.2);
+    -webkit-overflow-scrolling: touch; 
+}
+.customer__table--body-item__img {
+    width: 80px; 
+    height: 80px; 
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    border-radius: 5px; 
+}
+
+.customer__table--navbar {
+    background-color: #1976D2; 
+    color: white;
+    text-align: center;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 255, 0.2); 
+    text-shadow: 2px 2px 5px rgba(0, 0, 255, 0.5); 
+}
+
+.customer__table--item {
+    border: 1px solid rgba(0,0,0,.2);
+    font-size: 16px;
+    padding: 10px;
+    background: linear-gradient(135deg, #4CAF50, #2196F3);
+    color: white;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,.1);
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+.customer__table--body {
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.customer__table--body-item {
     text-align: center;
     border: 1px solid rgba(0,0,0,.2);
-    padding: 4px 10px;
+    padding: 10px;
     font-size: 16px;
-   color: black;
-   /* width: 100px; */
+    color: black;
+    background: linear-gradient(135deg, #f0f0f0, #e1e1e1);
+    box-shadow: 0 2px 4px rgba(0, 0, 255, 0.1);
+    border-radius: 8px;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2); 
 }
-.input__big{
+@media (max-width: 768px) {
+    .customer__table--body-item.input__big {
+        max-width: 150px; 
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .customer__table--body-item {
+        padding: 10px 5px;
+        font-size: 14px;
+    }
+
+    .customer__table--body-item a {
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+    .customer__table {
+        overflow-x: auto; 
+        -webkit-overflow-scrolling: touch; 
+        cursor: grab; 
+    }
+
+    .customer__table:active {
+        cursor: grabbing;
+    }
+    
+}
+
+.input__big {
     width: 300px;
 }
-.customer__table--body-item__img{
-    padding-top: 100%;
-    width: 60px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-.customer__table--body-btn-cre{
-    display: block;
-    background: none;
-    border: none;
-    padding: 2px 10px;
-    margin: 6px;
-    background-color: green;
-    color: white;
-    border-radius: 4px;
-}
-.customer__table--body-btn-cre:hover{
-    text-decoration: none;
-    color: white;
 
-}
-.customer__table--body-btn-upd{
+/* Các nút */
+.customer__table--body-btn-upd,
+.customer__table--body-btn-del {
     display: block;
     background: none;
     border: none;
-    padding: 2px 10px;
+    padding: 6px 10px;
+    color: white;
+    border-radius: 8px;
     margin: 6px;
-    background-color: blue;
-    color: white;
-    border-radius: 4px;
+    text-align: center;
+    transition: all 0.3s ease;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
-.customer__table--body-btn-upd:hover{
-    text-decoration: none;
-    color: white;
 
+/* Nút Sửa */
+.customer__table--body-btn-upd {
+    background-color: #1976D2;
+    box-shadow: 0 4px 8px rgba(0, 0, 255, 0.2); 
 }
-.customer__table--body-btn-del{
-    display: block;
-    background: none;
-    border: none;
-    padding: 2px 10px;
-    background-color: red;
-    color: white;
-    border-radius: 4px;
-    margin: 6px;
+.customer__table--body-btn-upd:hover {
+    background-color: #1565C0;
+    transform: scale(1.05);
 }
-.customer__table--body-btn-del:hover{
-    text-decoration: none;
-    color: white;
+
+/* Nút Xóa */
+.customer__table--body-btn-del {
+    background-color: #FF4081; 
+    box-shadow: 0 4px 8px rgba(0, 0, 255, 0.2); 
 }
+.customer__table--body-btn-del:hover {
+    background-color: #FF60A7;
+    transform: scale(1.05);
+}
+
+/* Hiệu ứng động */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    60% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .customer__title {
+        font-size: 1.5rem;
+    }
+
+    .customer__table--item {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .customer__table--body-item {
+        font-size: 14px;
+    }
+
+    .input__big {
+        width: 100%;
+    }
+
+    .customer__table--body-btn-upd,
+    .customer__table--body-btn-del {
+        padding: 6px 8px;
+    }
+}
+
 /* form cập nhật tài khoảng khách hàng */
 .update__app{
     width: 100%;

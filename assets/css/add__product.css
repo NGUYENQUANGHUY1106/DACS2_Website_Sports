@@ -19,6 +19,12 @@ body {
     border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     overflow: hidden;
+    transition: all 0.3s ease-in-out; 
+}
+
+.form-container:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2); 
 }
 
 .form-title {
@@ -27,6 +33,7 @@ body {
     font-size: 28px;
     font-weight: 600;
     color: #2c3e50;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2); 
 }
 
 .form-row {
@@ -61,14 +68,16 @@ body {
     font-size: 14px;
     color: #2d3436;
     background: #f9f9f9;
-    transition: all 0.3s;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
 }
 
 .form-group input:focus {
     outline: none;
     border-color: #0984e3;
     background: #fff;
-    box-shadow: 0 0 5px rgba(40, 83, 115, 0.3);
+    box-shadow: 0 0 10px rgba(40, 83, 115, 0.3); 
+    transform: translateY(-2px); 
 }
 
 .form-submit {
@@ -88,13 +97,14 @@ body {
     font-size: 16px;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
 }
 
 .form-submit button:hover {
     background: #74b9ff;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); 
+    transform: scale(1.05); 
 }
 
 @media (max-width: 768px) {

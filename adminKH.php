@@ -117,38 +117,37 @@ session_start();
 					</div>
 			</nav>
 
-				<div class="customer__container">
-					<h1 class="customer__title">Quản lý tài khoản khách hàng </h1>
-					<table align="center" border="1px" cellspacing="0px" class="customer__table">
-				
+			<div class="customer__container">
+				<h1 class="customer__title">Quản lý tài khoản khách hàng</h1>
+				<table align="center" border="1px" cellspacing="0px" class="customer__table">
 					<tr class="customer__table--navbar">
-					<td class="customer__table--item" >Id</td>
-					<td class="customer__table--item" >Tên Khách Hàng</td>
-					<td class="customer__table--item" >Email</td>
-					<td class="customer__table--item" >Password</td>
-					<td class="customer__table--item" >Hành Động</td>
+						<td class="customer__table--item">Id</td>
+						<td class="customer__table--item">Tên Khách Hàng</td>
+						<td class="customer__table--item">Email</td>
+						<td class="customer__table--item">Password</td>
+						<td class="customer__table--item">Hành Động</td>
 					</tr>
 					<?php
-					 $conn = mysqli_connect("localhost:3366","root","","MYPHAM");
-					 $sql = " SELECT * FROM  USERS ";
-					 $result = mysqli_query($conn,$sql);
-					 while($row = mysqli_fetch_array($result)){
-					?>	
+					$conn = mysqli_connect("localhost:3366", "root", "", "MYPHAM");
+					$sql = "SELECT * FROM USERS";
+					$result = mysqli_query($conn, $sql);
+					while ($row = mysqli_fetch_array($result)) {
+					?>
 					<tr class="customer__table--body">
-						<td  class="customer__table--body-item" ><?php echo $row['id']?></td>
-						<td  class="customer__table--body-item input__big" ><?php echo $row['tenKH']?></td>
-						<td  class="customer__table--body-item input__big" ><?php echo $row['email']?></td>
-						<td  class="customer__table--body-item input__big" ><?php echo $row['pass']?></td>
-						<td  class="customer__table--body-item" > 
-							<a  href="xulySuaKH.php?idkh=<?php echo $row['id']?>" class="customer__table--body-btn-upd" >Sửa</a>
-							<a href="xulyXoaKH.php?idkh=<?php echo $row['id']?>" class="customer__table--body-btn-del">Xóa</a>
+						<td class="customer__table--body-item"><?php echo $row['id'] ?></td>
+						<td class="customer__table--body-item input__big"><?php echo $row['tenKH'] ?></td>
+						<td class="customer__table--body-item input__big"><?php echo $row['email'] ?></td>
+						<td class="customer__table--body-item input__big"><?php echo $row['pass'] ?></td>
+						<td class="customer__table--body-item">
+							<a href="xulySuaKH.php?idkh=<?php echo $row['id'] ?>" class="customer__table--body-btn-upd">Sửa</a>
+							<a href="xulyXoaKH.php?idkh=<?php echo $row['id'] ?>" class="customer__table--body-btn-del">Xóa</a>
 						</td>
 					</tr>
-                     <?php
-					 }
-					 ?>
-					</table>
-				</div>
+					<?php
+					}
+					?>
+				</table>
+			</div>
 		</div>
 	</div>
 

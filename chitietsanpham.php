@@ -15,7 +15,7 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/grid.css">
     <link rel="stylesheet" href="/assets/css/responsive.css">
-    <link rel="stylesheet" href="/assets/css/butoonUI.css">
+    <link rel="stylesheet" href="/assets/css/test.css">
     <link rel="stylesheet" href="./assets/fonts/fontawesome-free-6.4.0-web/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -507,13 +507,12 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
                         <div class="detail__classify" id="detail__classify_size">
                             <span class="detail__classify-title">Kích Cỡ</span>
                             <ul class="detail__classify-list size-list" id="detail_classify_list_size">
-    <?php foreach ($sizes as $size) { ?>
-        <li class="detail__classify-item" onclick="selectSize(this, '<?php echo $size; ?>')">
-            <span class="detail__classify-size"><?php echo $size; ?></span>
-        </li>
-    <?php } ?>
-</ul>
-
+                                <?php foreach ($sizes as $size) { ?>
+                                    <li class="detail__classify-item size" onclick="selectSize(this, '<?php echo $size; ?>')">
+                                        <span class="detail__classify-size"><?php echo $size; ?></span>
+                                    </li>
+                                <?php } ?>
+                            </ul>
                         </div>
 
 

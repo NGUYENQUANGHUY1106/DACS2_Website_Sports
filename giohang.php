@@ -15,6 +15,7 @@ session_start();
     <link rel="stylesheet" href="./assets/css/main.css">
     <link rel="stylesheet" href="./assets/css/grid.css">
     <link rel="stylesheet" href="./assets/css/responsive.css">
+    <link rel="stylesheet" href="./assets/css/test.css">
     <link rel="stylesheet" href="./assets/fonts/fontawesome-free-6.4.0-web/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -25,7 +26,7 @@ session_start();
 <body>
 
     <div class="app">
-    <header class="header">
+        <header class="header">
             <div class="grid">
                 <nav class="header__navbar">
                     <ul class="header__navbar-list">
@@ -34,7 +35,7 @@ session_start();
                             <!-- QR code -->
                             <div class="header__qr">
                                 <a href=""> <img src="/assets/img/qr_shop.jpg" alt="QR Code" class="header__qr-img"></a>
-                               
+
                             </div>
                         </li>
                         <li class="header__navbar-item">
@@ -90,8 +91,8 @@ session_start();
                                             <div style="display: flex; gap:  15px;" class="header__notify-info">
                                                 <img style="width: 40px; object-fit: contain;" src="/assets/img/thonganh_3.jpg" alt="">
                                                 <div>
-                                                <span class="header__notify-name"> FC Baca chính thức ra mắt bóng thi đấu</span>
-                                                <span class="header__notify-descriotion">khuyến mãi chỉ còn 22%</span>
+                                                    <span class="header__notify-name"> FC Baca chính thức ra mắt bóng thi đấu</span>
+                                                    <span class="header__notify-descriotion">khuyến mãi chỉ còn 22%</span>
                                                 </div>
                                             </div>
                                         </a>
@@ -101,8 +102,8 @@ session_start();
                                             <div style="display: flex; gap:  15px;" class="header__notify-info">
                                                 <img style="width: 40px; object-fit: contain;" src="/assets/img/thongbao_anh4.webp" alt="">
                                                 <div>
-                                                <span class="header__notify-name">Phụ kiện bảo vệ ống đồng thi đấu</span>
-                                                <span class="header__notify-descriotion">giá mở bán chỉ 1.260.000 </span>
+                                                    <span class="header__notify-name">Phụ kiện bảo vệ ống đồng thi đấu</span>
+                                                    <span class="header__notify-descriotion">giá mở bán chỉ 1.260.000 </span>
                                                 </div>
                                             </div>
                                         </a>
@@ -286,7 +287,7 @@ session_start();
                                     </li>
                                     <li class="header__search-history-item">
                                         <a href="">
-                                            Áo 
+                                            Áo
                                         </a>
                                     </li>
                                 </ul>
@@ -301,92 +302,93 @@ session_start();
 
                     <!-- Giỏ hàng -->
                     <div class="header__cart">
-    <div class="header__cart-swap">
-        <i class="header__cart-icon fa-sharp fas fa-cart-shopping"></i>
-        <?php
-        // Lấy customer_id từ session (sau khi người dùng đăng nhập)
-        if (isset($_SESSION['customer_id'])) {
-            $customer_id = $_SESSION['customer_id'];
+                        <div class="header__cart-swap">
+                            <i class="header__cart-icon fa-sharp fas fa-cart-shopping"></i>
+                            <?php
+                            // Lấy customer_id từ session (sau khi người dùng đăng nhập)
+                            if (isset($_SESSION['customer_id'])) {
+                                $customer_id = $_SESSION['customer_id'];
 
-            // Tính tổng số lượng sản phẩm
-            $total_items = 0;
-            if (isset($_SESSION['cart'][$customer_id]) && is_array($_SESSION['cart'][$customer_id])) {
-                foreach ($_SESSION['cart'][$customer_id] as $item) {
-                    if (is_array($item) && isset($item['quantity'])) {
-                        $total_items += intval($item['quantity']);
-                    }
-                }
-            }
+                                // Tính tổng số lượng sản phẩm
+                                $total_items = 0;
+                                if (isset($_SESSION['cart'][$customer_id]) && is_array($_SESSION['cart'][$customer_id])) {
+                                    foreach ($_SESSION['cart'][$customer_id] as $item) {
+                                        if (is_array($item) && isset($item['quantity'])) {
+                                            $total_items += intval($item['quantity']);
+                                        }
+                                    }
+                                }
 
-            // Kiểm tra giỏ hàng trống
-            if ($total_items == 0) {
-        ?>
-                <span class="header__cart-swap-notice">0</span>
-                <div class="header__cart-list header__cart-list-no-cart">
-                    <img src="./assets/img/no_cart.png" alt="no-cart-img" class="header__cart-list-no-cart-img">
-                    <span class="header__cart-list-no-cart-msg">Chưa có sản phẩm</span>
-                </div>
-            <?php
-            } else {
-            ?>
-                <span class="header__cart-swap-notice"><?php echo $total_items; ?></span>
-                <div class="header__cart-list">
-                    <h4 class="header__cart-heading">Sản phẩm đã thêm</h4>
-                    <?php
-                    foreach ($_SESSION['cart'][$customer_id] as $product_id => $item) {
-                        if (is_array($item)) {
-                            // Check for required keys
-                            $product_name = isset($item['name']) ? $item['name'] : 'Sản phẩm không xác định';
-                            $product_img = isset($item['img']) ? $item['img'] : './assets/img/default.png';
-                            $product_price = isset($item['price']) ? str_replace('.', '', $item['price']) : 0;
-                            $product_quantity = isset($item['quantity']) ? intval($item['quantity']) : 0;
-                            $product_size = isset($item['size']) ? $item['size'] : 'Không rõ';
-                    ?>
-                            <a href="giohang.php" class="header__cart-list-item__link">
-                                <ul class="header__cart-list-item">
-                                    <li class="header__cart-item" style="margin-top: 10px;">
-                                        <img src="<?php echo $product_img; ?>" alt="<?php echo $product_name; ?>" class="header__cart-img">
-                                        <div class="header__cart-item-info">
-                                            <div class="header__cart-item-head">
-                                                <h5 class="header__cart-item-name"><?php echo $product_name; ?></h5>
-                                                <div class="header__cart-item-price-wrap">
-                                                    <span class="header__cart-item-price">
-                                                        <?php
-                                                        $price = floatval($product_price);
-                                                        echo number_format($price, 0, ',', '.') . 'đ';
-                                                        ?>
-                                                    </span>
-                                                    <span class="header__cart-item-quantity">x<?php echo $product_quantity; ?></span>
-                                                </div>
-                                            </div>
-                                            <div class="header__cart-item-body">
-                                                <span class="header__cart-item-description">Phân loại hàng: Chính hãng</span>
-                                                <a href="xoagiohang.php?productid=<?php echo $product_id; ?>" class="header__cart-item-remove">Xóa</a>
-                                            </div>
-                                            <span style="color: red; font-size: 14px;">Size: <?php echo $product_size; ?></span>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </a>
-                    <?php
-                        }
-                    }
-                    ?>
-                    <a class="header__cart-view btn btn--primary" href="giohang.php">Xem giỏ hàng</a>
-                </div>
-        <?php
-            }
-        } else {
-            // Nếu chưa đăng nhập, hiển thị giỏ hàng trống và yêu cầu đăng nhập
-        ?>
-            <span class="header__cart-swap-notice">0</span>
-            <div class="header__cart-list header__cart-list-no-cart">
-                <img src="./assets/img/no_cart.png" alt="no-cart-img" class="header__cart-list-no-cart-img">
-                <span class="header__cart-list-no-cart-msg">Vui lòng đăng nhập để xem giỏ hàng</span>
-            </div>
-        <?php } ?>
-    </div>
-</div>
+                                // Kiểm tra giỏ hàng trống
+                                if ($total_items == 0) {
+                            ?>
+                                    <span class="header__cart-swap-notice">0</span>
+                                    <div class="header__cart-list header__cart-list-no-cart">
+                                        <img src="./assets/img/no_cart.png" alt="no-cart-img" class="header__cart-list-no-cart-img">
+                                        <span class="header__cart-list-no-cart-msg">Chưa có sản phẩm</span>
+                                    </div>
+                                <?php
+                                } else {
+                                ?>
+                                    <span class="header__cart-swap-notice"><?php echo $total_items; ?></span>
+                                    <div class="header__cart-list">
+                                        <h4 class="header__cart-heading">Sản phẩm đã thêm</h4>
+                                        <?php
+                                        foreach ($_SESSION['cart'][$customer_id] as $product_id => $item) {
+                                            if (is_array($item)) {
+                                                // Check for required keys
+                                                $product_name = isset($item['name']) ? $item['name'] : 'Sản phẩm không xác định';
+                                                $product_img = isset($item['img']) ? $item['img'] : './assets/img/default.png';
+                                                $product_price = isset($item['price']) ? str_replace('.', '', $item['price']) : 0;
+                                                $product_quantity = isset($item['quantity']) ? intval($item['quantity']) : 0;
+                                                $product_size = isset($item['size']) ? $item['size'] : 'Không rõ';
+                                        ?>
+                                                <a href="giohang.php" class="header__cart-list-item__link">
+                                                    <ul class="header__cart-list-item">
+                                                        <li class="header__cart-item" style="margin-top: 10px;">
+                                                            <img src="<?php echo $product_img; ?>" alt="<?php echo $product_name; ?>" class="header__cart-img">
+                                                            <div class="header__cart-item-info">
+                                                                <div class="header__cart-item-head">
+                                                                    <h5 class="header__cart-item-name"><?php echo $product_name; ?></h5>
+                                                                    <div class="header__cart-item-price-wrap">
+                                                                        <span class="header__cart-item-price">
+                                                                            <?php
+                                                                            $price = floatval($product_price);
+                                                                            echo number_format($price, 0, ',', '.') . 'đ';
+                                                                            ?>
+                                                                        </span>
+                                                                        <span class="header__cart-item-quantity">x<?php echo $product_quantity; ?></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="header__cart-item-body">
+                                                                    <span class="header__cart-item-description">Phân loại hàng: Chính hãng</span>
+                                                                    <a href="xoagiohang.php?productid=<?php echo $product_id; ?>" class="header__cart-item-remove"> Xóa
+                                                                    </a>
+                                                                </div>
+                                                                <span style="color: red; font-size: 14px;">Size: <?php echo $product_size; ?></span>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </a>
+                                        <?php
+                                            }
+                                        }
+                                        ?>
+                                        <a class="header__cart-view btn btn--primary" href="giohang.php">Xem giỏ hàng</a>
+                                    </div>
+                                <?php
+                                }
+                            } else {
+                                // Nếu chưa đăng nhập, hiển thị giỏ hàng trống và yêu cầu đăng nhập
+                                ?>
+                                <span class="header__cart-swap-notice">0</span>
+                                <div class="header__cart-list header__cart-list-no-cart">
+                                    <img src="./assets/img/no_cart.png" alt="no-cart-img" class="header__cart-list-no-cart-img">
+                                    <span class="header__cart-list-no-cart-msg">Vui lòng đăng nhập để xem giỏ hàng</span>
+                                </div>
+                            <?php } ?>
+                        </div>
+                    </div>
 
 
 
@@ -459,7 +461,49 @@ session_start();
                                     <?php echo number_format($subtotal, 0, ',', '.'); ?> đ
                                 </span>
 
-                                <a class="delete_cart" href="xoagiohang.php?productid=<?php echo $product_id; ?>">Xóa</a>
+                                <a style="text-decoration: none; color: #000;" class="delete_cart" href="xoagiohang.php?productid=<?php echo $product_id; ?>">
+                                    <button class="bin-button">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 39 7"
+                                            class="bin-top">
+                                            <line stroke-width="4" stroke="white" y2="5" x2="39" y1="5"></line>
+                                            <line
+                                                stroke-width="3"
+                                                stroke="white"
+                                                y2="1.5"
+                                                x2="26.0357"
+                                                y1="1.5"
+                                                x1="12"></line>
+                                        </svg>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 33 39"
+                                            class="bin-bottom">
+                                            <mask fill="white" id="path-1-inside-1_8_19">
+                                                <path
+                                                    d="M0 0H33V35C33 37.2091 31.2091 39 29 39H4C1.79086 39 0 37.2091 0 35V0Z"></path>
+                                            </mask>
+                                            <path
+                                                mask="url(#path-1-inside-1_8_19)"
+                                                fill="white"
+                                                d="M0 0H33H0ZM37 35C37 39.4183 33.4183 43 29 43H4C-0.418278 43 -4 39.4183 -4 35H4H29H37ZM4 43C-0.418278 43 -4 39.4183 -4 35V0H4V35V43ZM37 0V35C37 39.4183 33.4183 43 29 43V35V0H37Z"></path>
+                                            <path stroke-width="4" stroke="white" d="M12 6L12 29"></path>
+                                            <path stroke-width="4" stroke="white" d="M21 6V29"></path>
+                                        </svg>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 89 80"
+                                            class="garbage">
+                                            <path
+                                                fill="white"
+                                                d="M20.5 10.5L37.5 15.5L42.5 11.5L51.5 12.5L68.75 0L72 11.5L79.5 12.5H88.5L87 22L68.75 31.5L75.5066 25L86 26L87 35.5L77.5 48L70.5 49.5L80 50L77.5 71.5L63.5 58.5L53.5 68.5L65.5 70.5L45.5 73L35.5 79.5L28 67L16 63L12 51.5L0 48L16 25L22.5 17L20.5 10.5Z"></path>
+                                        </svg>
+                                    </button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -537,12 +581,12 @@ session_start();
                             <ul class="footer-list">
                                 <li class="footer-item">
                                     <a href="" class="footer-item__link">
-                                       Giày Bóng Đá
+                                        Giày Bóng Đá
                                     </a>
                                 </li>
                                 <li class="footer-item">
                                     <a href="" class="footer-item__link">
-                                       Áo Quần Thể Thao
+                                        Áo Quần Thể Thao
                                     </a>
                                 </li>
                                 <li class="footer-item">

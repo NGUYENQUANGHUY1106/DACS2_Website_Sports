@@ -507,12 +507,13 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
                         <div class="detail__classify" id="detail__classify_size">
                             <span class="detail__classify-title">Kích Cỡ</span>
                             <ul class="detail__classify-list size-list" id="detail_classify_list_size">
-                                <?php foreach ($sizes as $size) { ?>
-                                    <li class="detail__classify-item size" onclick="selectSize(this, '<?php echo $size; ?>')">
-                                        <span class="detail__classify-size"><?php echo $size; ?></span>
-                                    </li>
-                                <?php } ?>
-                            </ul>
+    <?php foreach ($sizes as $size) { ?>
+        <li class="detail__classify-item" onclick="selectSize(this, '<?php echo $size; ?>')">
+            <span class="detail__classify-size"><?php echo $size; ?></span>
+        </li>
+    <?php } ?>
+</ul>
+
                         </div>
 
 

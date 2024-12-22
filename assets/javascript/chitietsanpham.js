@@ -102,5 +102,47 @@
         }
         
 // kiểm tra xem đã chọn size hay là chọn hình ảnh chưa
+// Kiểm tra lựa chọn kích cỡ và hình ảnh
+function validateForm(event) {
+    // Kiểm tra hình ảnh được chọn
+    const selectedImage = document.querySelector('.image-list .detail__classify-item.selected');
+    const selectedSize = document.querySelector('.size-list .detail__classify-item.selected');
+
+    if (!selectedImage) {
+        alert("Vui lòng chọn hình ảnh trước khi thêm vào giỏ hàng hoặc mua ngay.");
+        event.preventDefault(); // Ngăn chặn gửi form
+        return false;
+    }
+
+    if (!selectedSize) {
+        alert("Vui lòng chọn kích cỡ trước khi thêm vào giỏ hàng hoặc mua ngay.");
+        event.preventDefault(); // Ngăn chặn gửi form
+        return false;
+    }
+
+    // Nếu hợp lệ, cho phép gửi form
+    return true;
+}
+
+// Thêm sự kiện click vào từng hình ảnh và kích cỡ
+function selectImage(element, imgUrl) {
+    // Bỏ chọn hình ảnh trước đó
+    document.querySelectorAll('.image-list .detail__classify-item').forEach(item => item.classList.remove('selected'));
+
+    // Đánh dấu hình ảnh được chọn
+    element.classList.add('selected');
+}
+
+function selectSize(element, size) {
+    // Bỏ chọn kích cỡ trước đó
+    document.querySelectorAll('.size-list .detail__classify-item').forEach(item => item.classList.remove('selected'));
+
+    // Đánh dấu kích cỡ được chọn
+    element.classList.add('selected');
+}
+
+// Gắn sự kiện validate vào các nút
+document.getElementById('addToCartBtn').addEventListener('click', validateForm);
+document.getElementById('buyNowBtn').addEventListener('click', validateForm);
 
 

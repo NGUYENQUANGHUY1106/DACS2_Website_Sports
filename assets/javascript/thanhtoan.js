@@ -45,9 +45,11 @@ function validateForm() {
     var city = document.getElementById("city").value;
     var district = document.getElementById("district").value;
     var ward = document.getElementById("ward").value;
+    var note = document.getElementById("note").value;
+    
 
     // Kiểm tra xem các trường bắt buộc đã được điền chưa
-    if (name == "" || phone == "" || city == "" || district == "" || ward == "") {
+    if (name === "" || phone === "" || city === "" || district === "" || ward === "" || note === "") {
         alert("Vui lòng điền đầy đủ thông tin bắt buộc!");
         return false; // Ngừng hành động tiếp theo nếu thiếu thông tin
     }

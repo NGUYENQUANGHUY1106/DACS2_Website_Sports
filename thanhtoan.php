@@ -399,45 +399,42 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
         <div class="container_checkout">
             <div class="checkout-form">
                 <!-- Form Section -->
-                <div class="form-section">
-                    <h2>Thông tin mua hàng</h2>
-                    <div class="form-group">
-                        <label for="email">Email (tuỳ chọn)</label>
-                        <input type="email" id="email" placeholder="nguyenquanghuy110605@gmail.com">
-                    </div>
-                    <div class="form-group">
-                        <label for="name">Họ và tên</label>
-                        <input type="text" id="name" placeholder="QuangHuy">
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Số điện thoại</label>
-                        <input type="text" id="phone" placeholder="0344413346">
-                    </div>
-                    <div class="form-group">
-                        <label for="address">Địa chỉ (tuỳ chọn)</label>
-                        <input type="text" id="address" placeholder="18 Lê Thiện Trị">
-                    </div>
-                    <div class="form-group">
-                        <label for="city">Tỉnh Thành</label>
-                        <input type="text" id="city" placeholder="Đà Nẵng">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="district">Quận Huyện </label>
-                        <input type="text" id="district" placeholder="Ngũ Hành Sơn">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="ward">Phường Xã</label>
-                        <input type="text" id="ward" placeholder="Hòa Quý">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="deliver-different-address">Vui Lòng Nhập Địa Chỉ Cụ Thể</label>
-                        <textarea id="note" rows="3"></textarea>
-                    </div>
-                </div>
-
+                <form action="order.php" method="post">
+    <div class="form-section">
+        <h2>Thông tin mua hàng</h2>
+        <div class="form-group">
+            <label for="email">Email (tuỳ chọn)</label>
+            <input type="email" id="email" name="email" placeholder="nguyenquanghuy110605@gmail.com">
+        </div>
+        <div class="form-group">
+            <label for="name">Họ và tên</label>
+            <input type="text" id="name" name="name" placeholder="QuangHuy" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Số điện thoại</label>
+            <input type="text" id="phone" name="phone" placeholder="0344413346" required>
+        </div>
+        <div class="form-group">
+            <label for="city">Tỉnh Thành</label>
+            <input type="text" id="city" name="city" placeholder="Đà Nẵng" required>
+        </div>
+        <div class="form-group">
+            <label for="district">Quận Huyện</label>
+            <input type="text" id="district" name="district" placeholder="Ngũ Hành Sơn" required>
+        </div>
+        <div class="form-group">
+            <label for="ward">Phường Xã</label>
+            <input type="text" id="ward" name="ward" placeholder="Hòa Quý" required>
+        </div>
+        <div class="form-group">
+            <label for="address">Địa Chỉ Cụ Thể</label>
+            <textarea id="address" name="address" rows="3" required></textarea>
+        </div>
+    </div>
+    <button type="submit" name="place_order" class="btn-shine onclick="return validateForm()">
+        <span>Đặt Hàng</span>
+    </button>
+</form>
                 <!-- Shipping and Payment Section -->
                 <div class="shipping-payment-section">
                     <div class="section">
@@ -447,21 +444,7 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
 
                     <div class="section">
                         <h2>Thanh toán</h2>
-                        <label>
-                            <input type="radio" id="bankTransferOption" name="payment">
-                            Thanh Toán Qua Tài Khoản Ngân Hàng
-                        </label>
-                        <br>
-                        <div id="qrCode">
-                            <p>Quét mã QR để chuyển khoản:</p>
-                            <img style="width: 150px;" src="/assets/img/qr_ck.jpg" alt="QR Code">
-                        </div>
-                        <div id="uploadSection">
-                            <p>Tải ảnh minh chứng chuyển khoản:</p>
-                            <input type="file" id="proofImage" accept="image/*">
-                            <img id="previewImage" alt="Ảnh minh chứng" style="margin-top: 10px; max-width: 150px; width: 100%; object-fit: contain; height: auto;">
-                        </div>
-                        <br>
+                       
                         <label>
                             <input type="radio" name="payment">
                             Thanh Toán Khi Nhận Hàng
@@ -511,7 +494,7 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
                             <h3>Đơn hàng</h3>
                             <h3>(<?php echo count($cart_items); ?> sản phẩm)</h3>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 45px; margin-right: 5px;">
+                        <div style="display: flex; align-items: center; gap: 55px; margin-right: 5px;">
                             <h3>Size</h3>
                             <h3>Số Lượng</h3>
                             <h3>Tổng</h3>
@@ -527,7 +510,7 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
 
                     ?>
                         <div class="summary-item" style="display: flex; gap: 10px;">
-                            <span style="display: flex; gap: 4px;" class="name_product">
+                            <span style="display: flex; gap: 34px  ;" class="name_product">
                                 <img style="max-width: 70px; display: block; max-height: 70px; height: 50%; width: 100%; object-fit: contain;"
                                     src="<?php echo htmlspecialchars($item['img']); ?>" alt="">
                                 <span style="max-width:200px; width: 100%;"><?php echo htmlspecialchars($item['name']); ?></span>
@@ -553,10 +536,7 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
                         <span class="total"><?php echo number_format($total_with_shipping, 0, ',', '.'); ?> đ</span>
                     </div>
                     <div style="display: flex; justify-content: center;">
-                        <a href="">
-                        <button class="btn-shine" onclick="return validateForm()">
-                            <span>Mua Ngay</span>
-                        </button>
+                        <a style="text-decoration: none; color: red;" href="">
                         </a>
                     </div>
                 </div>

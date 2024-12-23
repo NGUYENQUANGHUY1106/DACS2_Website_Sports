@@ -12,10 +12,8 @@ session_start();
     <title>Thêm sản phẩm</title>
 </head>
 <body>
-    <?php
-    $id = $_GET['idkh'];
-    ?>
-    <div class="update__app">
+
+    <div style="background-color: green;" class="update__app">
         <div class="update__app--container">
                 <form  class="form__addProduct" action="Suasanpham.php" method="POST">
                 <div class="form__update--container">

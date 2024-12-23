@@ -1,14 +1,18 @@
 <?php
-if (isset($_GET['order_id'])) {
-    $order_id = $_GET['order_id'];
+session_start();
+
+    $order_id = $_SESSION['order_id'] ?? "N/A"; // Lấy `order_id` từ session (nếu có)
     echo "<div class='container'>";
     echo "<h1>Đặt hàng thành công!</h1>";
-    echo "<p>Mã đơn hàng của bạn: <strong>#$order_id</strong></p>";
     echo "<p>Chúng tôi sẽ liên hệ với bạn để xác nhận và giao hàng sớm nhất.</p>";
-    echo "<a href='index.php' class='btn'>Tiếp tục mua sắm</a>"; // Thêm nút ngay tại đây
+    echo "<a href='index.php' class='btn'>Tiếp tục mua sắm</a>";
     echo "</div>";
-}
+
+    // Xóa session để tránh lặp lại thông báo khi reload 
+    unset($_SESSION['order_success'], $_SESSION['order_id']);
+
 ?>
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>

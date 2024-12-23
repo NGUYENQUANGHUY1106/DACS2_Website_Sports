@@ -15,7 +15,7 @@ session_start();
    <link rel="stylesheet" href="./assets/css/main.css">
 	<link rel="canonical" href="https://demo-basic.adminkit.io/" />
 
-	<title>BEUTYBLEND</title>
+	<title>QuangHuySports</title>
 
 	<link href="./assets/css/app.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -72,7 +72,7 @@ session_start();
 					</li>
 
 					 <li class="sidebar-item">
-						<a class="sidebar-link" href="#">
+						<a class="sidebar-link" href="donhang.php">
                       <i class="align-middle" data-feather="shopping-cart"></i> <span class="align-middle">Đơn hàng</span>
                      </a>
 					</li>

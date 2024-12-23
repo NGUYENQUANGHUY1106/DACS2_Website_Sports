@@ -26,7 +26,7 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
 <body>
 
     <div class="app">
-    <header class="header">
+        <header class="header">
             <div class="grid">
                 <nav class="header__navbar">
                     <ul class="header__navbar-list">
@@ -34,11 +34,8 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
                             Vào cửa hàng trong ứng dụng TL-shop
                             <!-- QR code -->
                             <div class="header__qr">
-                                <a href=""> <img src="./assets/img/img-QR.png" alt="QR Code" class="header__qr-img"></a>
-                                <div class="header__qr-apps">
-                                    <a class="header__qr-link" href=""> <img src="./assets/img/img-ggplay.png" alt="Google play" class="header__qr-download-img"></a>
-                                    <a class="header__qr-link" href=""> <img src="./assets/img/ing-appstore.png" alt="App store" class="header__qr-download-img"></a>
-                                </div>
+                                <a href=""> <img src="/assets/img/qr_shop.jpg" alt="QR Code" class="header__qr-img"></a>
+
                             </div>
                         </li>
                         <li class="header__navbar-item">
@@ -94,8 +91,8 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
                                             <div style="display: flex; gap:  15px;" class="header__notify-info">
                                                 <img style="width: 40px; object-fit: contain;" src="/assets/img/thonganh_3.jpg" alt="">
                                                 <div>
-                                                <span class="header__notify-name"> FC Baca chính thức ra mắt bóng thi đấu</span>
-                                                <span class="header__notify-descriotion">khuyến mãi chỉ còn 22%</span>
+                                                    <span class="header__notify-name"> FC Baca chính thức ra mắt bóng thi đấu</span>
+                                                    <span class="header__notify-descriotion">khuyến mãi chỉ còn 22%</span>
                                                 </div>
                                             </div>
                                         </a>
@@ -105,8 +102,8 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
                                             <div style="display: flex; gap:  15px;" class="header__notify-info">
                                                 <img style="width: 40px; object-fit: contain;" src="/assets/img/thongbao_anh4.webp" alt="">
                                                 <div>
-                                                <span class="header__notify-name">Phụ kiện bảo vệ ống đồng thi đấu</span>
-                                                <span class="header__notify-descriotion">giá mở bán chỉ 1.260.000 </span>
+                                                    <span class="header__notify-name">Phụ kiện bảo vệ ống đồng thi đấu</span>
+                                                    <span class="header__notify-descriotion">giá mở bán chỉ 1.260.000 </span>
                                                 </div>
                                             </div>
                                         </a>
@@ -300,92 +297,92 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
 
                     <!-- Giỏ hàng -->
                     <div class="header__cart">
-    <div class="header__cart-swap">
-        <i class="header__cart-icon fa-sharp fas fa-cart-shopping"></i>
-        <?php
-        // Lấy customer_id từ session (sau khi người dùng đăng nhập)
-        if (isset($_SESSION['customer_id'])) {
-            $customer_id = $_SESSION['customer_id'];
+                        <div class="header__cart-swap">
+                            <i class="header__cart-icon fa-sharp fas fa-cart-shopping"></i>
+                            <?php
+                            // Lấy customer_id từ session (sau khi người dùng đăng nhập)
+                            if (isset($_SESSION['customer_id'])) {
+                                $customer_id = $_SESSION['customer_id'];
 
-            // Tính tổng số lượng sản phẩm
-            $total_items = 0;
-            if (isset($_SESSION['cart'][$customer_id]) && is_array($_SESSION['cart'][$customer_id])) {
-                foreach ($_SESSION['cart'][$customer_id] as $item) {
-                    if (is_array($item) && isset($item['quantity'])) {
-                        $total_items += intval($item['quantity']);
-                    }
-                }
-            }
+                                // Tính tổng số lượng sản phẩm
+                                $total_items = 0;
+                                if (isset($_SESSION['cart'][$customer_id]) && is_array($_SESSION['cart'][$customer_id])) {
+                                    foreach ($_SESSION['cart'][$customer_id] as $item) {
+                                        if (is_array($item) && isset($item['quantity'])) {
+                                            $total_items += intval($item['quantity']);
+                                        }
+                                    }
+                                }
 
-            // Kiểm tra giỏ hàng trống
-            if ($total_items == 0) {
-        ?>
-                <span class="header__cart-swap-notice">0</span>
-                <div class="header__cart-list header__cart-list-no-cart">
-                    <img src="./assets/img/no_cart.png" alt="no-cart-img" class="header__cart-list-no-cart-img">
-                    <span class="header__cart-list-no-cart-msg">Chưa có sản phẩm</span>
-                </div>
-            <?php
-            } else {
-            ?>
-                <span class="header__cart-swap-notice"><?php echo $total_items; ?></span>
-                <div class="header__cart-list">
-                    <h4 class="header__cart-heading">Sản phẩm đã thêm</h4>
-                    <?php
-                    foreach ($_SESSION['cart'][$customer_id] as $product_id => $item) {
-                        if (is_array($item)) {
-                            // Check for required keys
-                            $product_name = isset($item['name']) ? $item['name'] : 'Sản phẩm không xác định';
-                            $product_img = isset($item['img']) ? $item['img'] : './assets/img/default.png';
-                            $product_price = isset($item['price']) ? str_replace('.', '', $item['price']) : 0;
-                            $product_quantity = isset($item['quantity']) ? intval($item['quantity']) : 0;
-                            $product_size = isset($item['size']) ? $item['size'] : 'Không rõ';
-                    ?>
-                            <a href="giohang.php" class="header__cart-list-item__link">
-                                <ul class="header__cart-list-item">
-                                    <li class="header__cart-item" style="margin-top: 10px;">
-                                        <img src="<?php echo $product_img; ?>" alt="<?php echo $product_name; ?>" class="header__cart-img">
-                                        <div class="header__cart-item-info">
-                                            <div class="header__cart-item-head">
-                                                <h5 class="header__cart-item-name"><?php echo $product_name; ?></h5>
-                                                <div class="header__cart-item-price-wrap">
-                                                    <span class="header__cart-item-price">
-                                                        <?php
-                                                        $price = floatval($product_price);
-                                                        echo number_format($price, 0, ',', '.') . 'đ';
-                                                        ?>
-                                                    </span>
-                                                    <span class="header__cart-item-quantity">x<?php echo $product_quantity; ?></span>
-                                                </div>
-                                            </div>
-                                            <div class="header__cart-item-body">
-                                                <span class="header__cart-item-description">Phân loại hàng: Chính hãng</span>
-                                                <a href="xoagiohang.php?productid=<?php echo $product_id; ?>" class="header__cart-item-remove">Xóa</a>
-                                            </div>
-                                            <span style="color: red; font-size: 14px;">Size: <?php echo $product_size; ?></span>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </a>
-                    <?php
-                        }
-                    }
-                    ?>
-                    <a class="header__cart-view btn btn--primary" href="giohang.php">Xem giỏ hàng</a>
-                </div>
-        <?php
-            }
-        } else {
-            // Nếu chưa đăng nhập, hiển thị giỏ hàng trống và yêu cầu đăng nhập
-        ?>
-            <span class="header__cart-swap-notice">0</span>
-            <div class="header__cart-list header__cart-list-no-cart">
-                <img src="./assets/img/no_cart.png" alt="no-cart-img" class="header__cart-list-no-cart-img">
-                <span class="header__cart-list-no-cart-msg">Vui lòng đăng nhập để xem giỏ hàng</span>
-            </div>
-        <?php } ?>
-    </div>
-</div>
+                                // Kiểm tra giỏ hàng trống
+                                if ($total_items == 0) {
+                            ?>
+                                    <span class="header__cart-swap-notice">0</span>
+                                    <div class="header__cart-list header__cart-list-no-cart">
+                                        <img src="./assets/img/no_cart.png" alt="no-cart-img" class="header__cart-list-no-cart-img">
+                                        <span class="header__cart-list-no-cart-msg">Chưa có sản phẩm</span>
+                                    </div>
+                                <?php
+                                } else {
+                                ?>
+                                    <span class="header__cart-swap-notice"><?php echo $total_items; ?></span>
+                                    <div class="header__cart-list">
+                                        <h4 class="header__cart-heading">Sản phẩm đã thêm</h4>
+                                        <?php
+                                        foreach ($_SESSION['cart'][$customer_id] as $product_id => $item) {
+                                            if (is_array($item)) {
+                                                // Check for required keys
+                                                $product_name = isset($item['name']) ? $item['name'] : 'Sản phẩm không xác định';
+                                                $product_img = isset($item['img']) ? $item['img'] : './assets/img/default.png';
+                                                $product_price = isset($item['price']) ? str_replace('.', '', $item['price']) : 0;
+                                                $product_quantity = isset($item['quantity']) ? intval($item['quantity']) : 0;
+                                                $product_size = isset($item['size']) ? $item['size'] : 'Không rõ';
+                                        ?>
+                                                <a href="giohang.php" class="header__cart-list-item__link">
+                                                    <ul class="header__cart-list-item">
+                                                        <li class="header__cart-item" style="margin-top: 10px;">
+                                                            <img src="<?php echo $product_img; ?>" alt="<?php echo $product_name; ?>" class="header__cart-img">
+                                                            <div class="header__cart-item-info">
+                                                                <div class="header__cart-item-head">
+                                                                    <h5 class="header__cart-item-name"><?php echo $product_name; ?></h5>
+                                                                    <div class="header__cart-item-price-wrap">
+                                                                        <span class="header__cart-item-price">
+                                                                            <?php
+                                                                            $price = floatval($product_price);
+                                                                            echo number_format($price, 0, ',', '.') . 'đ';
+                                                                            ?>
+                                                                        </span>
+                                                                        <span class="header__cart-item-quantity">x<?php echo $product_quantity; ?></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="header__cart-item-body">
+                                                                    <span class="header__cart-item-description">Phân loại hàng: Chính hãng</span>
+                                                                    <a href="xoagiohang.php?productid=<?php echo $product_id; ?>" class="header__cart-item-remove">Xóa</a>
+                                                                </div>
+                                                                <span style="color: red; font-size: 14px;">Size: <?php echo $product_size; ?></span>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </a>
+                                        <?php
+                                            }
+                                        }
+                                        ?>
+                                        <a class="header__cart-view btn btn--primary" href="giohang.php">Xem giỏ hàng</a>
+                                    </div>
+                                <?php
+                                }
+                            } else {
+                                // Nếu chưa đăng nhập, hiển thị giỏ hàng trống và yêu cầu đăng nhập
+                                ?>
+                                <span class="header__cart-swap-notice">0</span>
+                                <div class="header__cart-list header__cart-list-no-cart">
+                                    <img src="./assets/img/no_cart.png" alt="no-cart-img" class="header__cart-list-no-cart-img">
+                                    <span class="header__cart-list-no-cart-msg">Vui lòng đăng nhập để xem giỏ hàng</span>
+                                </div>
+                            <?php } ?>
+                        </div>
+                    </div>
 
 
 
@@ -427,23 +424,23 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
                         <form method="POST" action="index.php" class="home-filter">
                             <span class="home-filter__lable">Sắp xếp theo</span>
                             <button class="home-filter-btn btn btn--primary">Mới Nhất</button>
+                            <button type="submit" name="top_sold" value="1" class="home-filter-btn btn active">Sản Phẩm Bán Chạy</button>
                             <button type="submit" name="upPrice" class="home-filter-btn btn active ">Giá Tăng Dần</button>
                             <button type="submit" name="downPrice" class="home-filter-btn btn active">Giá Giảm Dần</button>
 
-
                             <div class="home-filter__para">
                                 <div class="home-filter__para-control">
-                                    <!--phân trang  -->
+                                    <!-- Phân trang -->
                                     <?php
                                     $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
                                     if ($current_page > 1) {
-                                        echo  ' <a href="index.php?page=' . ($current_page - 1) . '"' . 'class="home-filter__para-btn">
-                           <i class="home-filter__para-icon fa-solid fa-chevron-left"></i>
-                           </a>';
+                                        echo '<a href="index.php?page=' . ($current_page - 1) . '" class="home-filter__para-btn">
+                            <i class="home-filter__para-icon fa-solid fa-chevron-left"></i>
+                          </a>';
                                     }
-                                    echo  ' <a href="index.php?page=' . ($current_page + 1) . '"' . 'class="home-filter__para-btn">
-                           <i class="home-filter__para-icon fa-solid fa-chevron-right"></i>
-                           </a> ';
+                                    echo '<a href="index.php?page=' . ($current_page + 1) . '" class="home-filter__para-btn">
+                        <i class="home-filter__para-icon fa-solid fa-chevron-right"></i>
+                      </a>';
                                     ?>
                                 </div>
                             </div>
@@ -453,75 +450,67 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
                                 <div class="row">
                                     <?php
                                     $conn = mysqli_connect("localhost:3366", "root", "", "MYPHAM");
+
+                                    // Tính tổng số sản phẩm và phân trang
+                                    $limit = 10; // Số sản phẩm trên mỗi trang
+                                    $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+                                    $start = ($current_page - 1) * $limit;
+
                                     if (isset($_GET['iddm'])) {
                                         $countSql = "SELECT COUNT(id) AS total FROM SANPHAM WHERE iddm = " . $_GET['iddm'];
                                     } else {
                                         $countSql = "SELECT COUNT(id) AS total FROM SANPHAM";
                                     }
-                                    // phân trang
-                                    $limit = 10; // sô sản phẩm trong 1 trang
-                                    $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
-                                    // Tìm Start
-                                    $start = ($current_page - 1) * $limit; // só sản phẩm bắt đầu của 1 trang tới limit
 
                                     $countResult = mysqli_query($conn, $countSql);
                                     $countRow = mysqli_fetch_assoc($countResult);
                                     $total_records = $countRow['total'];
-
                                     $total_page = ceil($total_records / $limit);
 
-                                    if (isset($_GET['iddm'])) {
-                                        $sql = "SELECT * , ((priceOld - priceNew) / priceOld * 100) AS priceDiscount  FROM SANPHAM WHERE iddm = " . $_GET['iddm'] . " LIMIT " . $start . "," . $limit;
-                                    } else if (isset($_POST['btn_search'])) {
-                                        $keyWords = $_POST['search_Keywords'];
-                                        $conn = mysqli_connect("localhost:3366", "root", "", "MYPHAM");
-                                        $sql = " SELECT * , ((priceOld - priceNew) / priceOld * 100) AS priceDiscount  FROM  SANPHAM WHERE title LIKE '%$keyWords%' ORDER BY id ASC";
+                                    // Lấy dữ liệu sản phẩm
+                                    if (isset($_POST['top_sold']) && $_POST['top_sold'] == 1) {
+                                        // Truy vấn sắp xếp sản phẩm theo số lượng bán giảm dần
+                                        $sql = "SELECT *, ((priceOld - priceNew) / priceOld * 100) AS priceDiscount 
+                                                FROM SANPHAM 
+                                                ORDER BY sold DESC 
+                                                LIMIT $start, $limit";
                                     } else if (isset($_POST['upPrice'])) {
-                                        $sql = " SELECT * , ((priceOld - priceNew) / priceOld * 100) AS priceDiscount  FROM   SANPHAM  ORDER BY CAST(REPLACE(priceNew, '.', '') AS DECIMAL(10, 3)) ASC LIMIT $start , $limit";
+                                        // Sắp xếp theo giá tăng dần
+                                        $sql = "SELECT *, ((priceOld - priceNew) / priceOld * 100) AS priceDiscount 
+                                                FROM SANPHAM 
+                                                ORDER BY CAST(REPLACE(priceNew, '.', '') AS DECIMAL(10, 3)) ASC 
+                                                LIMIT $start, $limit";
                                     } else if (isset($_POST['downPrice'])) {
-                                        $sql = " SELECT * , ((priceOld - priceNew) / priceOld * 100) AS priceDiscount  FROM  SANPHAM  ORDER BY CAST(REPLACE(priceNew, '.', '') AS DECIMAL(10, 3)) DESC LIMIT $start , $limit";
+                                        // Sắp xếp theo giá giảm dần
+                                        $sql = "SELECT *, ((priceOld - priceNew) / priceOld * 100) AS priceDiscount 
+                                                FROM SANPHAM 
+                                                ORDER BY CAST(REPLACE(priceNew, '.', '') AS DECIMAL(10, 3)) DESC 
+                                                LIMIT $start, $limit";
                                     } else {
-                                        $sql = "SELECT * , ((priceOld - priceNew) / priceOld * 100) AS priceDiscount  FROM SANPHAM LIMIT " . $start . "," . $limit;
+                                        // Truy vấn mặc định
+                                        $sql = "SELECT *, ((priceOld - priceNew) / priceOld * 100) AS priceDiscount 
+                                                FROM SANPHAM 
+                                                LIMIT $start, $limit";
                                     }
+                                    
                                     $result = mysqli_query($conn, $sql);
                                     while ($row = mysqli_fetch_array($result)) {
                                     ?>
-
-                                        <a href="chitietsanpham.php?idsp=<?php echo $row['id']; ?>"
-                                            class="col l-2-5 m-4 c-6 product__item-id" style="text-decoration: none;">
+                                        <a href="chitietsanpham.php?idsp=<?php echo $row['id']; ?>" class="col l-2-5 m-4 c-6 product__item-id" style="text-decoration: none;">
                                             <div class="home-product-item" style="position: relative; margin: 20px auto;">
                                                 <!-- Ảnh lớn -->
-                                                <div class="main-image home-product-item-img"
-                                                    style="background-image: url('<?php echo $row['urlImg']; ?>'); 
-                                            background-size: cover; 
-                                            background-position: center; 
-                                            height: 200px; 
-                                            width: 100%; 
-                                            border: 1px solid #ddd;">
-                                                </div>
+                                                <div class="main-image home-product-item-img" style="background-image: url('<?php echo $row['urlImg']; ?>'); background-size: cover; background-position: center; height: 200px; width: 100%; border: 1px solid #ddd;"></div>
 
                                                 <!-- Ảnh nhỏ -->
                                                 <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
                                                     <div>
-                                                        <img src="<?php echo $row['urlImg']; ?>"
-                                                            alt="Image 1"
-                                                            data-img="<?php echo $row['urlImg']; ?>"
-                                                            class="thumbnail"
-                                                            style="width: 40px; height: 40px; cursor: pointer; border: 1px solid #ddd;">
+                                                        <img src="<?php echo $row['urlImg']; ?>" alt="Image 1" data-img="<?php echo $row['urlImg']; ?>" class="thumbnail" style="width: 40px; height: 40px; cursor: pointer; border: 1px solid #ddd;">
                                                     </div>
                                                     <div>
-                                                        <img src="<?php echo $row['img_sub1']; ?>"
-                                                            alt="Image 2"
-                                                            data-img="<?php echo $row['img_sub1']; ?>"
-                                                            class="thumbnail"
-                                                            style="width: 40px; height: 40px; cursor: pointer; border: 1px solid #ddd;">
+                                                        <img src="<?php echo $row['img_sub1']; ?>" alt="Image 2" data-img="<?php echo $row['img_sub1']; ?>" class="thumbnail" style="width: 40px; height: 40px; cursor: pointer; border: 1px solid #ddd;">
                                                     </div>
                                                     <div>
-                                                        <img src="<?php echo $row['img_sub2']; ?>"
-                                                            alt="Image 3"
-                                                            data-img="<?php echo $row['img_sub2']; ?>"
-                                                            class="thumbnail"
-                                                            style="width: 40px; height: 40px; cursor: pointer; border: 1px solid #ddd;">
+                                                        <img src="<?php echo $row['img_sub2']; ?>" alt="Image 3" data-img="<?php echo $row['img_sub2']; ?>" class="thumbnail" style="width: 40px; height: 40px; cursor: pointer; border: 1px solid #ddd;">
                                                     </div>
                                                 </div>
 
@@ -529,7 +518,7 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
                                                 <h4 class="home-product-item-name"><?php echo $row['title']; ?></h4>
                                                 <div class="home-product-item-price">
                                                     <span class="home-product-item-price-old"><?php echo $row['priceOld']; ?></span>
-                                                    <span class="home-product-item-price-current" style="font-size: 16px ; color: red; "><?php echo $row['priceNew']; ?></span>
+                                                    <span class="home-product-item-price-current" style="font-size: 16px; color: red;"><?php echo $row['priceNew']; ?></span>
                                                 </div>
                                                 <div class="home-product-item-action">
                                                     <span class="home-product-item__like home-product-item__like-liked" id="icon_heart">
@@ -554,9 +543,7 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
                                                     <span>Yêu thích</span>
                                                 </div>
                                                 <div class="home-product-item__sale-off">
-                                                    <span class="home-product-item__sale-off-percent" id="price_discount">
-                                                        <?php echo intval($row['priceDiscount']) . '%'; ?>
-                                                    </span>
+                                                    <span class="home-product-item__sale-off-percent"><?php echo intval($row['priceDiscount']) . '%'; ?></span>
                                                     <span class="home-product-item__sale-off-label">GIẢM</span>
                                                 </div>
                                             </div>
@@ -566,62 +553,30 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
                                     ?>
                                 </div>
                                 <?php
-
-                                //   $total_page = ceil($total_records / $limit);
-                                // Giới hạn current_page trong khoảng 1 đến total_page
-                                if ($current_page > $total_page) {
-                                    $current_page = $total_page;
-                                } else if ($current_page < 1) {
-                                    $current_page = 1;
-                                }
                                 echo '<ul class="Pagination home-product__Pagination">';
                                 if ($current_page > 1 && $total_page > 1) {
-                                    echo '<li class="Pagination-item">';
-                                    if (isset($_GET['iddm'])) {
-                                        echo '<a href="index.php?iddm=' . $_GET['iddm'] . '&page=' . ($current_page - 1) . '" class="Pagination-item__link">';
-                                        echo '<i class="Pagination-item__icon fa-solid fa-chevron-left"></i>';
-                                        echo '</a>';
-                                    } else {
-                                        echo  ' <a href="index.php?page=' . ($current_page - 1) . '"' . 'class="Pagination-item__link">
-                                 <i class="Pagination-item__icon fa-solid fa-chevron-left " ></i>
-                                </a> ';
-                                    }
-                                    echo '</li>';
+                                    echo '<li class="Pagination-item">
+                        <a href="index.php?page=' . ($current_page - 1) . '" class="Pagination-item__link">
+                            <i class="Pagination-item__icon fa-solid fa-chevron-left"></i>
+                        </a>
+                      </li>';
                                 }
                                 for ($i = 1; $i <= $total_page; $i++) {
-                                    echo ' <li class="Pagination-item ">';
-                                    // Nếu là trang hiện tại thì hiển thị thẻ span và không cho ấn vào
-                                    // ngược lại hiển thị thẻ a để chuyển qua trang
                                     if ($i == $current_page) {
-                                        echo  '<span class="Pagination-item__link " style="  background-color: red; color: var(--white-color); border-radius: 50%; cursor: pointer;
-
-                                       ">' . $i . '</span>';
+                                        echo '<li class="Pagination-item"><span class="Pagination-item__link" style="background-color: red; color: var(--white-color); border-radius: 50%;">' . $i . '</span></li>';
                                     } else {
-                                        if (isset($_GET['iddm'])) { // hiển thị số phân trang khi ở trang danh mục
-                                            echo '<a href="index.php?iddm=' . $_GET['iddm'] . '&page=' . $i . '" class=" Pagination-item__link">' . $i . '</a>';
-                                        } else {
-                                            echo ' <a href="index.php?page=' . $i . '"' . 'class="Pagination-item__link">' . $i . '</a>';
-                                        }
+                                        echo '<li class="Pagination-item"><a href="index.php?page=' . $i . '" class="Pagination-item__link">' . $i . '</a></li>';
                                     }
                                 }
-                                echo '</li>';
-
                                 if ($current_page < $total_page && $total_page > 1) {
-                                    echo '<li class="Pagination-item">';
-                                    if (isset($_GET['iddm'])) {
-                                        echo '<a href="index.php?iddm=' . $_GET['iddm'] . '&page=' . ($current_page + 1) . '" class="Pagination-item__link">';
-                                        echo '<i class="Pagination-item__icon fa-solid fa-chevron-right"></i>';
-                                        echo '</a>';
-                                    } else {
-                                        echo  ' <a href="index.php?page=' . ($current_page + 1) . '"' . 'class="Pagination-item__link">
-                                        <i class="Pagination-item__icon fa-solid fa-chevron-right"></i>
-                                        </a> ';
-                                    }
-                                    echo '</li>';
+                                    echo '<li class="Pagination-item">
+                        <a href="index.php?page=' . ($current_page + 1) . '" class="Pagination-item__link">
+                            <i class="Pagination-item__icon fa-solid fa-chevron-right"></i>
+                        </a>
+                      </li>';
                                 }
-                                echo ' </ul>';
+                                echo '</ul>';
                                 ?>
-
                             </div>
                         </div>
                     </div>

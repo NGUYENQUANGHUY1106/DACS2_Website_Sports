@@ -485,3 +485,124 @@
     opacity: 1;
   }
 }
+/* button save cart */
+/* From Uiverse.io by vinodjangid07 */ 
+.bookmarkBtn {
+  width: 100px;
+  height: 40px;
+  border-radius: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.349);
+  background-color: rgb(12, 12, 12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition-duration: 0.3s;
+  overflow: hidden;
+}
+
+.IconContainer {
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(to bottom, rgb(255, 136, 255), rgb(172, 70, 255));
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 2;
+  transition-duration: 0.3s;
+}
+
+.icon {
+  border-radius: 1px;
+}
+
+.text {
+  height: 100%;
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  z-index: 1;
+  transition-duration: 0.3s;
+  font-size: 1.04em;
+  margin-top: 14px;
+}
+
+.bookmarkBtn:hover .IconContainer {
+  width: 90px;
+  transition-duration: 0.3s;
+}
+
+.bookmarkBtn:hover .text {
+  transform: translate(10px);
+  width: 0;
+  font-size: 0;
+  transition-duration: 0.3s;
+}
+
+.bookmarkBtn:active {
+  transform: scale(0.95);
+  transition-duration: 0.3s;
+}
+
+/* delete_cart_order */
+.button_delete_order {
+  position: relative;
+  width: 100px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: 1px solid #cc0000;
+  background-color: #e50000;
+  overflow: hidden;
+}
+
+.button_delete_order, .button__icon, .button__text {
+  transition: all 0.3s;
+}
+
+.button_delete_order .button__text {
+  transform: translateX(30px);
+  color: #fff;
+  font-weight: 600;
+}
+
+.button_delete_order .button__icon {
+  position: absolute;
+  transform: translateX(100px);
+  height: 100%;
+  width: 50;
+  background-color: #cc0000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button_delete_order .svg {
+  width: 20px;
+}
+
+.button_delete_order:hover {
+  background: #cc0000;
+}
+
+.button_delete_order:hover .button__text {
+  color: transparent;
+}
+
+.button_delete_order:hover .button__icon {
+  width: 85px;
+  transform: translateX(0);
+}
+
+.button_delete_order:active .button__icon {
+  background-color: #b20000;
+}
+
+.button_delete_order:active {
+  border: 1px solid #b20000;
+}

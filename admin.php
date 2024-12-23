@@ -142,7 +142,7 @@ session_start();
 													$current_month_end = date('Y-m-t 23:59:59');   // Ngày cuối tháng
 
 													// Truy vấn số lượng sản phẩm đã bán trong tháng
-													$query = "SELECT product_details FROM orders WHERE created_at BETWEEN ? AND ?";
+													$query = "SELECT product_quantity FROM orders WHERE created_at BETWEEN ? AND ?";
 													$stmt = mysqli_prepare($conn, $query);
 													mysqli_stmt_bind_param($stmt, "ss", $current_month_start, $current_month_end);
 													mysqli_stmt_execute($stmt);
@@ -150,20 +150,19 @@ session_start();
 
 													$total_sold = 0;
 													while ($row = mysqli_fetch_assoc($result)) {
-														$product_details = json_decode($row['product_details'], true);
-														foreach ($product_details as $product) {
-															$total_sold += $product['quantity']; // Cộng số lượng từng sản phẩm
-														}
+														// Thêm trực tiếp product_quantity vào tổng
+														$total_sold += $row['product_quantity'];
 													}
 
 													// Hiển thị số lượng đã bán
 													echo "<div class='stat-card'>";
-													echo "<h3>Đã bán</h3>";
+													echo "<h3>Đơn đặt hàng</h3>";
 													echo "<p>$total_sold</p>";
-													echo "</div> ";
+													echo "</div>";
 
 													mysqli_close($conn);
 													?>
+
 
 												</div>
 											</div>
@@ -211,7 +210,6 @@ session_start();
 																display: flex;
 																align-items: center;
 																justify-content: center;
-																margin-top: 50px;
 															}
 
 															.stat-card {
@@ -278,7 +276,7 @@ session_start();
 										}
 
 										// Truy vấn tổng thu nhập từ tất cả sản phẩm trong bảng `orders`
-										$query = "SELECT SUM(total_amount) AS total_income FROM orders";
+										$query = "SELECT SUM(total_price) AS total_income FROM orders";
 										$result = mysqli_query($conn, $query);
 
 										// Kiểm tra và lấy dữ liệu
@@ -291,7 +289,7 @@ session_start();
 										}
 
 										// Nhân tổng số tiền với 1.000.000 (giả định mỗi đơn vị trong cột là 1.000.000 VNĐ)
-										$total_income_vnd = $total_income * 1000000;
+										$total_income_vnd = $total_income;
 
 										// Định dạng số tiền theo Việt Nam Đồng (VNĐ)
 										$formatted_income = number_format($total_income_vnd, 0, ',', '.') . " ₫";
@@ -377,48 +375,44 @@ session_start();
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
-													<?php
-													// Kết nối cơ sở dữ liệu
-													$conn = mysqli_connect("localhost:3366", "root", "", "mypham");
-													if (!$conn) {
-														die("Kết nối cơ sở dữ liệu thất bại: " . mysqli_connect_error());
-													}
-
-													// Lấy thời gian đầu và cuối của tháng hiện tại
-													$current_month_start = date('Y-m-01 00:00:00'); // Ngày đầu tháng
-													$current_month_end = date('Y-m-t 23:59:59');   // Ngày cuối tháng
-
-													// Truy vấn số lượng sản phẩm đã bán trong tháng
-													$query = "SELECT product_details FROM orders WHERE created_at BETWEEN ? AND ?";
-													$stmt = mysqli_prepare($conn, $query);
-													mysqli_stmt_bind_param($stmt, "ss", $current_month_start, $current_month_end);
-													mysqli_stmt_execute($stmt);
-													$result = mysqli_stmt_get_result($stmt);
-
-													$total_sold = 0;
-													while ($row = mysqli_fetch_assoc($result)) {
-														$product_details = json_decode($row['product_details'], true);
-														foreach ($product_details as $product) {
-															$total_sold += $product['quantity']; // Cộng số lượng từng sản phẩm
+														<?php
+														// Kết nối cơ sở dữ liệu
+														$conn = mysqli_connect("localhost:3366", "root", "", "mypham");
+														if (!$conn) {
+															die("Kết nối cơ sở dữ liệu thất bại: " . mysqli_connect_error());
 														}
-													}
 
-													// Hiển thị số lượng đã bán
-													echo "<div class='stat-card'>";
-													echo "<h3>Đã bán</h3>";
-													echo "<p>$total_sold</p>";
-													echo "</div> ";
+														// Lấy thời gian đầu và cuối của tháng hiện tại
+														$current_month_start = date('Y-m-01 00:00:00'); // Ngày đầu tháng
+														$current_month_end = date('Y-m-t 23:59:59');   // Ngày cuối tháng
 
-													mysqli_close($conn);
-													?>
+														// Truy vấn số lượng sản phẩm đã bán trong tháng
+														$query = "SELECT product_quantity FROM orders WHERE created_at BETWEEN ? AND ?";
+														$stmt = mysqli_prepare($conn, $query);
+														mysqli_stmt_bind_param($stmt, "ss", $current_month_start, $current_month_end);
+														mysqli_stmt_execute($stmt);
+														$result = mysqli_stmt_get_result($stmt);
+
+														$total_sold = 0;
+														while ($row = mysqli_fetch_assoc($result)) {
+															// Thêm trực tiếp product_quantity vào tổng
+															$total_sold += $row['product_quantity'];
+														}
+
+														// Hiển thị số lượng đã bán
+														echo "<div class='stat-card'>";
+														echo "<h3>Đã bán</h3>";
+														echo "<p>$total_sold</p>";
+														echo "</div>";
+
+														mysqli_close($conn);
+														?>
+
 													</div>
 
-													<div class="col-auto">
-														<div class="stat text-primary">
-														</div>
-													</div>
+
 												</div>
-												
+
 											</div>
 										</div>
 									</div>
@@ -441,7 +435,7 @@ session_start();
 						</div>
 					</div>
 
-					<div class="row">
+					<div style="margin-top: 0;" class="row">
 						<div class="col-12 col-md-6 col-xxl-3 d-flex order-2 order-xxl-3">
 							<div class="card flex-fill w-100">
 								<div class="card-header">

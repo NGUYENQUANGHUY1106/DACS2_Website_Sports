@@ -12,7 +12,7 @@ if (!empty($order_id) && !empty($status)) {
     mysqli_stmt_bind_param($stmt, "si", $status, $order_id);
 
     if (mysqli_stmt_execute($stmt)) {
-        header("Location: admin.php"); // Quay lại trang quản lý
+        header("Location: donhang.php"); // Quay lại trang quản lý
     } else {
         echo "Lỗi cập nhật trạng thái: " . mysqli_error($conn);
     }

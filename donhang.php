@@ -164,7 +164,7 @@ session_start();
 							<td class="customer__table--body-item">
 								<?php echo $row['specific_address'] . ', ' . $row['ward'] . ', ' . $row['district'] . ', ' . $row['city']; ?>
 							</td>
-							<td class="customer__table--body-item"><?php echo $row['total_price']; ?></td>
+							<td class="customer__table--body-item"><?php echo htmlspecialchars(number_format($row['total_price'], 0, ',', '.')); ?></td>
 							<td class="customer__table--body-item"><?php echo $row['created_at']; ?></td>
 							<td class="customer__table--body-item">
 							<form action="delete_order.php" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa đơn hàng này không?');">

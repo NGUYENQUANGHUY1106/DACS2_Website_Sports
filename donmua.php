@@ -5,6 +5,7 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,6 +21,81 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .header-buttons button {
+            padding: 8px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .header-buttons button:hover {
+            background-color: #45a049;
+        }
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+
+        table th,
+        table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .action-buttons button {
+            padding: 5px 10px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .action-buttons button:hover {
+            background-color: #0b7dda;
+        }
+
+        .checkbox {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -388,6 +464,74 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
                 </div>
 
         </header>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mã Đơn Hàng</th>
+                        <th> Tên Khách Hàng</th>
+                        <th>Tên sản Phẩm</th>
+                        <th>Hình Ảnh Sản Phẩm</th>
+                        <th>Kích Thước</th>
+                        <th>Số Lượng</th>
+                        <th>Địa Chỉ Giao Hàng</th>
+                        <th>Điện Thoại</th>
+                        <th>Tổng Tiền</th>
+                        <th>Ngày Đặt</th>
+                        <th>Trạng Thái</th>
+                    </tr>
+                </thead>
+                <tbody style="font-size: 12px; text-align: center;">
+                    <?php
+                    $conn = mysqli_connect("localhost:3366", "root", "", "MYPHAM");
+                    if (!$conn) {
+                        die("Kết nối thất bại: " . mysqli_connect_error());
+                    }
+
+                    if (!isset($_SESSION['customer_id'])) {
+                        die("<p>Vui lòng đăng nhập để xem giỏ hàng.</p>");
+                    }
+                    $customer_id = $_SESSION['customer_id'];
+
+                    // Truy vấn dữ liệu từ bảng CART
+                    $sql = "SELECT * FROM orders WHERE customer_id = ?";
+                    $stmt = mysqli_prepare($conn, $sql);
+                    mysqli_stmt_bind_param($stmt, "i", $customer_id);
+                    mysqli_stmt_execute($stmt);
+                    $result = mysqli_stmt_get_result($stmt);
+
+                    if (mysqli_num_rows($result) > 0) {
+                        while ($row = mysqli_fetch_assoc($result)) { ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($row['order_id']); ?></td>
+                                <td><?php echo htmlspecialchars($row['full_name']); ?></td>
+                                <td ><?php echo htmlspecialchars($row['product_name']); ?></td>
+                                <td> <img src="<?php echo htmlspecialchars($row['product_image']); ?>" alt="Product Image" style="width: 90px; height: auto;">
+                                </td>
+                                <td><?php echo htmlspecialchars($row['product_size']); ?></td>
+                                <td><?php echo htmlspecialchars($row['product_quantity']); ?></td>
+                                <td> <?php echo htmlspecialchars($row['specific_address'] . ', ' . $row['ward'] . ', ' . $row['district'] . ', ' . $row['city']); ?>
+                                </td>
+                                <td><?php echo htmlspecialchars($row['phone']); ?></td>
+                                <td><?php echo htmlspecialchars(number_format($row['total_price'], 0, ',', '.')); ?></td>
+                                <td><?php echo htmlspecialchars($row['created_at']); ?></td>
+                                <td style="color: #45a049; font-weight: bold;"><?php echo htmlspecialchars($row['status']); ?></td>
+
+                            </tr>
+                        <?php }
+                    } else { ?>
+                        <tr>
+                            <td colspan="10">Không có đơn hàng nào trong giỏ hàng.</td>
+                        </tr>
+                    <?php }
+                    mysqli_stmt_close($stmt);
+                    mysqli_close($conn);
+                    ?>
+                </tbody>
+
+            </table>
+        </div>
     </div>
-<body>
-            
+</body>
+
+</html>

@@ -131,7 +131,7 @@ session_start();
 					<td class="customer__table--item">Địa chỉ Giao hàng</td>
 					<td class="customer__table--item">Tổng tiền</td>
 					<td class="customer__table--item">Ngày đặt</td>
-					<td class="customer__table--item">Trạng Thái</td>
+					<td class="customer__table--item">Chức Năng</td>
 					<td class="customer__table--item">Tùy Chọn</td>
 
 
@@ -167,24 +167,7 @@ session_start();
 							<td class="customer__table--body-item"><?php echo $row['total_price']; ?></td>
 							<td class="customer__table--body-item"><?php echo $row['created_at']; ?></td>
 							<td class="customer__table--body-item">
-								<select style="max-width: 200px; width: 100%;" name="trangthai" id="trangthai">
-									<option value="">Xác Nhận Đơn Hàng</option>
-									<option value="">Người Bán Đang Chuẩn Bị Đơn Hàng</option>
-									<option value="">Đơn Hàng Đã Được Gửi Đi</option>
-									<option value="">Đã Giao Hàng</option>
-								</select>
-							</td>
-							<td style="text-align: center;" class="customer__table--body-item">
-								<button style="display: flex; align-items: center;" class="bookmarkBtn">
-									<span class="IconContainer">
-										<svg viewBox="0 0 384 512" height="0.9em" class="icon">
-											<path
-												d="M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9 4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z"></path>
-										</svg>
-									</span>
-									<p class="text">Lưu</p>
-								</button>
-								<form action="delete_order.php" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa đơn hàng này không?');">
+							<form action="delete_order.php" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa đơn hàng này không?');">
 									<!-- Hidden input để truyền ID -->
 									<input type="hidden" name="order_id" value="<?php echo $row['order_id']; ?>">
 									<button style="margin-top: 15px;" class="button_delete_order" type="submit">
@@ -201,8 +184,33 @@ session_start();
 										</span>
 									</button>
 								</form>
-
 							</td>
+							<td style="text-align: center;" class="customer__table--body-item">
+								<!-- Form lưu trạng thái -->
+								<form action="update_status.php" method="POST">
+									<!-- Select trạng thái -->
+									<select style="max-width: 200px; width: 100%;" name="trangthai">
+										<option value="Xác Nhận Đơn Hàng" <?php if ($row['status'] == "Xác Nhận Đơn Hàng") echo "selected"; ?>>Xác Nhận Đơn Hàng</option>
+										<option value="Người Bán Đang Chuẩn Bị Đơn Hàng" <?php if ($row['status'] == "Người Bán Đang Chuẩn Bị Đơn Hàng") echo "selected"; ?>>Người Bán Đang Chuẩn Bị Đơn Hàng</option>
+										<option value="Đơn Hàng Đã Được Gửi Đi" <?php if ($row['status'] == "Đơn Hàng Đã Được Gửi Đi") echo "selected"; ?>>Đơn Hàng Đã Được Gửi Đi</option>
+										<option value="Đã Giao Hàng" <?php if ($row['status'] == "Đã Giao Hàng") echo "selected"; ?>>Đã Giao Hàng</option>
+									</select>
+									<!-- Hidden input để truyền ID -->
+									<input type="hidden" name="order_id" value="<?php echo $row['order_id']; ?>">
+									<!-- Nút lưu -->
+									<button style="display: flex; align-items: center; margin-top: 10px;" class="bookmarkBtn" type="submit">
+										<span class="IconContainer">
+											<svg viewBox="0 0 384 512" height="0.9em" class="icon">
+												<path
+													d="M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9 4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z"></path>
+											</svg>
+										</span>
+										<p class="text">Lưu</p>
+									</button>
+								</form>
+								<!-- Form xóa đơn hàng -->
+							</td>
+
 
 						</tr>
 					<?php

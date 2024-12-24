@@ -250,7 +250,7 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
                                     <a href="diachi.php">Địa chỉ của tôi</a>
                                 </li>
                                 <li class="header__navbar-user-item">
-                                    <a href="donMua.php">Đơn mua</a>
+                                    <a href="donmua.php">Đơn mua</a>
                                 </li>
                                 <li class="header__navbar-user-item header__navbar-user-item--separate ">
                                     <a href="xulylogout.php?logout=true">Đăng xuất</a>
@@ -261,7 +261,7 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
                 </nav>
                 <div class="header-with-search">
                     <div class="header__logo">
-                        <a href="#" class="header__logo-link">
+                        <a href="index.php" class="header__logo-link">
 
 
                             <img src="/assets/img/logo (2).png" alt="anhlogo" class="header__logo-img">

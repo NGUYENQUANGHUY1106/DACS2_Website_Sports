@@ -264,7 +264,7 @@ $customer_id = $_COOKIE['customer_id'] ?? null;
                 </nav>
                 <div class="header-with-search">
                     <div class="header__logo">
-                        <a href="#" class="header__logo-link">
+                        <a href="index.php" class="header__logo-link">
 
 
                             <img src="/assets/img/logo (2).png" alt="anhlogo" class="header__logo-img">
